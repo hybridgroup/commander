@@ -3,9 +3,25 @@ Commander
 
 An app to control robots from your device
 
-## Using this project
+## Building
 
-TODO
+```bash
+$ ionic build ios
+$ ionic build android
+```
+
+## Running
+
+To run project in iOS emulator:
+```bash
+$ ionic emulate ios
+```
+
+To run project in android device (You can use [Genymotion](http://www.genymotion.com/) too):
+
+```bash
+$ ionic run android
+```
 
 ## Installation
 
