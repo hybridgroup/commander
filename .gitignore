@@ -1,0 +1,4 @@
+bower_components/
+ant-gen/
+ant-build/
+local.properties
