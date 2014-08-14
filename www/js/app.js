@@ -1,3 +1,4 @@
+// Remove when configuration screen is done
 localStorage.commander = JSON.stringify({
   api: {
     host: 'http://localhost',
@@ -30,19 +31,19 @@ app = angular.module('commander', ['ionic'])
 app.controller('CommanderController', ['$http', function($http) {
   this.message = 'Ready...';
 
-  this.commands = function() {
-    return JSON.parse(localStorage.commander).commands;
+  this.storedValues = function() {
+    return JSON.parse(localStorage.commander);
   };
 
   this.commandUrl = function(command) {
-    var api = JSON.parse(localStorage.commander).api;
+    var api = this.storedValues().api;
 
     return api.host + ':' + api.port + '/api/robots/' + command.robot +
       '/devices/' + command.device + '/commands/' + command.name;
   };
 
   this.execute = function(index) {
-    var command = this.commands()[index];
+    var command = this.storedValues().commands[index];
     var execution = $http.post(this.commandUrl(command), command.params);
 
     execution.success(function(data){
