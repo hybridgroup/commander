@@ -1,19 +1,15 @@
 localStorage.commander = JSON.stringify({
-  robot: {
-    host: 'http://localhost:8080',
-    name: 'pebble',
+  api: {
+    host: 'http://localhost',
+    port: '8080'
+  },
+  commands: [{
+    label: 'Say hello',
+    robot: 'pebble',
     device: 'pebble',
-    commands: {
-      up: '',
-      center: 'pending_message',
-      down: '',
-      left: '',
-      right: '',
-      one: '',
-      two: '',
-      three: ''
-    }
-  }
+    name: 'sendNotification',
+    params: {message: 'Hello'}
+  }]
 });
 
 app = angular.module('commander', ['ionic'])
@@ -34,33 +30,27 @@ app = angular.module('commander', ['ionic'])
 app.controller('CommanderController', ['$http', function($http) {
   this.message = 'Ready...';
 
-  this.robot = function() {
-    return JSON.parse(localStorage.commander).robot;
+  this.commands = function() {
+    return JSON.parse(localStorage.commander).commands;
   };
 
-  this.commandUrl = function(buttonName) {
-    var robot = this.robot();
-    return robot.host + '/api/robots/' + robot.name + '/devices/' +
-      robot.device + '/commands/' + robot.commands[buttonName];
+  this.commandUrl = function(command) {
+    var api = JSON.parse(localStorage.commander).api;
+
+    return api.host + ':' + api.port + '/api/robots/' + command.robot +
+      '/devices/' + command.device + '/commands/' + command.name;
   };
 
-  this.execute = function(buttonName) {
-    command = this.robot().commands[buttonName];
+  this.execute = function(index) {
+    var command = this.commands()[index];
+    var execution = $http.post(this.commandUrl(command), command.params);
 
-    if ( command === '') {
-      this.message = 'Command is not defined';
-    } else {
-      this.message = 'Executting command: ' + command;
+    execution.success(function(data){
+      this.message = 'Result of ' + command.name + ': ' + data.result;
+    }.bind(this));
 
-      var execution = $http.post(this.commandUrl(buttonName));
-
-      execution.success(function(data){
-        this.message = 'Result: ' + data.result;
-      }.bind(this));
-
-      execution.catch(function(data){
-        this.message = 'Error executing command: ' + command;
-      }.bind(this));
-    }
+    execution.catch(function(data){
+      this.message = 'Error executing command: ' + command.name;
+    }.bind(this));
   };
 }]);
