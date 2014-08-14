@@ -5,12 +5,13 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title></title>
 
-    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
     <link href="css/style.css" rel="stylesheet">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
     -->
+    <link href="css/ionic.app.css" rel="stylesheet">
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
@@ -24,43 +25,35 @@
   <body ng-app="commander">
 
     <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Commander</h1>
+      <ion-header-bar class="bar-dark">
+        <div class="top-logo">
+          <img src="img/logo_only_no_bkg.png">
+        </div>
+        <h1 class="title">COMMANDER</h1>
+        <button class="button icon ion-gear-a"></button>
       </ion-header-bar>
-      <ion-tabs class="tabs-positive tabs-icon-only">
+      <ion-header-bar class="bar bar-subheader bar-stable">
+        <h1 class="title">Simple message</h1>
+      </ion-header-bar>
 
-        <ion-tab title="Home" icon-on="ion-ios7-home" icon-off="ion-ios7-home-outline">
-          <ion-content>
-            <button class="button button-light">
-              Command
-            </button>
-          </ion-content>
-        </ion-tab>
-
-        <ion-tab title="Settings" icon-on="ion-ios7-gear" icon-off="ion-ios7-gear-outline">
-          <ion-content>
-            <div class="list">
-              <label class="item item-input">
-                <span class="input-label">Robot host</span>
-                <input type="text">
-              </label>
-              <label class="item item-input">
-                <span class="input-label">Robot port</span>
-                <input type="text">
-              </label>
-              <label class="item item-input">
-                <span class="input-label">Robot name</span>
-                <input type="text">
-              </label>
-              <label class="item item-input">
-                <span class="input-label">Robot device</span>
-                <input type="text">
-              </label>
-            </div>
-          </ion-content>
-        </ion-tab>
-
-      </ion-tabs>
-    </ion-pane>
+      <ion-content class="royal-bg">
+        <div class="controls row" style="vertical-align: text-bottom;">
+          <i class="control-up col col-offset-33 col-33 light ion-arrow-up-b"></i>
+        </div>
+        <div class="controls row">
+          <i class="control-left col col-33 col-center light ion-arrow-left-b"></i>
+          <i class="control-center col col-33 light ion-record circle"></i>
+          <i class="control-right col col-33 col-center light ion-arrow-right-b"></i>
+        </div>
+        <div class="controls row">
+          <i class="control-down col col-offset-33 col-33 light ion-arrow-down-b"></i>
+        </div>
+        <div class="controls row">
+          <i class="control-center col col-33 light ion-stop"></i>
+          <i class="control-center col col-33 light ion-stop"></i>
+          <i class="control-center col col-33 light ion-stop"></i>
+        </div>
+      </ion-content>
+   </ion-pane>
   </body>
 </html>

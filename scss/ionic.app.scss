@@ -16,7 +16,14 @@ $dark:                            #444 !default;
 */
 
 // The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../lib/ionic/fonts" !default;
+// If watching assets, execute this command on:
+// $ sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css
+$ionicons-font-path: "../fonts" !default;
+
+// IF using Sass (run gulp sass first), uncomment the line below and comment the line above this message.
+// Execute on your console: gulp saas
+//
+// $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
