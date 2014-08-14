@@ -1,1 +1,17 @@
 /* Empty. Add your own CSS if you like */
+.controls {
+  font-size: 140px;
+}
+
+.controls .circle {
+  font-size: 90px;
+  line-height: 140px;
+}
+
+.controls i {
+  text-align: center;
+}
+
+.top-logo img {
+ height: 33px;
+}
