@@ -5,11 +5,36 @@
 
 .controls .circle {
   font-size: 90px;
-  line-height: 140px;
 }
 
-.controls i {
+.controls .control-up, .controls .control-down {
   text-align: center;
+  height: 65px;
+}
+
+.controls .control-up:before, .controls .control-down:before {
+  line-height: 54px;
+}
+
+.controls .control-left {
+  text-align: right;
+}
+
+.controls .control-center {
+  text-align: center;
+}
+
+.controls .control-right {
+  text-align: left;
+}
+
+.controls .control-left:before, .controls .control-center:before, .controls .control-right:before {
+  line-height: 90px;
+  vertical-align: middle;
+}
+
+.controls .control-center.ion-stop {
+  font-size: 90px;
 }
 
 .top-logo img {
