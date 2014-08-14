@@ -3,28 +3,18 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
+    <title>Commander</title>
 
-    <!--<link href="lib/ionic/css/ionic.css" rel="stylesheet">-->
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
     <link href="css/ionic.app.css" rel="stylesheet">
 
-    <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
-
-    <!-- your app's js -->
     <script src="js/app.js"></script>
   </head>
   <body ng-app="commander" class="platform-android platform-cordova platform-webview">
 
-    <ion-pane>
+    <ion-pane ng-controller="CommanderController as commander">
       <ion-header-bar class="bar-dark">
         <div class="top-logo">
           <img src="img/logo_only_no_bkg.png">
@@ -33,25 +23,25 @@
         <button class="button icon ion-gear-a"></button>
       </ion-header-bar>
       <ion-header-bar class="bar bar-subheader bar-stable">
-        <h1 class="title">Simple message</h1>
+      <h1 class="title">{{commander.message}}</h1>
       </ion-header-bar>
 
       <ion-content class="royal-bg">
         <div class="controls row" style="vertical-align: text-bottom;">
-          <i class="control-up col col-offset-33 col-33 light ion-arrow-up-b"></i>
+          <i ng-click="commander.execute('up')" class="control-up col col-offset-33 col-33 light ion-arrow-up-b"></i>
         </div>
         <div class="controls row">
-          <i class="control-left col col-33 col-center light ion-arrow-left-b"></i>
-          <i class="control-center col col-33 light ion-record circle"></i>
-          <i class="control-right col col-33 col-center light ion-arrow-right-b"></i>
+          <i ng-click="commander.execute('left')" class="control-left col col-33 col-center light ion-arrow-left-b"></i>
+          <i ng-click="commander.execute('center')" class="control-center col col-33 light ion-record circle"></i>
+          <i ng-click="commander.execute('right')" class="control-right col col-33 col-center light ion-arrow-right-b"></i>
         </div>
         <div class="controls row">
-          <i class="control-down col col-offset-33 col-33 light ion-arrow-down-b"></i>
+          <i ng-click="commander.execute('down')" class="control-down col col-offset-33 col-33 light ion-arrow-down-b"></i>
         </div>
         <div class="controls row">
-          <i class="control-center col col-33 light ion-stop"></i>
-          <i class="control-center col col-33 light ion-stop"></i>
-          <i class="control-center col col-33 light ion-stop"></i>
+          <i ng-click="commander.execute('one')" class="control-center col col-33 light ion-stop"></i>
+          <i ng-click="commander.execute('two')" class="control-center col col-33 light ion-stop"></i>
+          <i ng-click="commander.execute('three')" class="control-center col col-33 light ion-stop"></i>
         </div>
       </ion-content>
    </ion-pane>
