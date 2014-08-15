@@ -29,8 +29,6 @@ app = angular.module('commander', ['ionic'])
 });
 
 app.controller('CommanderController', ['$http', function($http) {
-  this.message = 'Ready...';
-
   this.storedValues = function() {
     return JSON.parse(localStorage.commander);
   };
@@ -54,4 +52,10 @@ app.controller('CommanderController', ['$http', function($http) {
       this.message = 'Error executing command: ' + command.name;
     }.bind(this));
   };
+
+  this.message = 'Ready...';
+  this.labels = this.storedValues().commands.map(function(command){
+    return command.label;
+  });
+
 }]);
