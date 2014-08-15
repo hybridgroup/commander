@@ -1,1 +1,42 @@
 /* Empty. Add your own CSS if you like */
+.controls {
+  font-size: 140px;
+}
+
+.controls .circle {
+  font-size: 90px;
+}
+
+.controls .control-up, .controls .control-down {
+  text-align: center;
+  height: 65px;
+}
+
+.controls .control-up:before, .controls .control-down:before {
+  line-height: 54px;
+}
+
+.controls .control-left {
+  text-align: right;
+}
+
+.controls .control-center {
+  text-align: center;
+}
+
+.controls .control-right {
+  text-align: left;
+}
+
+.controls .control-left:before, .controls .control-center:before, .controls .control-right:before {
+  line-height: 90px;
+  vertical-align: middle;
+}
+
+.controls .control-center.ion-stop {
+  font-size: 90px;
+}
+
+.top-logo img {
+ height: 33px;
+}
