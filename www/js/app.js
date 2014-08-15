@@ -10,7 +10,7 @@ localStorage.commander = JSON.stringify({
     device: 'pebble',
     name: 'sendNotification',
     params: {message: 'Hello'}
-  }]
+  }, {}, {}, {}, {}, {}, {}, {}]
 });
 
 app = angular.module('commander', ['ionic'])
@@ -29,19 +29,19 @@ app = angular.module('commander', ['ionic'])
 });
 
 app.controller('CommanderController', ['$http', function($http) {
-  this.storedValues = function() {
+  this.configuration = function() {
     return JSON.parse(localStorage.commander);
   };
 
   this.commandUrl = function(command) {
-    var api = this.storedValues().api;
+    var api = this.configuration().api;
 
     return api.host + ':' + api.port + '/api/robots/' + command.robot +
       '/devices/' + command.device + '/commands/' + command.name;
   };
 
   this.execute = function(index) {
-    var command = this.storedValues().commands[index];
+    var command = this.configuration().commands[index];
     var execution = $http.post(this.commandUrl(command), command.params);
 
     execution.success(function(data){
@@ -54,8 +54,32 @@ app.controller('CommanderController', ['$http', function($http) {
   };
 
   this.message = 'Ready...';
-  this.labels = this.storedValues().commands.map(function(command){
+  this.labels = this.configuration().commands.map(function(command) {
     return command.label;
   });
 
 }]);
+
+app.controller('ConfigController', function() {
+  this.configuration = JSON.parse(localStorage.commander);
+
+  this.saveConfiguration = function() {
+    localStorage.commander = JSON.stringify(this.configuration);
+  };
+
+  this.editAPI = function(host, port) {
+    this.configuration.api = { host: host, port: port };
+    this.saveConfiguration();
+  };
+
+  this.add_command = function(index, command) {
+    this.configuration.commands[index] = command;
+    this.saveConfiguration();
+  };
+
+  this.remove_command = function(index) {
+    this.configuration.commands[index] = {};
+    this.saveConfiguration();
+  };
+
+});
