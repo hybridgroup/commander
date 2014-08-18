@@ -1,18 +1,3 @@
-// Remove when configuration screen is done
-localStorage.commander = JSON.stringify({
-  api: {
-    host: 'http://localhost',
-    port: '8080'
-  },
-  commands: [{
-    label: 'Say hello',
-    robot: 'pebble',
-    device: 'pebble',
-    name: 'sendNotification',
-    params: {message: 'Hello'}
-  }, {}, {}, {}, {}, {}, {}, {}]
-});
-
 app = angular.module('commander', ['ionic'])
 
 .run(function($ionicPlatform) {
