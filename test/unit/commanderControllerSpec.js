@@ -15,7 +15,7 @@ describe('CommanderController', function() {
         device: 'pebble',
         name: 'sendNotification',
         params: {message: 'Hello'}
-      }]
+      }, undefined]
     });
   });
 
@@ -27,7 +27,7 @@ describe('CommanderController', function() {
   }));
 
   it('returns command labels', function() {
-    expect(ctrl.labels).toEqual(['Say hello']);
+    expect(ctrl.labels).toEqual(['Say hello', '']);
   });
 
   it('executes command correctly', function() {
