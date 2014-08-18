@@ -1,18 +1,3 @@
-// Remove when configuration screen is done
-localStorage.commander = JSON.stringify({
-  api: {
-    host: 'http://localhost',
-    port: '8080'
-  },
-  commands: [{
-    label: 'Say hello',
-    robot: 'pebble',
-    device: 'pebble',
-    name: 'sendNotification',
-    params: {message: 'Hello'}
-  }, {}, {}, {}, {}, {}, {}, {}]
-});
-
 app = angular.module('commander', ['ionic'])
 
 .run(function($ionicPlatform) {
@@ -55,7 +40,11 @@ app.controller('CommanderController', ['$http', function($http) {
 
   this.message = 'Ready...';
   this.labels = this.configuration().commands.map(function(command) {
-    return command.label;
+    if (command && command.label){
+      return command.label;
+    } else {
+      return '';
+    }
   });
 
 }]);
@@ -72,13 +61,13 @@ app.controller('ConfigController', function() {
     this.saveConfiguration();
   };
 
-  this.add_command = function(index, command) {
+  this.addCommand = function(index, command) {
     this.configuration.commands[index] = command;
     this.saveConfiguration();
   };
 
-  this.remove_command = function(index) {
-    this.configuration.commands[index] = {};
+  this.removeCommand = function(index) {
+    this.configuration.commands[index] = undefined;
     this.saveConfiguration();
   };
 
