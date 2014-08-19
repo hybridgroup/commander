@@ -10,8 +10,7 @@ commander.controller('CommanderController', ['$scope', '$http', function($scope,
       '/devices/' + command.device + '/commands/' + command.name;
   };
 
-  $scope.execute = function(index) {
-    var command = $scope.configuration.commands[index];
+  $scope.execute = function(command) {
     var execution = $http.post($scope.commandUrl(command), command.params);
 
     execution.success(function(data){
