@@ -1,4 +1,4 @@
-commander.controller('ConfigController', function($scope, $http) {
+commander.controller('ConfigController', [ '$scope', function($scope) {
   $scope.command = {};
 
   $scope.configuration = JSON.parse(localStorage.commander);
@@ -35,4 +35,4 @@ commander.controller('ConfigController', function($scope, $http) {
     $scope.saveConfiguration();
   };
 
-});
+}]);

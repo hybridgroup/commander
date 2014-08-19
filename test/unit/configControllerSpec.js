@@ -1,7 +1,7 @@
 'use strict';
 
 describe('ConfigController', function() {
-  var ctrl;
+  var ctrl, scope;
 
   beforeEach(function() {
     localStorage.commander = JSON.stringify({
@@ -15,12 +15,13 @@ describe('ConfigController', function() {
 
   beforeEach(module('commander'));
 
-  beforeEach(inject(function($controller) {
-    ctrl = $controller('ConfigController');
+  beforeEach(inject(function($controller, $rootScope) {
+    scope = $rootScope.$new();
+    $controller('ConfigController', {$scope:scope});
   }));
 
   it('returns configuration', function() {
-    expect(ctrl.configuration).toEqual({
+    expect(scope.configuration).toEqual({
       api: {
         host: 'http://localhost',
         port: '8080'
@@ -30,26 +31,26 @@ describe('ConfigController', function() {
   });
 
   it('edits api values', function() {
-    ctrl.editAPI('http://otherhost', '3000');
+    scope.editAPI('http://otherhost', '3000');
 
-    expect(ctrl.configuration.api).toEqual({
+    expect(scope.configuration.api).toEqual({
       host: 'http://otherhost',
       port: '3000'
     });
   });
 
   it('adds a command', function() {
-    ctrl.addCommand(1, {label: 'one'});
-    ctrl.addCommand(2, {label: 'two'});
+    scope.addCommand(1, {label: 'one'});
+    scope.addCommand(2, {label: 'two'});
 
-    expect(ctrl.configuration.commands).toEqual([undefined, {label: 'one'}, {label: 'two'}]);
+    expect(scope.configuration.commands).toEqual([undefined, {label: 'one'}, {label: 'two'}]);
   });
 
   it('removes a command', function() {
-    ctrl.addCommand(0, {label: 'one'});
-    ctrl.removeCommand(0);
+    scope.addCommand(0, {label: 'one'});
+    scope.removeCommand(0);
 
-    expect(ctrl.configuration.commands).toEqual([undefined]);
+    expect(scope.configuration.commands).toEqual([undefined]);
   });
 
 });
