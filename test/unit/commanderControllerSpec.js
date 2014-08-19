@@ -23,7 +23,8 @@ describe('CommanderController', function() {
 
   beforeEach(module('commander'));
 
-  beforeEach(inject(function($controller, $http, $httpBackend, $rootScope) {
+  beforeEach(inject(function($controller, $http, $httpBackend, $rootScope, $templateCache) {
+    $templateCache.put('templates/commands.html', '.<template-goes-here />');
     httpBackend = $httpBackend;
     scope = $rootScope.$new();
     ctrl = $controller('CommanderController', {$scope:scope, $http:$http});
@@ -37,10 +38,10 @@ describe('CommanderController', function() {
     var expectedCommand = 'http://localhost:8080/api/robots/pebble/devices/pebble/commands/sendNotification';
     httpBackend.expectPOST(expectedCommand).respond({result: 'ok'});
 
-    ctrl.execute(0);
+    scope.execute(command);
     httpBackend.flush();
 
-    expect(ctrl.message).toEqual('Result of sendNotification: ok');
+    expect(scope.message).toEqual('Result of sendNotification: ok');
   });
 
 });

@@ -13,13 +13,13 @@ commander.controller('ConfigController', function($scope, $http) {
     $scope.saveConfiguration();
   };
 
-  $scope.addCommand = function() {
+  $scope.addCommand = function(command) {
     new_command_params = {
-      label: $scope.command.label,
-      robot: $scope.command.robot,
-      device: $scope.command.device,
-      name: $scope.command.name,
-      params: $scope.command.params
+      label: command.label,
+      robot: command.robot,
+      device: command.device,
+      name: command.name,
+      params: command.params
     }
 
     $scope.configuration.commands.push(new_command_params);

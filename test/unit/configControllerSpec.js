@@ -40,17 +40,17 @@ describe('ConfigController', function() {
   });
 
   it('adds a command', function() {
-    scope.addCommand(1, {label: 'one'});
-    scope.addCommand(2, {label: 'two'});
+    scope.addCommand({label: 'one'});
+    scope.addCommand({label: 'two'});
 
-    expect(scope.configuration.commands).toEqual([undefined, {label: 'one'}, {label: 'two'}]);
+    expect(scope.configuration.commands).toEqual([{label: 'one'}, {label: 'two'}]);
   });
 
   it('removes a command', function() {
-    scope.addCommand(0, {label: 'one'});
-    scope.removeCommand(0);
+    scope.addCommand({label: 'one'});
+    scope.removeCommand(scope.commands[0]);
 
-    expect(scope.configuration.commands).toEqual([undefined]);
+    expect(scope.configuration.commands).toEqual([]);
   });
 
 });
