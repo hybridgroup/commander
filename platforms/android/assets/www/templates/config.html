@@ -1,0 +1,14 @@
+<ion-view title="Manage commands">
+  <ion-content class="royal-bg">
+    <ul class="list">
+      <li class="item item-button-right" ng-repeat="command in commands  track by $index">
+        {{command.label}}
+        <button class="button button-assertive" ng-click="removeCommand(command)">
+          <i class="icon ion-close-round"></i>
+        </button>
+      </li>
+    </ul>
+
+    <a href="#/add" class="button button-light button-block">+ Add command</a>
+  </ion-content>
+</ion-view>
