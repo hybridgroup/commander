@@ -1,0 +1,7 @@
+<ion-view title="{{message}}">
+  <ion-content class="royal-bg">
+    <div class="controls">
+      <button ng-click="execute(command)" ng-repeat="command in commands track by $index" class="button button-light">{{command.label}}</button>
+    </div>
+  </ion-content>
+</ion-view>

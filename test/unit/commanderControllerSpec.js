@@ -1,7 +1,15 @@
 'use strict';
 
 describe('CommanderController', function() {
-  var ctrl, httpBackend;
+  var ctrl, httpBackend, scope, command;
+
+  command = {
+    label: 'Say hello',
+    robot: 'pebble',
+    device: 'pebble',
+    name: 'sendNotification',
+    params: {message: 'Hello'}
+  }
 
   beforeEach(function() {
     localStorage.commander = JSON.stringify({
@@ -9,35 +17,31 @@ describe('CommanderController', function() {
         host: 'http://localhost',
         port: '8080'
       },
-      commands: [{
-        label: 'Say hello',
-        robot: 'pebble',
-        device: 'pebble',
-        name: 'sendNotification',
-        params: {message: 'Hello'}
-      }, undefined]
+      commands: [command]
     });
   });
 
   beforeEach(module('commander'));
 
-  beforeEach(inject(function($controller, $http, $httpBackend) {
+  beforeEach(inject(function($controller, $http, $httpBackend, $rootScope, $templateCache) {
+    $templateCache.put('templates/commands.html', '.<template-goes-here />');
     httpBackend = $httpBackend;
-    ctrl = $controller('CommanderController', {$http:$http});
+    scope = $rootScope.$new();
+    ctrl = $controller('CommanderController', {$scope:scope, $http:$http});
   }));
 
-  it('returns command labels', function() {
-    expect(ctrl.labels).toEqual(['Say hello', '']);
+  it('returns command', function() {
+    expect(scope.commands).toEqual([command]);
   });
 
   it('executes command correctly', function() {
     var expectedCommand = 'http://localhost:8080/api/robots/pebble/devices/pebble/commands/sendNotification';
     httpBackend.expectPOST(expectedCommand).respond({result: 'ok'});
 
-    ctrl.execute(0);
+    scope.execute(command);
     httpBackend.flush();
 
-    expect(ctrl.message).toEqual('Result of sendNotification: ok');
+    expect(scope.message).toEqual('Result of sendNotification: ok');
   });
 
 });
