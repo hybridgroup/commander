@@ -22,5 +22,13 @@ commander.controller('CommanderController', ['$scope', '$http', function($scope,
     }.bind(this));
   };
 
+  $scope.isValid = function(command) {
+    if (command.device && command.robot && command.params && command.name && command.label){
+      return true;
+    }else{
+      return false;
+    }
+  };
+
   $scope.message = 'Ready...';
 }]);
