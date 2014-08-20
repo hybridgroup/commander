@@ -9,7 +9,7 @@ describe('CommanderController', function() {
     device: 'pebble',
     name: 'sendNotification',
     params: {message: 'Hello'}
-  }
+  };
 
   beforeEach(function() {
     localStorage.commander = JSON.stringify({
@@ -44,4 +44,12 @@ describe('CommanderController', function() {
     expect(scope.message).toEqual('Result of sendNotification: ok');
   });
 
+  it('returns true when command is valid', function() {
+    expect(scope.isValid(command)).toEqual(true);
+  });
+
+  it('returns false when command is not valid', function() {
+    var false_command = {label: "False command"}
+    expect(scope.isValid(false_command)).toEqual(false);
+  });
 });
