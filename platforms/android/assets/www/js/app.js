@@ -24,7 +24,11 @@ commander = angular.module('commander', ['ionic'])
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
-    StatusBar.hide();
+    if(window.StatusBar) {
+      StatusBar.hide();
+    }
   });
+
+  ionic.Platform.fullScreen(true, false);
 });
 

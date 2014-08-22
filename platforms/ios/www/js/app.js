@@ -27,12 +27,8 @@ commander = angular.module('commander', ['ionic'])
     if(window.StatusBar) {
       StatusBar.hide();
     }
-
-
   });
 
   ionic.Platform.fullScreen(true, false);
-
-  alert(ionic.Platform.platforms);
 });
 
