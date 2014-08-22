@@ -1,3 +1,20 @@
+if(!localStorage.commander){
+  localStorage.commander = JSON.stringify({
+    api: {
+      host: 'http://localhost',
+      port: '8080'
+    },
+    commands: [{
+      label: 'Say hello',
+      robot: 'pebble',
+      device: 'pebble',
+      name: 'sendNotification',
+      params: {message: 'Hello'}
+    }]
+  });
+}
+
+
 commander = angular.module('commander', ['ionic'])
 
 .run(function($ionicPlatform) {
@@ -8,8 +25,10 @@ commander = angular.module('commander', ['ionic'])
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
     if(window.StatusBar) {
-      StatusBar.styleDefault();
+      StatusBar.hide();
     }
   });
+
+  ionic.Platform.fullScreen(true, false);
 });
 
