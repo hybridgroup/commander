@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'commander' target in the 'commander' project
+// Prefix header for all source files of the 'Commander' target in the 'Commander' project
 //
 
 #ifdef __OBJC__
