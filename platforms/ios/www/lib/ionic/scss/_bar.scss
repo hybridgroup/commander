@@ -319,6 +319,10 @@
   &.has-tabs-top{
     border-bottom-width: 0px;
   }
+
+  &.sub-bar {
+    top: $bar-height;
+  }
 }
 
 // Footer at bottom

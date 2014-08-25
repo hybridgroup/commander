@@ -5,13 +5,13 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <title>Commander</title>
 
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/ionic.app.css" rel="stylesheet">
 
     <script src="lib/ionic/js/ionic.bundle.js"></script>
     <script src="cordova.js"></script>
   </head>
-  <body>
+  <body ng-controller="MyCtrl" class="platform-ios platform-cordova platform-webview">
     <ion-pane>
       <ion-header-bar class="bar-dark">
         <div class="top-logo">
@@ -21,6 +21,8 @@
         </div>
         <h1 class="title">COMMANDER</h1>
         <a href="#/config" class="button icon ion-gear-a"></a>
+        <!--<button ng-click="hide()" class="button">hide</button>-->
+        <!--<button ng-click="show()" class="button">show</button>-->
       </ion-header-bar>
 
       <ion-nav-bar class="bar-stable sub-bar">
