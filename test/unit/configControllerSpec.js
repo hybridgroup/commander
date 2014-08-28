@@ -40,14 +40,24 @@ describe('ConfigController', function() {
   });
 
   it('adds a command', function() {
-    scope.addCommand({label: 'one'});
-    scope.addCommand({label: 'two'});
+    scope.saveCommand({label: 'one'});
+    scope.saveCommand({label: 'two'});
 
     expect(scope.configuration.commands).toEqual([{label: 'one'}, {label: 'two'}]);
   });
 
+  it('edits a command', function() {
+    scope.saveCommand({label: 'one'});
+    scope.saveCommand({label: 'two'});
+
+    expect(scope.configuration.commands).toEqual([{label: 'one'}, {label: 'two'}]);
+    scope.index = 0;
+    scope.saveCommand({label: 'uno'});
+    expect(scope.configuration.commands).toEqual([{label: 'uno'}, {label: 'two'}]);
+  });
+
   it('removes a command', function() {
-    scope.addCommand({label: 'one'});
+    scope.saveCommand({label: 'one'});
     scope.removeCommand(scope.commands[0]);
 
     expect(scope.configuration.commands).toEqual([]);

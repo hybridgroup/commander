@@ -1,8 +1,18 @@
-commander.controller('ConfigController', [ '$scope', function($scope) {
-  $scope.command = {};
-
+commander.controller('ConfigController', [ '$scope', '$stateParams', function($scope, $stateParams) {
+  $scope.params = $stateParams;
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.commands = $scope.configuration.commands;
+
+  if ($stateParams && $stateParams.index){
+    $scope.index = $stateParams.index;
+    $scope.command = $scope.commands[$scope.index];
+  }else{
+    $scope.command = {};
+  }
+
+  console.log($stateParams);
+  console.log($scope.commands);
+  console.log($scope.command);
 
   $scope.saveConfiguration = function() {
     localStorage.commander = JSON.stringify($scope.configuration);
@@ -13,16 +23,12 @@ commander.controller('ConfigController', [ '$scope', function($scope) {
     $scope.saveConfiguration();
   };
 
-  $scope.addCommand = function(command) {
-    new_command_params = {
-      label: command.label,
-      robot: command.robot,
-      device: command.device,
-      name: command.name,
-      params: command.params
+  $scope.saveCommand = function(command) {
+    if($scope.index){
+      $scope.configuration.commands[$scope.index] = command;
+    }else{
+      $scope.configuration.commands.push(command);
     }
-
-    $scope.configuration.commands.push(new_command_params);
     $scope.saveConfiguration();
   };
 
