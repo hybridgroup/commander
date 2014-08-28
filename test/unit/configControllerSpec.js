@@ -49,10 +49,8 @@ describe('ConfigController', function() {
   it('edits a command', function() {
     scope.saveCommand({label: 'one'});
     scope.saveCommand({label: 'two'});
+    scope.saveCommand({label: 'uno'}, 0);
 
-    expect(scope.configuration.commands).toEqual([{label: 'one'}, {label: 'two'}]);
-    scope.index = 0;
-    scope.saveCommand({label: 'uno'});
     expect(scope.configuration.commands).toEqual([{label: 'uno'}, {label: 'two'}]);
   });
 

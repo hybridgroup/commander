@@ -10,10 +10,6 @@ commander.controller('ConfigController', [ '$scope', '$stateParams', function($s
     $scope.command = {};
   }
 
-  console.log($stateParams);
-  console.log($scope.commands);
-  console.log($scope.command);
-
   $scope.saveConfiguration = function() {
     localStorage.commander = JSON.stringify($scope.configuration);
   };
@@ -23,12 +19,13 @@ commander.controller('ConfigController', [ '$scope', '$stateParams', function($s
     $scope.saveConfiguration();
   };
 
-  $scope.saveCommand = function(command) {
-    if($scope.index){
-      $scope.configuration.commands[$scope.index] = command;
+  $scope.saveCommand = function(command, index) {
+    if(index != undefined){
+       $scope.configuration.commands[index] = command;
     }else{
       $scope.configuration.commands.push(command);
     }
+
     $scope.saveConfiguration();
   };
 
