@@ -2,6 +2,7 @@ commander.controller('ConfigController', [ '$scope', '$stateParams', function($s
   $scope.params = $stateParams;
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.commands = $scope.configuration.commands;
+  $scope.api = $scope.configuration.api;
 
   if ($stateParams && $stateParams.index){
     $scope.index = $stateParams.index;
@@ -14,8 +15,8 @@ commander.controller('ConfigController', [ '$scope', '$stateParams', function($s
     localStorage.commander = JSON.stringify($scope.configuration);
   };
 
-  $scope.editAPI = function(host, port) {
-    $scope.configuration.api = { host: host, port: port };
+  $scope.editAPI = function(api) {
+    $scope.configuration.api = api;
     $scope.saveConfiguration();
   };
 

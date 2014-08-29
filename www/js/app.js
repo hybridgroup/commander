@@ -31,3 +31,11 @@ commander = angular.module('commander', ['ionic'])
 
   ionic.Platform.fullScreen(true, false);
 });
+
+commander.controller('ContentController', ['$scope', '$ionicSideMenuDelegate', function($scope, $ionicSideMenuDelegate) {
+  $scope.toggleLeft = function() {
+    console.log("si entra");
+    $ionicSideMenuDelegate.toggleRight();
+    console.log("si pasa");
+  };
+}]);
