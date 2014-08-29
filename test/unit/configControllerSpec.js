@@ -31,7 +31,7 @@ describe('ConfigController', function() {
   });
 
   it('edits api values', function() {
-    scope.editAPI('http://otherhost', '3000');
+    scope.editAPI({host: 'http://otherhost', port: '3000'});
 
     expect(scope.configuration.api).toEqual({
       host: 'http://otherhost',
