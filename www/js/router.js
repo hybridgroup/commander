@@ -14,6 +14,11 @@ commander.config(function($stateProvider, $urlRouterProvider) {
       url: '/add',
         templateUrl: 'templates/add_command.html',
         controller: 'ConfigController'
+    })
+    .state('edit-command', {
+      url: '/edit/:index',
+        templateUrl: 'templates/add_command.html',
+        controller: 'ConfigController'
     });
 
   $urlRouterProvider.otherwise('/commands');
