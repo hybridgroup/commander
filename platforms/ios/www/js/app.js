@@ -32,17 +32,8 @@ commander = angular.module('commander', ['ionic'])
   ionic.Platform.fullScreen(true, false);
 });
 
-commander.controller('MyCtrl', function($scope) {
-  ionic.Platform.ready(function() {
-    StatusBar.hide();
-  });
-
-
-  $scope.hide= function() {
-    StatusBar.hide();
+commander.controller('ContentController', ['$scope', '$ionicSideMenuDelegate', function($scope, $ionicSideMenuDelegate) {
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleRight();
   };
-
-  $scope.show= function() {
-    StatusBar.show();
-  };
-});
+}]);

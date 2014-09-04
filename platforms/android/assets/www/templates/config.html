@@ -2,9 +2,11 @@
   <ion-content class="royal-bg has-subheader">
     <ul class="list">
       <li class="item item-button-right" ng-repeat="command in commands  track by $index">
-        {{command.label}}
+        <a href="#/edit/{{$index}}">
+          {{command.label}}
+        </a>
         <button class="button button-assertive" ng-click="removeCommand(command)">
-          <i class="icon ion-close-round"></i>
+          <i class="icon ion-trash-a"></i>
         </button>
       </li>
     </ul>
