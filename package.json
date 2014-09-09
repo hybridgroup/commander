@@ -1,7 +1,11 @@
 {
-  "name": "ionic-project",
-  "version": "1.0.0",
-  "description": "An Ionic project",
+  "name": "Commander",
+  "version": "0.0.1",
+  "description": "An app to control robots from your device",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hybridgroup/commander.git"
+  },
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^0.7.1",
