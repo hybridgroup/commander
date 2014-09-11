@@ -1,0 +1,15 @@
+<ion-view title="{{message}}">
+  <ion-content class="royal-bg has-subheader">
+    <ul class="list">
+      <li class="item item-checkbox" ng-repeat="remote in remotes track by $index">
+        <label class="checkbox">
+          <input type="checkbox" ng-model="remote.selected" name="remotes.label">
+        </label>
+        {{remote.label}}
+      </li>
+    </ul>
+
+    <a href="#/config" ng-click="saveRemotes(remotes)" class="button button-positive button-block">Save</a>
+    <a href="#/config" class="button button-assertive button-block">Cancel</a>
+  </ion-content>
+</ion-view>
