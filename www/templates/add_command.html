@@ -1,0 +1,29 @@
+<ion-view title="Add command">
+  <ion-content class="has-subheader">
+    <div class="list ">
+      <label class="item item-input">
+        <span class="input-label">Label</span>
+        <input ng-model="command.label" type="text" placeholder="Roll Sphero">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Robot</span>
+        <input ng-model="command.robot" type="text" placeholder="sphero">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Device</span>
+        <input ng-model="command.device" type="text" placeholder="sphero">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Name</span>
+        <input ng-model="command.name" type="text" placeholder="'roll'">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Params</span>
+        <textarea ng-model="command.params" placeholder='{"heading": 0, "speed": 100}'></textarea>
+      </label>
+    </div>
+
+    <a href="#/config" ng-click="saveCommand(command, index)" class="button button-positive button-block">Save</a>
+    <a href="#/config" class="button button-assertive button-block">Cancel</a>
+  </ion-content>
+</ion-view>

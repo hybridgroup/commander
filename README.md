@@ -42,3 +42,11 @@ Execute the following commands:
 
 That will generate a `local.properties` file which contains the location
 of the SDK.
+
+## Watch ionic SASS
+
+Execute the following command when customizing ionic SCSS files:
+
+```bash
+$ sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css
+```
