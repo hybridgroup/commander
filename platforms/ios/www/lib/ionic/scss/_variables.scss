@@ -3,14 +3,21 @@
 // -------------------------------
 
 $light:                           #fff !default;
-$stable:                          #f8f8f8 !default;
-$positive:                        #4a87ee !default;
+$stable:                          #FCFFF4 !default; // Custom
+$positive:                        #385E71 !default; // Custom
 $calm:                            #43cee6 !default;
 $balanced:                        #66cc33 !default;
 $energized:                       #f0b840 !default;
 $assertive:                       #ef4e3a !default;
-$royal:                           #8a6de9 !default;
-$dark:                            #444 !default;
+$royal:                           #0E2F40 !default; // Custom
+$dark:                            #0A2433 !default; // Custom
+
+//$top: #0A2433;
+//$background-blue: #0E2F40;
+//$inactive: #FFF;
+//$active: #385E71;
+//$bottom: #0E2F40;
+//$banner: #FCFFF4;
 
 
 // Base
@@ -707,4 +714,4 @@ $z-index-view:                    1 !default;
 // Platform
 // -------------------------------
 
-$ios-statusbar-height:           20px !default;
+$ios-statusbar-height:           0px !default;
