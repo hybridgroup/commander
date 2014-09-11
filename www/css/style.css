@@ -11,4 +11,7 @@
 .controls button {
   margin: 5px;
   width: 28%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
