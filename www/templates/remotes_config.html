@@ -1,0 +1,17 @@
+<ion-view title="Remote commands API route">
+  <ion-content class="has-subheader">
+    <div class="list ">
+      <label class="item item-input">
+        <span class="input-label">Host</span>
+        <input ng-model="remotes_config.host" type="text" placeholder="http://localhost">
+      </label>
+      <label class="item item-input">
+        <span class="input-label">Port</span>
+        <input ng-model="remotes_config.port" type="text" placeholder="8080">
+      </label>
+    </div>
+
+    <a href="#/remotes" ng-click="editRemotesAPI(remotes_config)" class="button button-positive button-block">Save</a>
+    <a href="#/remotes" class="button button-assertive button-block">Cancel</a>
+  </ion-content>
+</ion-view>

@@ -158,6 +158,38 @@ $ ionic run android
 
 This are the basic steps to have Commander up and running locally.
 
+## Remote controls API connection
+
+In order to obtain a list of available Remote controls/commands for Commander you can start a service that provides
+them. Commander, currently, is able to get this list and parse it, so you can choose from a variety of available
+commands, instead of typing them manually.
+
+The service provider for this purpose must return an array that contains available commands in JSON format. Those
+commands will require the following parameters:
+
+* label  - The name of the command.
+* robot  - Robot that the command will manipulate.
+* device - Device that the command will utilize.
+* name   - Command name to be interpreted. It will identify the command purpose, example: `sendNotification`
+* params - A hash that contains the params the command will require for it's purpose, this param is optional.
+
+Example:
+```json
+[
+  {
+    label: 'Say hello',
+    robot: 'pebble',
+    device: 'pebble',
+    name: 'sendNotification',
+    params: {message: 'Hello'}
+  }
+]
+```
+
+Once you have your service provider URL, you will need to configure it into the Commander app. Just go to the
+`Import Commands` and click onto the `Remotes Config` button, this will redirect you to the API end point configuration,
+update it according to your service host and port.
+
 ## Testing
 
 A testing framework was previously installed on the commander app. In order to run it, make sure you have installed

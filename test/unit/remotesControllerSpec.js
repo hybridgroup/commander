@@ -9,6 +9,10 @@ describe('RemotesController', function() {
         host: 'http://localhost',
         port: '8080'
       },
+      remote_address: {
+        host: 'http://localhost',
+        port: '8080'
+      },
       commands: []
     });
   });
@@ -31,6 +35,12 @@ describe('RemotesController', function() {
     scope.addRemote({label: 'two', selected: false});
 
     expect(scope.configuration.commands).toEqual([{label: 'one'}, {label: 'two'}]);
+  });
+
+  it('edits remotes API routes', function() {
+    scope.editRemotesAPI({host: 'http://otherhost', port: "8000"});
+
+    expect(scope.configuration.remote_address).toEqual({host: 'http://otherhost', port: "8000"});
   });
 
 });

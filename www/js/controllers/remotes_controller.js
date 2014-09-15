@@ -1,7 +1,9 @@
 commander.controller('RemotesController', ['$scope', '$http', function($scope, $http) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.commands = $scope.configuration.commands;
+  $scope.remotes_config = $scope.configuration.remote_address || {host: "", port: ""};
   $scope.message = 'Import Commands';
+  var remotes_config = $scope.remotes_config;
 
   // WARNING: Once a remote commands provider is served, this method should be replaced with:
   //   $scope.remotes = [];
@@ -26,7 +28,9 @@ commander.controller('RemotesController', ['$scope', '$http', function($scope, $
     params: {message: 'Hello'}
   }];
 
-  $http({method: 'GET', url: '/remote_commands'}).
+  var url = remotes_config.host + ':' + remotes_config.port + '/api/remote_commands';
+
+  $http({method: 'GET', url: url}).
     success(function(data, status, headers, config) {
       $scope.remotes = data.remotes;
     }).
@@ -45,6 +49,11 @@ commander.controller('RemotesController', ['$scope', '$http', function($scope, $
   $scope.addRemote = function(remote) {
     delete(remote.selected);
     $scope.configuration.commands.push(remote);
+    $scope.saveConfiguration();
+  };
+
+  $scope.editRemotesAPI = function(remotes_config) {
+    $scope.configuration.remote_address = remotes_config;
     $scope.saveConfiguration();
   };
 
