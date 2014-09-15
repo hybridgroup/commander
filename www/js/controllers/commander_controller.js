@@ -6,8 +6,17 @@ commander.controller('CommanderController', ['$scope', '$http', function($scope,
   $scope.commandUrl = function(command) {
     var api = $scope.configuration.api;
 
-    return api.host + ':' + api.port + '/api/robots/' + command.robot +
-      '/devices/' + command.device + '/commands/' + command.name;
+    var buildCommandUrl = function(api, command) {
+      var url = api.host + ':' + api.port + '/api'
+
+      if (command.robot) { url += '/robots/' + command.robot; }
+      if (command.device) { url += '/devices/' + command.device; }
+
+      url += '/commands/' + command.name;
+
+      return url;
+    }
+    return buildCommandUrl(api, command);
   };
 
   $scope.execute = function(command) {
@@ -23,7 +32,7 @@ commander.controller('CommanderController', ['$scope', '$http', function($scope,
   };
 
   $scope.isValid = function(command) {
-    if (command.device && command.robot && command.params && command.name && command.label){
+    if (command.name && command.label){
       return true;
     }else{
       return false;

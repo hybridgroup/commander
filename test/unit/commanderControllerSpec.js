@@ -3,6 +3,8 @@
 describe('CommanderController', function() {
   var ctrl, httpBackend, scope, command;
 
+  var apiUrl = "http://localhost:8080/api";
+
   command = {
     label: 'Say hello',
     robot: 'pebble',
@@ -52,4 +54,65 @@ describe('CommanderController', function() {
     var false_command = {label: "False command"}
     expect(scope.isValid(false_command)).toEqual(false);
   });
+
+  describe('#commandUrl', function(){
+
+    describe('when is a MCP command', function(){
+
+      it('should return an URL like api/commands/{command}', function(){
+
+        var mcpCommand = {
+          label: 'MCP: Echo',
+          robot: '',
+          device: '',
+          name: 'echo',
+          params: ''
+        };
+
+        var expectedUrl = apiUrl + '/commands/' + mcpCommand.name;
+        expect(scope.commandUrl(mcpCommand)).toEqual(expectedUrl)
+      });
+
+    });
+
+    describe('when is a robot command', function(){
+
+      it('should return an URL like api/robots/{robot}/commands/{command}', function(){
+
+        var mcpCommand = {
+          label: 'TestBot: Echo',
+          robot: 'TestBot',
+          device: '',
+          name: 'echo',
+          params: ''
+        };
+
+        var expectedUrl = apiUrl + '/robots/' + mcpCommand.robot + 
+                                   '/commands/' + mcpCommand.name;
+        expect(scope.commandUrl(mcpCommand)).toEqual(expectedUrl)
+      });
+
+    });
+
+    describe('when is a device command', function(){
+
+      it('should return an URL like api/robots/{robot}/devices/{device}/commands/{command}', function(){
+
+        var mcpCommand = {
+          label: 'TestBot: Echo',
+          robot: 'TestBot',
+          device: 'TestDevice',
+          name: 'echo',
+          params: ''
+        };
+
+        var expectedUrl = apiUrl + '/robots/' + mcpCommand.robot +
+                                   '/devices/' + mcpCommand.device +
+                                   '/commands/' + mcpCommand.name;
+        expect(scope.commandUrl(mcpCommand)).toEqual(expectedUrl)
+      });
+
+    });
+
+  })
 });
