@@ -10,7 +10,7 @@
 
 .controls button {
   margin: 5px;
-  width: 28%;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
