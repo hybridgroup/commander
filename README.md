@@ -175,7 +175,7 @@ commands will require the following parameters:
 
 Example:
 ```json
-[
+{commands: [
   {
     label: 'Say hello',
     robot: 'pebble',
@@ -183,7 +183,7 @@ Example:
     name: 'sendNotification',
     params: {message: 'Hello'}
   }
-]
+]}
 ```
 
 Once you have your service provider URL, you will need to configure it into the Commander app. Just go to the
