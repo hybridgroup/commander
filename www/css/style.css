@@ -21,6 +21,6 @@ li {
   width: 15%;
 }
 
-input {
+input[type=text] {
   min-width: 85%;
 }
