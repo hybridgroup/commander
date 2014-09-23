@@ -1,4 +1,4 @@
-commander.controller('RemotesController', ['$scope', '$http', '$ionicNavBarDelegate', function($scope, $http, $ionicNavBarDelegate) {
+commander.controller('RemotesController', ['$scope', '$http', '$ionicNavBarDelegate', '$ionicPopup', function($scope, $http, $ionicNavBarDelegate, $ionicPopup) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.commands = $scope.configuration.commands;
   $scope.remotes_config = $scope.configuration.remote_address || {url: "http://localhost:8080"};
@@ -6,19 +6,29 @@ commander.controller('RemotesController', ['$scope', '$http', '$ionicNavBarDeleg
   $scope.remotes = [];
 
   $scope.getRemoteCommands = function() {
-    var url = $scope.remotes_config.url || "http://localhost:8080";
+    var url = $scope.remotes_config.url;
 
     $http({method: 'GET', url: url}).
       success(function (data, status, headers, config) {
         $scope.remotes = data.commands;
-        $scope.message = 'Commands imported from: ' + url;
+        $scope.alert_title = 'Commands imported from:';
+        $scope.alert_message = url;
       }).
       error(function (data, status, headers, config) {
-        $scope.message = 'Error: No Remote Commands available...';
+        $scope.alert_title = 'Error:';
+        $scope.alert_message = 'No Remote Commands available.';
       });
   };
 
-  $scope.getRemoteCommands();
+  if(!$scope.remotes_config.url){
+    $scope.alert_title = 'Alert:';
+    $scope.alert_message = 'The commands will be imported from an external endpoint that returns a JSON structure, please set the endpoint first.';
+  }else{
+    $scope.getRemoteCommands();
+  }
+
+  console.log($scope.alert_title);
+  console.log($scope.alert_message);
 
   $scope.saveRemotes = function(remotes) {
     angular.forEach(remotes, function(remote, index){
@@ -58,13 +68,13 @@ commander.controller('RemotesController', ['$scope', '$http', '$ionicNavBarDeleg
     $ionicNavBarDelegate.back();
   };
 
-  $scope.remotesEndpointAvailable = function() {
-    if (!$scope.remotes_config.url){
-      return(true);
-    }
-    else{
-      return(false);
-    }
+  $scope.reload = function() {
+    $scope.getRemoteCommands();
+
+    $ionicPopup.alert({
+      title: 'Success!',
+      template: 'Your import commands list has been reloaded.'
+    });
   };
 }]);
 

@@ -12,3 +12,15 @@
   margin: 5px;
   width: 28%;
 }
+
+li {
+  white-space: normal !important;
+}
+
+.input-label {
+  width: 15%;
+}
+
+input {
+  min-width: 85%;
+}
