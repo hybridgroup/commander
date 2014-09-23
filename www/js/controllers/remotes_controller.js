@@ -52,6 +52,18 @@ commander.controller('RemotesController', ['$scope', '$http', '$ionicNavBarDeleg
     if(!$scope.findCommand(remote)){
       $scope.configuration.commands.push(remote);
       $scope.saveConfiguration();
+    }else{
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Duplicates found:',
+        template: 'Do you want to keep the remote "' + remote.label + '" anyways?'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          $scope.configuration.commands.push(remote);
+          $scope.saveConfiguration();
+        }
+      });
     }
   };
 
