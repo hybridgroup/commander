@@ -158,7 +158,7 @@ $ ionic run android
 
 This are the basic steps to have Commander up and running locally.
 
-## Remote controls API connection
+## Remote controls API Endpoint connection
 
 In order to obtain a list of available Remote controls/commands for Commander you can start a service that provides
 them. Commander, currently, is able to get this list and parse it, so you can choose from a variety of available

@@ -27,7 +27,7 @@ commander.config(function($stateProvider, $urlRouterProvider) {
     .state('remotes_config', {
       url: '/remotes_config',
       templateUrl: 'templates/remotes_config.html',
-      controller: 'RemotesController'
+      controller: 'ConfigRemotesController'
     })
 
     .state('add-command', {

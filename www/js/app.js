@@ -5,8 +5,7 @@ if(!localStorage.commander){
       port: '8080'
     },
     remote_address: {
-      host: 'http://localhost',
-      port: '8080'
+      url: 'http://localhost:8080'
     },
     commands: [{
       label: 'Say hello',

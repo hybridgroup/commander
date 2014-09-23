@@ -1,42 +1,24 @@
-commander.controller('RemotesController', ['$scope', '$http', function($scope, $http) {
+commander.controller('RemotesController', ['$scope', '$http', '$ionicNavBarDelegate', function($scope, $http, $ionicNavBarDelegate) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.commands = $scope.configuration.commands;
-  $scope.remotes_config = $scope.configuration.remote_address || {host: "", port: ""};
+  $scope.remotes_config = $scope.configuration.remote_address || {url: "http://localhost:8080"};
   $scope.message = 'Import Commands';
-  var remotes_config = $scope.remotes_config;
+  $scope.remotes = [];
 
-  // WARNING: Once a remote commands provider is served, this method should be replaced with:
-  //   $scope.remotes = [];
+  $scope.getRemoteCommands = function() {
+    var url = $scope.remotes_config.url || "http://localhost:8080";
 
-  $scope.remotes = [{
-    label: 'Say hello',
-    robot: 'pebble',
-    device: 'pebble',
-    name: 'sendNotification',
-    params: {message: 'Hello'}
-  }, {
-    label: 'Say bye',
-    robot: 'pebble',
-    device: 'pebble',
-    name: 'sendNotification',
-    params: {message: 'Hello'}
-  }, {
-    label: 'Say cheers!',
-    robot: 'pebble',
-    device: 'pebble',
-    name: 'sendNotification',
-    params: {message: 'Hello'}
-  }];
+    $http({method: 'GET', url: url}).
+      success(function (data, status, headers, config) {
+        $scope.remotes = data.commands;
+        $scope.message = 'Commands imported from: ' + url;
+      }).
+      error(function (data, status, headers, config) {
+        $scope.message = 'Error: No Remote Commands available...';
+      });
+  };
 
-  var url = remotes_config.host + ':' + remotes_config.port + '/api/remote_commands';
-
-  $http({method: 'GET', url: url}).
-    success(function(data, status, headers, config) {
-      $scope.remotes = data.remotes;
-    }).
-    error(function(data, status, headers, config) {
-      $scope.message = 'Error: No Remote Commands available...';
-    });
+  $scope.getRemoteCommands();
 
   $scope.saveRemotes = function(remotes) {
     angular.forEach(remotes, function(remote, index){
@@ -46,10 +28,21 @@ commander.controller('RemotesController', ['$scope', '$http', function($scope, $
     });
   };
 
+  $scope.findCommand = function(command) {
+    for (var i = 0; i < $scope.commands.length; i++) {
+      if ($scope.commands[i].label === command.label) {
+        return true;
+      }
+    }
+    return false;
+  };
+
   $scope.addRemote = function(remote) {
     delete(remote.selected);
-    $scope.configuration.commands.push(remote);
-    $scope.saveConfiguration();
+    if(!$scope.findCommand(remote)){
+      $scope.configuration.commands.push(remote);
+      $scope.saveConfiguration();
+    }
   };
 
   $scope.editRemotesAPI = function(remotes_config) {
@@ -59,6 +52,19 @@ commander.controller('RemotesController', ['$scope', '$http', function($scope, $
 
   $scope.saveConfiguration = function() {
     localStorage.commander = JSON.stringify($scope.configuration);
+  };
+
+  $scope.goBack = function() {
+    $ionicNavBarDelegate.back();
+  };
+
+  $scope.remotesEndpointAvailable = function() {
+    if (!$scope.remotes_config.url){
+      return(true);
+    }
+    else{
+      return(false);
+    }
   };
 }]);
 
