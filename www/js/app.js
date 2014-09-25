@@ -4,6 +4,9 @@ if(!localStorage.commander){
       host: 'http://localhost',
       port: '8080'
     },
+    remote_address: {
+      url: 'http://localhost:8080'
+    },
     commands: [{
       label: 'Say hello',
       robot: 'pebble',

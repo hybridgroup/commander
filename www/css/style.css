@@ -15,3 +15,15 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+li {
+  white-space: normal !important;
+}
+
+.input-label {
+  width: 15%;
+}
+
+input[type=text] {
+  min-width: 85%;
+}

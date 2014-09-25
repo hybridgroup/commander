@@ -1,0 +1,13 @@
+<ion-view title="Commands API endpoint">
+  <ion-content class="has-subheader">
+    <div class="list ">
+      <label class="item item-input">
+        <span class="input-label">URL</span>
+        <input ng-model="remotes_config.url" type="text" placeholder="http://localhost:8080/api/commands">
+      </label>
+    </div>
+
+    <a href="#/remotes" ng-click="editRemotesAPI(remotes_config)" class="button button-positive button-block">Save</a>
+    <a href="#/remotes" class="button button-assertive button-block">Cancel</a>
+  </ion-content>
+</ion-view>
