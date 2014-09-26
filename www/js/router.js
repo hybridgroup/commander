@@ -1,7 +1,7 @@
 commander.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('commands', {
-      url: '/commands',
+    .state('command_set', {
+      url: '/command_set/:index',
       templateUrl: 'templates/commands.html',
       controller: 'CommanderController'
     })

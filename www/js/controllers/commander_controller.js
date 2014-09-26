@@ -1,13 +1,20 @@
-commander.controller('CommanderController', ['$scope', '$http', function($scope, $http) {
+commander.controller('CommanderController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
   $scope.configuration = JSON.parse(localStorage.commander);
 
-  $scope.commands = $scope.configuration.commands;
+  if ($stateParams && $stateParams.index){
+    $scope.index = $stateParams.index;
+    $scope.command_set = $scope.configuration.command_sets[$scope.index];
+  }else{
+    $scope.command_set = $scope.configuration.command_sets[0];
+  }
+
+  $scope.commands = $scope.command_set.commands;
 
   $scope.commandUrl = function(command) {
     var api = $scope.configuration.api;
 
     var buildCommandUrl = function(api, command) {
-      var url = api.host + ':' + api.port + '/api'
+      var url = api.host + ':' + api.port + '/api';
 
       if (command.robot) { url += '/robots/' + command.robot; }
       if (command.device) { url += '/devices/' + command.device; }

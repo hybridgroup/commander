@@ -1,19 +1,49 @@
 if(!localStorage.commander){
   localStorage.commander = JSON.stringify({
-    api: {
-      host: 'http://localhost',
-      port: '8080'
-    },
-    remote_address: {
-      url: 'http://localhost:8080'
-    },
-    commands: [{
-      label: 'Say hello',
-      robot: 'pebble',
-      device: 'pebble',
-      name: 'sendNotification',
-      params: {message: 'Hello'}
-    }]
+    api: "http://localhost:3000",
+    command_sets: [
+      {
+        name: "Pebble",
+        commands: [
+          {
+            label: 'Say hello',
+            robot: 'pebble',
+            device: 'pebble',
+            name: 'sendNotification',
+            params: "{message: 'Hello'}"
+          },
+          {
+            label: 'Say bye',
+            robot: 'pebble',
+            device: 'pebble',
+            name: 'sendNotification',
+            params: "{message: 'Bye'}"
+          }
+        ],
+        type: "list"
+      },
+      {
+        name: "AR-Drone",
+        commands: [
+          {
+            label: 'Say hello',
+            robot: 'pebble',
+            device: 'pebble',
+            name: 'sendNotification',
+            params: "{message: 'Hello'}"
+          },
+          {
+            label: 'Say bye',
+            robot: 'pebble',
+            device: 'pebble',
+            name: 'sendNotification',
+            params: "{message: 'Bye'}"
+          }
+        ],
+        type: "d-pad"
+      }
+    ],
+    log: "blah..."
   });
 }
 
