@@ -1,11 +1,11 @@
-commander.controller('CommanderController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+commander.controller('CommanderSetController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
   $scope.configuration = JSON.parse(localStorage.commander);
 
   if ($stateParams && $stateParams.index){
     $scope.index = $stateParams.index;
     $scope.command_set = $scope.configuration.command_sets[$scope.index];
   }else{
-    $scope.command_set = $scope.configuration.command_sets[0];
+    $scope.command_set = $scope.configuration.current_command_set;
   }
 
   $scope.commands = $scope.command_set.commands;

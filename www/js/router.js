@@ -1,9 +1,15 @@
-commander.config(function($stateProvider, $urlRouterProvider) {
+commander.config(function($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
   $stateProvider
     .state('command_set', {
-      url: '/command_set/:index',
+      url: '/current_command_set',
+      templateUrl: 'templates/redirect.html',
+      controller: 'CurrentCommanderSetController'
+    })
+
+    .state('command_sets_index', {
+      url: '/command_sets/:index',
       templateUrl: 'templates/commands.html',
-      controller: 'CommanderController'
+      controller: 'CommanderSetController'
     })
 
     .state('config', {
@@ -42,5 +48,5 @@ commander.config(function($stateProvider, $urlRouterProvider) {
         controller: 'ConfigController'
     });
 
-  $urlRouterProvider.otherwise('/commands');
+  $urlRouterProvider.otherwise('/current_command_set');
 });
