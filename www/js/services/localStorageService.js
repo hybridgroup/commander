@@ -19,7 +19,8 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
       localStorage.commander = JSON.stringify({
         api: "",
         command_sets: [],
-        current_command_set: null
+        current_command_set: null,
+        log: ""
       })
     }
 

@@ -1,12 +1,9 @@
 if(!localStorage.commander){
   localStorage.commander = JSON.stringify({
-    api: {
-      host: 'http://localhost',
-      port: '8080'
-    },
+    api: 'http://localhost:3000',
     command_sets: [],
     current_command_set: null,
-	log: ""
+    log: ''
   });
 }
 

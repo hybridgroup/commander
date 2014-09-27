@@ -1,4 +1,4 @@
-commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup) {
+commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$location', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $location) {
 
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
@@ -14,6 +14,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
   $scope.useCommandSet = function(commandSetIndex) {
     LocalStorageService.set('current_command_set', commandSetIndex)
     $scope.currentCommandSet = commandSetIndex;
+    $location.path('/command_sets/' + commandSetIndex);
   }
 
   // Presentation-related
