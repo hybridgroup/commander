@@ -5,7 +5,8 @@ if(!localStorage.commander){
       port: '8080'
     },
     command_sets: [],
-    current_command_set: null
+    current_command_set: null,
+	log: ""
   });
 }
 

@@ -1,7 +1,5 @@
-<ion-view title="{{message}}">
+<ion-view title="{{command_set.name}}: {{command_set.type}}">
   <ion-content class="royal-bg has-subheader">
-    <div class="controls">
-      <button ng-disabled="!isValid(command)" ng-click="execute(command)" ng-repeat="command in commands track by $index" class="button button-light">{{command.label}}</button>
-    </div>
+    <command-set-layout name="{{command_set.type}}"></command-set-layout>
   </ion-content>
 </ion-view>

@@ -1,0 +1,8 @@
+<button
+  ng-disabled="!isValid(command)"
+  ng-click="execute(command)"
+  ng-repeat="command in commands track by $index"
+  class="button button-light"
+  >
+  {{command.label}}
+</button>

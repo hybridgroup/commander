@@ -1,27 +1,27 @@
 commander.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('command_sets', {
+    .state('command_sets_loader', {
       url: '/command_sets',
       templateUrl: 'templates/command_sets.html',
       controller: 'CommandSetsController'
     })
 
-    .state('commands', {
-      url: '/commands',
-      templateUrl: 'templates/commands.html',
-      controller: 'CommanderController'
+    .state('command_sets_current', {
+      url: '/command_sets/current',
+      templateUrl: 'templates/redirect.html',
+      controller: 'CommandSetCurrentController'
     })
 
-    .state('config', {
-      url: '/config',
-      templateUrl: 'templates/config.html',
-      controller: 'ConfigController'
+    .state('command_sets_index', {
+      url: '/command_sets/:index',
+      templateUrl: 'templates/commands.html',
+      controller: 'CommandSetController'
     })
 
     .state('connection', {
       url: '/connection',
       templateUrl: 'templates/connection.html',
-      controller: 'ConfigController'
+      controller: 'ConnectionController'
     })
 
     .state('remotes', {
@@ -34,19 +34,7 @@ commander.config(function($stateProvider, $urlRouterProvider) {
       url: '/remotes_config',
       templateUrl: 'templates/remotes_config.html',
       controller: 'ConfigRemotesController'
-    })
-
-    .state('add-command', {
-      url: '/add',
-        templateUrl: 'templates/add_command.html',
-        controller: 'ConfigController'
-    })
-
-    .state('edit-command', {
-      url: '/edit/:index',
-        templateUrl: 'templates/add_command.html',
-        controller: 'ConfigController'
     });
 
-  $urlRouterProvider.otherwise('/commands');
+  $urlRouterProvider.otherwise('/command_sets/current');
 });
