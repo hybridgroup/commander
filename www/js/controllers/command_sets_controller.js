@@ -1,4 +1,4 @@
-commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarDelegate', '$ionicPopup', 'LocalStorageService', function($scope, $http, $ionicNavBarDelegate, $ionicPopup, LocalStorageService) {
+commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup) {
 
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
@@ -41,9 +41,11 @@ commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarD
     }
 
     $http.get(url).success(function(data, status, headers, config){
+    console.log("Calling get... success")
       var remoteSet = data.command_set
 
       if (!remoteSet) {
+        console.log("Calling get... no command_set")
         $ionicPopup.alert({
           title: "JSON Error",
           template: 'Wrong JSON structure, you must wrap the command set definition in a "command_set" object.'
@@ -52,6 +54,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarD
       }
 
       if (!remoteSet.name) {
+        console.log("Calling get... no name")
         $ionicPopup.alert({
           title: "Command set definition error",
           template: 'The command set must have a name.'
@@ -60,6 +63,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarD
       }
 
       if (remoteSet.type != 'list' && remoteSet.type != 'd-pad')  {
+        console.log("Calling get... bad type")
         $ionicPopup.alert({
           title: "Command set definition error",
           template: 'The command set must have a type (value must be either <b>list</b> or <b>d-pad</b>).'
@@ -68,6 +72,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarD
       }
 
       if (!remoteSet.commands || !remoteSet.commands instanceof Array || remoteSet.commands.length == 0)  {
+        console.log("Calling get... no commands array")
         $ionicPopup.alert({
           title: "Command set definition error",
           template: 'Please define at least one command.'
@@ -78,6 +83,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarD
       for(i = 0; i < remoteSet.commands.length; i++){
         command = remoteSet.commands[i];
         if (!command.name || !command.label) {
+          console.log("Calling get... command does not have name or label")
           $ionicPopup.alert({
             title: "Command definition error",
             template: 'Commands must have at least a name and a label. Please fix the problem and try again.'
@@ -114,6 +120,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', '$ionicNavBarD
       });
 
     }).error(function(data, status, headers, config){
+      console.log("Calling get... error")
       $ionicPopup.alert({
         title: 'Unknown Error',
         template: "Please make sure your server is running and that the URL is correct and try again."

@@ -11,13 +11,16 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
     }
 
     var save = function() {
-      console.log(data)
       localStorage.commander = JSON.stringify(data)
       $rootScope.$broadcast(self.Event.updated, fetchData())
     }
 
     var init = function(){
-      localStorage.commander = JSON.stringify({})
+      localStorage.commander = JSON.stringify({
+        api: "",
+        command_sets: [],
+        current_command_set: null
+      })
     }
 
     this.get = function(key) {
@@ -35,12 +38,8 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
       save()
     }
 
-    this.appendCommandSets = function(commandSets) {
-      data = fetchData()
-      for (i = 0; i < commandSets.length; i++) {
-        data.command_sets.push(commandSets[i])
-      }
-      save()
+    this.clear = function() {
+      init();
     }
 
     this.api = function() { return fetchData()['api'] }
