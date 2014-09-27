@@ -22,13 +22,18 @@
               </a>
             </div>
             <h1 class="title">COMMANDER</h1>
-            <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+            <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()">
             </button>
           </ion-header-bar>
 
           <ion-nav-bar class="bar-stable sub-bar">
             <ion-nav-back-button class="button-icon ion-arrow-left-c">
             </ion-nav-back-button>
+            <ion-nav-buttons side="right" ng-controller="CommanderController">
+              <a href="/#/log" class="badge" ng-class="{true: 'badge-balanced', false: 'badge-assertive'}[connection.success]">
+                <i class="icon ion-alert"></i>
+              </a>
+            </ion-nav-buttons>
           </ion-nav-bar>
 
           <ion-nav-view animation="slide-left-right"></ion-nav-view>
@@ -72,5 +77,6 @@
     <script src="js/controllers/config_controller.js"></script>
     <script src="js/controllers/remotes_controller.js"></script>
     <script src="js/controllers/config_remotes_controller.js"></script>
+    <script src="js/services/connection.js"></script>
   </body>
 </html>

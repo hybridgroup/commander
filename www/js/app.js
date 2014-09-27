@@ -35,8 +35,10 @@ commander = angular.module('commander', ['ionic'])
   ionic.Platform.fullScreen(true, false);
 });
 
-commander.controller('ContentController', ['$scope', '$ionicSideMenuDelegate', function($scope, $ionicSideMenuDelegate) {
-  $scope.toggleLeft = function() {
+commander.controller('ContentController', ['$scope', '$ionicSideMenuDelegate', 'Connection', function($scope, $ionicSideMenuDelegate, Connection) {
+  $scope.connection = Connection;
+
+  $scope.toggleRight = function() {
     $ionicSideMenuDelegate.toggleRight();
   };
 }]);

@@ -3,6 +3,12 @@
  height: 33px;
 }
 
+.right-buttons .badge {
+  line-height: 26px;
+  width: 32px;
+  border-radius: 22px;
+}
+
 .controls {
   text-align: center;
   padding: 10px;
