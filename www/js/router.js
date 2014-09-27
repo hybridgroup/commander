@@ -40,6 +40,11 @@ commander.config(function($stateProvider, $urlRouterProvider) {
       url: '/edit/:index',
         templateUrl: 'templates/add_command.html',
         controller: 'ConfigController'
+    })
+
+    .state('log', {
+      url: '/log',
+        templateUrl: 'templates/log.html'
     });
 
   $urlRouterProvider.otherwise('/commands');
