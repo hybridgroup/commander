@@ -2,3 +2,7 @@ bower_components/
 ant-gen/
 ant-build/
 local.properties
+node_modules/
+*.log
+.idea
+

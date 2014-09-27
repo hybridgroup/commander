@@ -1,0 +1,32 @@
+<ion-view title="{{message}}">
+  <ion-content class="royal-bg has-subheader">
+    <div class="card">
+      <div class="item item-divider">
+        {{alert_title}}
+      </div>
+      <div class="item item-text-wrap">
+        {{alert_message}}
+      </div>
+    </div>
+
+    <ul class="list">
+      <li class="item item-checkbox" ng-repeat="remote in remotes track by $index">
+        <label class="checkbox">
+          <input type="checkbox" ng-model="remote.selected" name="remotes.label">
+        </label>
+        {{remote.label}}
+      </li>
+    </ul>
+
+    <a href="#/config" ng-click="saveRemotes(remotes)" class="button button-positive button-block">Import</a>
+    <a href="#/config" class="button button-assertive button-block">Cancel</a>
+    <button href="#/config" ng-click="reload()" class="button button-outline button-block item item-icon-right button-light">
+      Reload remote commands
+      <i class="icon ion-refresh"></i>
+    </button>
+    <a href="#/remotes_config" class="button button-outline button-block item item-icon-right">
+      Config Endpoint
+      <i class="icon ion-gear-a"></i>
+    </a>
+  </ion-content>
+</ion-view>

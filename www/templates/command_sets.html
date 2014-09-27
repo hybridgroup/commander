@@ -1,0 +1,27 @@
+<ion-view title="Command sets">
+  <ion-content class="has-subheader">
+    <div class="list">
+      <div class="item item-divider">
+        Local Command Sets
+      </div>
+      <div class="item item-button-right" ng-repeat="commandSet in commandSets track by $index">
+        <span>{{commandSet.name || "Unnamed set"}}</span>
+        <button ng-click="useCommandSet($index)" ng:class="getClass($index)" class="button button-energized">{{getTitle($index)}}</button>
+      </div>
+      <div class="item item-calm" ng-show="!commandSets.length">There aren't any command sets yet.</div>
+    </div>
+
+    <div class="list">
+      <div class="item item-divider">
+        Load command sets from JSON
+      </div>
+      <label class="item item-input">
+        <span class="input-label">URL</span>
+        <input ng-model="url" type="text" placeholder="http://server:port/command_set_endpoint">
+      </label>
+      </div>
+        <button ng-click="loadCommandSet(url)" class="button button-positive button-block">Load</button>
+        <a href="#/command_sets/current" class="button button-assertive button-block">Cancel</button>
+    </div>
+  </ion-content>
+</ion-view>
