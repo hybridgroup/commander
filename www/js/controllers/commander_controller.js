@@ -1,4 +1,5 @@
-commander.controller('CommanderController', ['$scope', '$http', function($scope, $http) {
+commander.controller('CommanderController', ['$scope', '$http', 'Connection', function($scope, $http, Connection) {
+  $scope.connection = Connection;
   $scope.configuration = JSON.parse(localStorage.commander);
 
   $scope.commands = $scope.configuration.commands;
@@ -23,11 +24,11 @@ commander.controller('CommanderController', ['$scope', '$http', function($scope,
     var execution = $http.post($scope.commandUrl(command), command.params);
 
     execution.success(function(data){
-      $scope.message = 'Result of ' + command.name + ': ' + data.result;
+      $scope.connection.success = true;
     }.bind(this));
 
     execution.catch(function(data){
-      $scope.message = 'Error executing command: ' + command.name;
+      $scope.connection.success = false;
     }.bind(this));
   };
 
@@ -38,6 +39,4 @@ commander.controller('CommanderController', ['$scope', '$http', function($scope,
       return false;
     }
   };
-
-  $scope.message = 'Ready...';
 }]);

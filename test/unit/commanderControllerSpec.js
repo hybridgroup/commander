@@ -43,7 +43,7 @@ describe('CommanderController', function() {
     scope.execute(command);
     httpBackend.flush();
 
-    expect(scope.message).toEqual('Result of sendNotification: ok');
+    expect(scope.connection.success).toEqual(true);
   });
 
   it('returns true when command is valid', function() {
