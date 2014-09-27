@@ -43,7 +43,13 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
     }
 
     this.api = function() { return fetchData()['api'] }
-    this.commandSets = function() { return fetchData()['command_sets'] }
+    this.commandSets = function() {
+      var sets = fetchData()['command_sets']
+      if (!sets) {
+        this.set('command_sets', []);
+      }
+      return fetchData()['command_sets']
+    }
     this.log = function() { return fetchData()['log'] }
 
     // Events
