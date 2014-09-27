@@ -1,4 +1,4 @@
-commander.controller('CurrentCommanderSetController', ['$scope', '$window', '$location', function($scope, $window, $location) {
+commander.controller('CommandSetCurrentController', ['$scope', '$window', '$location', function($scope, $window, $location) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.current_command_set = $scope.configuration.current_command_set;
 

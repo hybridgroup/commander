@@ -1,11 +1,11 @@
-commander.controller('CommanderSetController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
+commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) {
   $scope.configuration = JSON.parse(localStorage.commander);
 
   if ($stateParams && $stateParams.index){
     $scope.index = $stateParams.index;
     $scope.command_set = $scope.configuration.command_sets[$scope.index];
   }else{
-    $scope.command_set = $scope.configuration.current_command_set;
+    $scope.command_set = $scope.configuration.command_sets[$scope.configuration.current_command_set];
   }
 
   $scope.commands = $scope.command_set.commands;
@@ -14,7 +14,7 @@ commander.controller('CommanderSetController', ['$scope', '$http', '$stateParams
     var api = $scope.configuration.api;
 
     var buildCommandUrl = function(api, command) {
-      var url = api.host + ':' + api.port + '/api';
+      var url = api;
 
       if (command.robot) { url += '/robots/' + command.robot; }
       if (command.device) { url += '/devices/' + command.device; }
@@ -36,6 +36,8 @@ commander.controller('CommanderSetController', ['$scope', '$http', '$stateParams
     execution.catch(function(data){
       $scope.message = 'Error executing command: ' + command.name;
     }.bind(this));
+
+    return true;
   };
 
   $scope.isValid = function(command) {

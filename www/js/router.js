@@ -1,27 +1,21 @@
-commander.config(function($stateProvider, $urlRouterProvider, $urlMatcherFactoryProvider) {
+commander.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
-    .state('command_set', {
-      url: '/current_command_set',
+    .state('command_sets_current', {
+      url: '/command_sets/current',
       templateUrl: 'templates/redirect.html',
-      controller: 'CurrentCommanderSetController'
+      controller: 'CommandSetCurrentController'
     })
 
     .state('command_sets_index', {
       url: '/command_sets/:index',
       templateUrl: 'templates/commands.html',
-      controller: 'CommanderSetController'
-    })
-
-    .state('config', {
-      url: '/config',
-      templateUrl: 'templates/config.html',
-      controller: 'ConfigController'
+      controller: 'CommandSetController'
     })
 
     .state('connection', {
       url: '/connection',
       templateUrl: 'templates/connection.html',
-      controller: 'ConfigController'
+      controller: 'ConnectionController'
     })
 
     .state('remotes', {
@@ -34,19 +28,7 @@ commander.config(function($stateProvider, $urlRouterProvider, $urlMatcherFactory
       url: '/remotes_config',
       templateUrl: 'templates/remotes_config.html',
       controller: 'ConfigRemotesController'
-    })
-
-    .state('add-command', {
-      url: '/add',
-        templateUrl: 'templates/add_command.html',
-        controller: 'ConfigController'
-    })
-
-    .state('edit-command', {
-      url: '/edit/:index',
-        templateUrl: 'templates/add_command.html',
-        controller: 'ConfigController'
     });
 
-  $urlRouterProvider.otherwise('/current_command_set');
+  $urlRouterProvider.otherwise('/command_sets/current');
 });
