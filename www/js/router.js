@@ -1,5 +1,11 @@
 commander.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+    .state('command_sets', {
+      url: '/command_sets',
+      templateUrl: 'templates/command_sets.html',
+      controller: 'CommandSetsController'
+    })
+
     .state('commands', {
       url: '/commands',
       templateUrl: 'templates/commands.html',
