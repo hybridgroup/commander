@@ -1,19 +1,9 @@
 if(!localStorage.commander){
   localStorage.commander = JSON.stringify({
-    api: {
-      host: 'http://localhost',
-      port: '8080'
-    },
-    remote_address: {
-      url: 'http://localhost:8080'
-    },
-    commands: [{
-      label: 'Say hello',
-      robot: 'pebble',
-      device: 'pebble',
-      name: 'sendNotification',
-      params: {message: 'Hello'}
-    }]
+    api: 'http://localhost:3000',
+    command_sets: [],
+    current_command_set: null,
+    log: ''
   });
 }
 

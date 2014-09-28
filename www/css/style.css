@@ -3,14 +3,7 @@
  height: 33px;
 }
 
-.controls {
-  text-align: center;
-  padding: 10px;
-}
-
 .controls button {
-  margin: 5px;
-  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

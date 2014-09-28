@@ -1,9 +1,9 @@
 'use strict';
 
-describe('CommanderController', function() {
+describe('CommandSetController', function() {
   var ctrl, httpBackend, scope, command;
 
-  var apiUrl = "http://localhost:8080/api";
+  var apiUrl = "http://localhost:8000/api";
 
   command = {
     label: 'Say hello',
@@ -15,11 +15,16 @@ describe('CommanderController', function() {
 
   beforeEach(function() {
     localStorage.commander = JSON.stringify({
-      api: {
-        host: 'http://localhost',
-        port: '8080'
-      },
-      commands: [command]
+      current_command_set: 0,
+      api: apiUrl,
+      command_sets: [
+        {
+          name: "Pebble",
+          type: "list",
+          commands: [command]
+        }
+      ],
+      log: ""
     });
   });
 
@@ -29,7 +34,7 @@ describe('CommanderController', function() {
     $templateCache.put('templates/commands.html', '.<template-goes-here />');
     httpBackend = $httpBackend;
     scope = $rootScope.$new();
-    ctrl = $controller('CommanderController', {$scope:scope, $http:$http});
+    ctrl = $controller('CommandSetController', {$scope:scope, $http:$http});
   }));
 
   it('returns command', function() {
@@ -37,13 +42,10 @@ describe('CommanderController', function() {
   });
 
   it('executes command correctly', function() {
-    var expectedCommand = 'http://localhost:8080/api/robots/pebble/devices/pebble/commands/sendNotification';
+    var expectedCommand = 'http://localhost:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
     httpBackend.expectPOST(expectedCommand).respond({result: 'ok'});
 
-    scope.execute(command);
-    httpBackend.flush();
-
-    expect(scope.message).toEqual('Result of sendNotification: ok');
+    expect(scope.execute(command)).toEqual(true);
   });
 
   it('returns true when command is valid', function() {
