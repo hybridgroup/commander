@@ -7,6 +7,15 @@ if(!localStorage.commander){
   });
 }
 
+// Making sure api is a string, not an object as before
+(function() {
+  var storage = JSON.parse(localStorage.commander);
+  var api = storage.api
+  if(api.host){
+    storage.api = api.host + ':' + api.port;
+    localStorage.commander = JSON.stringify(storage);
+  }
+})();
 
 commander = angular.module('commander', ['ionic'])
 
