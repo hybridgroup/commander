@@ -20,3 +20,150 @@ li {
 input[type=text] {
   min-width: 85%;
 }
+
+/* Directional pad (d-pad) */
+
+.d-pad {
+  display: inline-block;
+  position: relative;
+  /*background:#AD0F0F;*/
+  width: 80%;
+  height: 300px;
+  padding: 20px 15px;
+  margin: 20px;
+  border-radius: 20px;
+  /*border: 1px solid #410707;*/
+  /*border-bottom-width: 5px;*/
+  /*box-shadow: 0 2px 5px rgba(2,0,0,0.7),*/
+    /*inset 0 0 10px rgba(255,255,255,0.5),*/
+    /*inset 0 2px 2px rgba(255,255,255,0.25);*/
+}
+
+.up, .down, .left, .right {
+  position: absolute;
+  z-index: 1001;
+  margin-left: 50%;
+  font-size: 10px;
+  width: 100px;
+  height: 100px;
+  background: #FFFFFF;
+  border: 1px solid #E6E6E6;
+  box-shadow: 0 3px 0 #535353,
+    inset 0 0 10px rgba(10,10,10,0.3);
+
+  appearance: none;
+  border-radius: 500px;
+  cursor: pointer;
+}
+
+.up:active, .down:active, .left:active, .right:active {
+  margin-top: 10px;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
+  -webkit-transform:scale(0.9);
+  -moz-transform:scale(0.9);
+  -ms-transform:scale(0.9);
+  -o-transform:scale(0.9);
+  transform:scale(0.9);
+  -webkit-box-shadow:0px 0px 20px #FFF;
+  -moz-box-shadow:0px 0px 20px #FFF;
+  -o-box-shadow:0px 0px 20px #FFF;
+  box-shadow:0px 0px 20px #FFF;
+}
+
+.up:before, .down:before, .left:before, .right:before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background: #5F5F5F;
+  box-shadow: 0 2px 2px rgba(50,50,50,0.25),
+    inset 1px 1px 0 rgba(255,255,255,0.5);
+}
+
+.up:after, .down:after, .left:after, .right:after {
+  display: block;
+  position: absolute;
+  content: "";
+  top: -5px;
+  left: -6px;
+  width: 110px;
+  height: 110px;
+  border-radius: 60px;
+  box-shadow: 0 2px 2px rgba(255,255,255,0.25),
+    inset 0 2px 2px rgba(0,0,0,0.5);
+}
+
+.up:active:after, .down:active:after, .left:active:after, .right:active:after {
+  top: -8px;
+}
+
+.up {
+  top: 20px;
+  left: -25px;
+}
+
+.up:before {
+  top: 8px;
+  left: 40px;
+}
+
+.down {
+  top: 180px;
+  left: -25px;
+}
+
+.down:before {
+  bottom: 8px;
+  left: 40px;
+}
+
+.left {
+  top: 100px;
+  left: -120px;
+}
+
+.left:before {
+  top: 45px;
+  left: 8px;
+}
+
+.right {
+  top: 100px;
+  left: 70px;
+}
+
+.right:before {
+  top: 45px;
+  right: 8px;
+}
+
+.up:active ~ .screen .char, .down:active ~ .screen .char, .left:active ~ .screen .char, .right:active ~ .screen .char {
+  transition: margin-top 2s linear,
+              margin-left 2s linear;
+}
+
+.up:active ~ .screen .char {
+  margin-top: -84px;
+  background-position: 0 -144px;
+  animation: walk-up 0.65s infinite;
+}
+
+.down:active ~ .screen .char {
+  margin-top: 90px;
+  background-position: 0 0;
+  animation: walk-down 0.65s infinite;
+}
+
+.left:active ~ .screen .char {
+  margin-left: -88px;
+  background-position: 0 -48px;
+  animation: walk-left 0.65s infinite;
+}
+
+.right:active ~ .screen .char {
+  margin-left: 88px;
+  background-position: 0 -96px;
+  animation: walk-right 0.65s infinite;
+}

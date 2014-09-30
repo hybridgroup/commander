@@ -1,8 +1,6 @@
-<button
-  ng-disabled="!isValid(command)"
-  ng-click="execute(command)"
-  ng-repeat="command in commands track by $index"
-  class="button button-light"
-  >
-  {{command.label}}
-</button>
+<div class="d-pad">
+  <button class="up" ng-click="execute(commands[0])"></button>
+  <button class="down" ng-click="execute(commands[1])"></button>
+  <button class="left" ng-click="execute(commands[2])"></button>
+  <button class="right" ng-click="execute(commands[3])"></button>
+</div>
