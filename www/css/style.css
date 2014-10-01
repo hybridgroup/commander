@@ -20,3 +20,7 @@ li {
 input[type=text] {
   min-width: 85%;
 }
+
+.command-set-item {
+  padding: 14px;
+}
