@@ -22,13 +22,18 @@
               </a>
             </div>
             <h1 class="title">COMMANDER</h1>
-            <button class="button button-icon button-clear ion-navicon" ng-click="toggleLeft()">
+            <button class="button button-icon button-clear ion-navicon" ng-click="toggleRight()">
             </button>
           </ion-header-bar>
 
           <ion-nav-bar class="bar-stable sub-bar">
             <ion-nav-back-button class="button-icon ion-arrow-left-c">
             </ion-nav-back-button>
+            <ion-nav-buttons side="right" ng-controller="CommandSetController">
+              <a href="/#/log" class="badge" ng-class="{true: 'badge-balanced', false: 'badge-assertive', null: 'hide'}[activityLog.status()]" ng-show="showActivityLogIndicator()">
+                <i class="icon ion-alert"></i>
+              </a>
+            </ion-nav-buttons>
           </ion-nav-bar>
 
           <ion-nav-view animation="slide-left-right"></ion-nav-view>
@@ -61,6 +66,7 @@
     <script src="js/app.js"></script>
     <script src="js/router.js"></script>
     <script src="js/services/localStorageService.js"></script>
+    <script src="js/services/activityLogger.js"></script>
     <script src="js/controllers/command_sets_controller.js"></script>
     <script src="js/controllers/command_set_controller.js"></script>
     <script src="js/controllers/connection_controller.js"></script>

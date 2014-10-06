@@ -1,5 +1,6 @@
-commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', '$location', function($scope, $http, $stateParams, $location) {
+commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', '$location', 'activityLogger', function($scope, $http, $stateParams, $location, activityLogger) {
   $scope.configuration = JSON.parse(localStorage.commander);
+  $scope.activityLog = activityLogger;
 
   if ($stateParams && $stateParams.index){
     $scope.index = $stateParams.index;
@@ -31,15 +32,14 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
   };
 
   $scope.execute = function(command) {
-    var execution = $http.post($scope.commandUrl(command), command.params);
 
-    execution.success(function(data){
-      $scope.message = 'Result of ' + command.name + ': ' + data.result;
-    }.bind(this));
-
-    execution.catch(function(data){
-      $scope.message = 'Error executing command: ' + command.name;
-    }.bind(this));
+    $http.post($scope.commandUrl(command), command.params)
+    .success(function(data){
+      $scope.logActivity(true, command, data);
+    })
+    .error(function(data){
+      $scope.logActivity(false, command, data);
+    });
 
     return true;
   };
@@ -50,6 +50,20 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
     }else{
       return false;
     }
+  };
+
+  $scope.logActivity = function(success, command, data) {
+    if (success){
+      $scope.message = 'Result of ' + command.name + ': ' + data.result;
+    }
+    else {
+      $scope.message = 'Error executing command: ' + command.name;
+    }
+    $scope.activityLog.saveLog(success, $scope.message);
+  };
+
+  $scope.showActivityLogIndicator = function(){
+    return $location.path() == "/command_sets/" + $scope.configuration.current_command_set;
   };
 
   $scope.message = 'Ready...';

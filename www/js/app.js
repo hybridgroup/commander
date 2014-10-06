@@ -35,7 +35,7 @@ commander = angular.module('commander', ['ionic'])
 });
 
 commander.controller('ContentController', ['$scope', '$ionicSideMenuDelegate', function($scope, $ionicSideMenuDelegate) {
-  $scope.toggleLeft = function() {
+  $scope.toggleRight = function() {
     $ionicSideMenuDelegate.toggleRight();
   };
 }]);

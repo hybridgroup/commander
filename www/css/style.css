@@ -24,3 +24,20 @@ input[type=text] {
 .command-set-item {
   padding: 14px;
 }
+
+.right-buttons .badge {
+  line-height: 26px;
+  width: 32px;
+  border-radius: 22px;
+}
+
+.item-activity-log {
+  padding: 10px;
+  font-size: 14px;
+}
+.item-activity-log.item-icon-left {
+  padding-left: 45px;
+}
+.item-activity-log .icon {
+  font-size: 14px;
+}
