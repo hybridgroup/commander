@@ -12,8 +12,10 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
   updateLocalCommandsView()
 
   $scope.useCommandSet = function(commandSetIndex) {
+    if (!isCurrent(commandSetIndex)){
+      activityLogger.clear();
+    }
     LocalStorageService.set('current_command_set', commandSetIndex)
-    activityLogger.clear();
     $scope.currentCommandSet = commandSetIndex;
     $location.path('/command_sets/' + commandSetIndex);
   }
