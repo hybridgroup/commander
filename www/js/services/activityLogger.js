@@ -17,5 +17,10 @@ commander.factory('activityLogger', function() {
     this.getLog = function(msg){ return log; }
 
     this.status = function(){ return executionSuccess; }
+
+    this.clear = function(){
+      log = [];
+      executionSuccess = null;
+    }
   }
 })

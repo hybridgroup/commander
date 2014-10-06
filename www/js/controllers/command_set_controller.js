@@ -1,4 +1,4 @@
-commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', '$location', 'activityLogger', function($scope, $http, $stateParams, $location, activityLogger) {
+commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', '$location', 'activityLogger', 'LocalStorageService', function($scope, $http, $stateParams, $location, activityLogger, LocalStorageService) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.activityLog = activityLogger;
 
@@ -63,7 +63,8 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
   };
 
   $scope.showActivityLogIndicator = function(){
-    return $location.path() == "/command_sets/" + $scope.configuration.current_command_set;
+    currentCommandSet = LocalStorageService.get('current_command_set');
+    return $location.path() == "/command_sets/" + currentCommandSet;
   };
 
   $scope.message = 'Ready...';
