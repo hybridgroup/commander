@@ -120,6 +120,24 @@ input[type=text] {
   left: 70px;
 }
 
+
+.platform-ios .dpad-button:after {
+  top: -21px;
+  left: -20px;
+}
+.platform-ios .up-button:before {
+  left: 27px;
+}
+.platform-ios .down-button:before {
+  left: 27px;
+}
+.platform-ios .left-button:before {
+  left: -7px;
+}
+.platform-ios .right-button:before {
+  left: 62px;
+}
+
 .dpad-button:active ~ .screen .char{
   transition: margin-top 2s linear,
               margin-left 2s linear;
