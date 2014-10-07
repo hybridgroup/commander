@@ -12,8 +12,9 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
   if(!$scope.command_set) {
     $location.path('/command_sets');
   }
-
-  $scope.commands = $scope.command_set.commands;
+  else {
+    $scope.commands = $scope.command_set.commands;
+  }
 
   $scope.commandUrl = function(command) {
     var api = $scope.configuration.api;
