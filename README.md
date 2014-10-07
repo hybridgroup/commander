@@ -164,6 +164,7 @@ Currently, the only way to create commands is by loading a command set via a ser
 
 The service provider for this purpose must return the following structure in JSON format:
 
+**List Layout:**
 ```json
 {
   command_set: {
@@ -183,6 +184,47 @@ The service provider for this purpose must return the following structure in JSO
         device: "Device name",
         name: "Command name",
         params: {param1: "value1"}
+      }
+    ]
+  }
+}
+```
+
+
+**D-Pad Layout**
+```json
+{
+  "command_set":{
+    "name": "D-pad Name",
+    "type": "d-pad",
+    "commands":[
+      {
+        "label": "Up",
+        "robot": "Robot Name",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      },
+      {
+        "label": "Down",
+        "robot": "Robot Name",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      },
+      {
+        "label": "Left",
+        "robot": "Robot Name",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      },
+      {
+        "label": "Right",
+        "robot": "Robot Device",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
       }
     ]
   }
