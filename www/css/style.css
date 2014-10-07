@@ -94,7 +94,6 @@ input[type=text] {
 }
 .dpad-button:before {
   position: relative;
-  
   display: block;
   content: "";
   width: 15px;
@@ -119,8 +118,13 @@ input[type=text] {
   top: 40px;
   left: 70px;
 }
+.dpad-button:active ~ .screen .char{
+  transition: margin-top 2s linear,
+              margin-left 2s linear;
+}
 
 
+/*Platform specific changes*/
 .platform-ios .dpad-button:after {
   top: -21px;
   left: -20px;
@@ -136,9 +140,4 @@ input[type=text] {
 }
 .platform-ios .right-button:before {
   left: 62px;
-}
-
-.dpad-button:active ~ .screen .char{
-  transition: margin-top 2s linear,
-              margin-left 2s linear;
 }
