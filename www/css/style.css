@@ -1,4 +1,7 @@
 /* Empty. Add your own CSS if you like */
+@import url("activity_log.css");
+@import url("list.css");
+
 .top-logo img {
  height: 33px;
 }
@@ -19,25 +22,4 @@ li {
 
 input[type=text] {
   min-width: 85%;
-}
-
-.command-set-item {
-  padding: 14px;
-}
-
-.right-buttons .badge {
-  line-height: 26px;
-  width: 32px;
-  border-radius: 22px;
-}
-
-.item-activity-log {
-  padding: 10px;
-  font-size: 14px;
-}
-.item-activity-log.item-icon-left {
-  padding-left: 45px;
-}
-.item-activity-log .icon {
-  font-size: 14px;
 }
