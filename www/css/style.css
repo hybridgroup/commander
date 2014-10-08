@@ -1,4 +1,6 @@
 /* Empty. Add your own CSS if you like */
+@import url("dpad.css");
+
 .top-logo img {
  height: 33px;
 }
