@@ -1,6 +1,6 @@
 /* Empty. Add your own CSS if you like */
-@import url("activity_log.css");
-@import url("list.css");
+@import url("activity-log.css");
+@import url("layouts-list.css");
 
 .top-logo img {
  height: 33px;
