@@ -3,7 +3,7 @@
 // -------------------------------
 
 $light:                           #fff !default;
-$stable:                          #FCFFF4 !default; // Custom
+$stable:                          #FAFAFA !default; // Custom
 $positive:                        #385E71 !default; // Custom
 $calm:                            #43cee6 !default;
 $balanced:                        #66cc33 !default;
@@ -177,7 +177,8 @@ $bar-light-active-border:         $button-light-active-border !default;
 
 $bar-stable-bg:                   rgba($button-stable-bg, $bar-transparency) !default;
 $bar-stable-text:                 $button-stable-text !default;
-$bar-stable-border:               $button-stable-border !default;
+//$bar-stable-border:               $button-stable-border !default;
+$bar-stable-border:               $button-light-border !default; //custom
 $bar-stable-active-bg:            $button-stable-active-bg !default;
 $bar-stable-active-border:        $button-stable-active-border !default;
 
@@ -311,8 +312,10 @@ $item-thumbnail-width:            80px !default;
 $item-thumbnail-height:           80px !default;
 $item-thumbnail-margin:           10px !default;
 
-$item-divider-bg:                 #f5f5f5 !default;
-$item-divider-color:              #222 !default;
+//$item-divider-bg:                 #f5f5f5 !default;
+$item-divider-bg:                 #f7f7f7 !default; //custom
+//$item-divider-color:              #222 !default;
+$item-divider-color:              #444 !default; //custom
 $item-divider-padding:            5px 15px !default;
 
 $item-light-bg:                   $button-light-bg !default;
@@ -427,10 +430,12 @@ $input-height-small:              (floor($font-size-small * $line-height-small) 
 $input-bg:                        $light !default;
 $input-bg-disabled:               $stable !default;
 
-$input-color:                     #111 !default;
+//$input-color:                     #111 !default;
+$input-color:                     #333 !default; //custom
 $input-border:                    $item-default-border !default;
 $input-border-width:              $item-border-width !default;
-$input-label-color:               $dark !default;
+//$input-label-color:               $dark !default;
+$input-label-color:               #5a5a5a !default; //custom
 $input-color-placeholder:         lighten($dark, 40%) !default;
 
 
