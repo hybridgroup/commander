@@ -158,37 +158,97 @@ $ ionic run android
 
 This are the basic steps to have Commander up and running locally.
 
-## Remote controls API Endpoint connection
+## Loading command sets
 
-In order to obtain a list of available Remote controls/commands for Commander you can start a service that provides
-them. Commander, currently, is able to get this list and parse it, so you can choose from a variety of available
-commands, instead of typing them manually.
+Currently, the only way to create commands is by loading a command set via a service (JSON API), this way you won't need to typing them manually.
 
-The service provider for this purpose must return an array that contains available commands in JSON format. Those
-commands will require the following parameters:
+The service provider for this purpose must return the following structure in JSON format:
 
-* label  - The name of the command.
-* robot  - Robot that the command will manipulate.
-* device - Device that the command will utilize.
-* name   - Command name to be interpreted. It will identify the command purpose, example: `sendNotification`
-* params - A hash that contains the params the command will require for it's purpose, this param is optional.
-
-Example:
+**List Layout:**
 ```json
-{commands: [
-  {
-    label: 'Say hello',
-    robot: 'pebble',
-    device: 'pebble',
-    name: 'sendNotification',
-    params: {message: 'Hello'}
+{
+  command_set: {
+    name: "Command set name",
+    type: "list or d-pad",
+    commands: [
+      {
+        label: "Command name 1",
+        robot: "Robot name",
+        device: "Device name",
+        name: "Command name",
+        params: {param1: "value1"}
+      },
+      {
+        label: "Command name 2",
+        robot: "Robot name",
+        device: "Device name",
+        name: "Command name",
+        params: {param1: "value1"}
+      }
+    ]
   }
-]}
+}
 ```
 
-Once you have your service provider URL, you will need to configure it into the Commander app. Just go to the
-`Import Commands` and click onto the `Remotes Config` button, this will redirect you to the API end point configuration,
-update it according to your service host and port.
+
+**D-Pad Layout**
+```json
+{
+  "command_set":{
+    "name": "D-pad Name",
+    "type": "d-pad",
+    "commands":[
+      {
+        "label": "Up",
+        "robot": "Robot Name",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      },
+      {
+        "label": "Down",
+        "robot": "Robot Name",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      },
+      {
+        "label": "Left",
+        "robot": "Robot Name",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      },
+      {
+        "label": "Right",
+        "robot": "Robot Device",
+        "device": "Device Name",
+        "name": "Command Name",
+        "params":{}
+      }
+    ]
+  }
+}
+```
+
+### Command set structure
+
+* `name` - The name of the command set, it must be unique. If you load a command set with the same twice the command set will be updated, not duplicated.
+* `type` - There two possible options:
+  * `list` - A list of buttons
+  * `d-pad` - A directional pad (up, down, left, right)
+* `commands` - It's an array of commands
+
+### Command structure
+
+* `label`  - For a button list, this is the label of the button.
+* `robot`  - Name of the robot the command will be executed in.
+* `device` - Name of the device the command will be executed in.
+* `name`   - Actual command name as defined in the API. Example: `sendNotification`
+* `params` - An object/hash that contains the params the command requires, it's optional.
+
+Once you have your service running and returning the aforementioned structure you will need to configure the Command Set Loader. Just tap the
+`Command sets` menu item in the right menu, paste the URL of your service (ie. http://localhost:4567/command_set) and click the `Load` button, you should see your new command set in the `Local Command Sets` section.
 
 ## Testing
 

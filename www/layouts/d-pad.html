@@ -1,8 +1,12 @@
-<button
-  ng-disabled="!isValid(command)"
-  ng-click="execute(command)"
-  ng-repeat="command in commands track by $index"
-  class="button button-light"
-  >
-  {{command.label}}
-</button>
+<div class="d-pad">
+  <div class='row dpad-row'>
+    <div class='col up-button-col'><button class="dpad-button up-button" ng-click="execute(commands[0])"></button></div>
+  </div>
+  <div class='row dpad-row'>
+    <div class='col col-50 left-button-col'><button class="dpad-button left-button" ng-click="execute(commands[2])"></button></div>
+    <div class='col col-50 right-button-col'><button class="dpad-button right-button" ng-click="execute(commands[3])"></button></div>
+  </div>
+  <div class='row dpad-row'>
+    <div class='col down-button-col'><button class="dpad-button down-button" ng-click="execute(commands[1])"></button></div>
+  </div>
+</div>

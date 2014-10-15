@@ -1,6 +1,7 @@
 /* Empty. Add your own CSS if you like */
 @import url("activity-log.css");
 @import url("layouts-list.css");
+@import url("layouts-dpad.css");
 
 .top-logo img {
  height: 33px;
