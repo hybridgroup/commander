@@ -2,9 +2,10 @@
 @import url("activity-log.css");
 @import url("layouts-list.css");
 @import url("layouts-dpad.css");
+@import url("ionic-override.css");
 
 .top-logo img {
- height: 33px;
+  height: 33px;
 }
 
 .controls button {
