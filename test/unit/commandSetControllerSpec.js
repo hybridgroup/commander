@@ -31,7 +31,7 @@ describe('CommandSetController', function() {
   beforeEach(module('commander'));
 
   beforeEach(inject(function($controller, $http, $httpBackend, $rootScope, $templateCache) {
-    $templateCache.put('templates/commands.html', '.<template-goes-here />');
+    $templateCache.put('templates/redirect.html', '.<template-goes-here />');
     httpBackend = $httpBackend;
     scope = $rootScope.$new();
     ctrl = $controller('CommandSetController', {$scope:scope, $http:$http});
@@ -41,20 +41,58 @@ describe('CommandSetController', function() {
     expect(scope.commands).toEqual([command]);
   });
 
-  it('executes command correctly', function() {
-    var expectedCommand = 'http://localhost:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
-    httpBackend.expectPOST(expectedCommand).respond({result: 'ok'});
+  it('initialize activity logger vars', function() {
+    expect(scope.activityLog.getLog()).toEqual([]);
+    expect(scope.activityLog.status()).toEqual(null);
+  });
+  
+  describe('command execute:', function(){
+    it('when succeed should set activity logger results', function() {
+      var expectedCommand = 'http://localhost:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
+      httpBackend.expectPOST(expectedCommand).respond(200, {result:'success'});
 
-    expect(scope.execute(command)).toEqual(true);
+      scope.execute(command);
+      httpBackend.flush();
+
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Result of sendNotification: success', status : true });
+      expect(scope.activityLog.status()).toEqual(true);
+    });
+
+    it('when fails should set activity logger results', function() {
+      var expectedCommand = 'http://localhost:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
+      httpBackend.expectPOST(expectedCommand).respond(401);
+
+      scope.execute(command);
+      httpBackend.flush();
+
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : false });
+      expect(scope.activityLog.status()).toEqual(false);
+    });
   });
 
-  it('returns true when command is valid', function() {
-    expect(scope.isValid(command)).toEqual(true);
+  describe('logActivity:', function(){
+    it('should set activity logger results', function() {
+      // Success Activiy log
+      scope.logActivity(true, command, {result:'success'});
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Result of sendNotification: success', status : true });
+      expect(scope.activityLog.status()).toEqual(true);
+
+      // Error Activiy log
+      scope.logActivity(false, command, null);
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : false });
+      expect(scope.activityLog.status()).toEqual(false);
+    });
   });
 
-  it('returns false when command is not valid', function() {
-    var false_command = {label: "False command"}
-    expect(scope.isValid(false_command)).toEqual(false);
+  describe('isValid:', function(){
+    it('returns true when command is valid', function() {
+      expect(scope.isValid(command)).toEqual(true);
+    });
+
+    it('returns false when command is not valid', function() {
+      var false_command = {label: "False command"}
+      expect(scope.isValid(false_command)).toEqual(false);
+    });
   });
 
   describe('#commandUrl', function(){

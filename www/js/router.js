@@ -34,6 +34,11 @@ commander.config(function($stateProvider, $urlRouterProvider) {
       url: '/remotes_config',
       templateUrl: 'templates/remotes_config.html',
       controller: 'ConfigRemotesController'
+    })
+
+    .state('activity_log', {
+      url: '/log',
+      templateUrl: 'templates/activity_log.html'
     });
 
   $urlRouterProvider.otherwise('/command_sets/current');
