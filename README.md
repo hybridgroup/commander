@@ -159,7 +159,19 @@ To run project in android device (You can use [Genymotion](http://www.genymotion
 $ ionic run android
 ```
 
-This are the basic steps to have Commander up and running locally.
+## Plugins
+
+If you need to add a plugin"
+
+```bash
+$ cordova plugin add org.apache.cordova.device
+```
+
+Note: You need to add your plugin to plugins.json config file in order to maintain the build process successful.
+
+
+
+# This are the basic steps to have Commander up and running locally.
 
 ## Loading command sets
 
