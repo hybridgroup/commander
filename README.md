@@ -67,14 +67,11 @@ use it to preview your changes on your mobile device browser as well.
 For this purpose you need to define the platforms you will be working on with the commander app, then set and
 configure the emulator properly, according to the [PhoneGap Platform Guides](http://docs.phonegap.com/en/edge/guide_platforms_index.md.html).
 
-Here we will explain how to get your Android platform up and running.
-
-First you need tell Commander which platforms you will be using. In this case, this repo contains Android and iOS
-platforms already, so you need to run:
+First you need tell Commander which platforms you will be using, so you need to run:
 
 ```bash
-$ ionic platform android
-$ ionic platform ios
+$ ionic platform add android
+$ ionic platform add ios
 ```
 
 NOTE: If you aren't on Mac, avoid adding the iOS platform.
@@ -95,6 +92,12 @@ export PATH=${PATH}:/Development/adt-bundle/sdk/platform-tools:/Development/adt-
 ```
 
 The address used on this case is the address you have your android SDK properly installed.
+
+Next you need to update the android project to add the location.properties file contaning the sdk location:
+
+```bash
+$ android update project --subprojects -p platforms/android/
+```
 
 NOTE: For more detailed instructions follow the [PhoneGap Android Platform Guide](http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide).
 
@@ -269,16 +272,6 @@ $ npm test
 It will automatically execute your tests every time you modify the observed files.
 
 ## Workarounds
-
-For testing purposes, we have added Android and iOS platforms to the repo, since those are not commonly uploaded to a
-PhoneGaph project. But, due some of the config file addresses local files you need to run, for android, this commands:
-
-```bash
-$ android update project -p platforms/android/
-$ android update project -p platforms/android/CordovaLib
-```
-
-That will generate a `local.properties` file which contains the location of the SDK.
 
 Watch ionic SASS when in Development mode will be helpful. Execute the following command when customizing ionic SCSS files:
 
