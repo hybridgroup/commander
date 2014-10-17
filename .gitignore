@@ -3,6 +3,8 @@ ant-gen/
 ant-build/
 local.properties
 node_modules/
+platforms/
+plugins/
 *.log
 .idea
 
