@@ -1,7 +1,11 @@
 .right-buttons .badge {
-  line-height: 26px;
-  width: 32px;
+  line-height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 22px;
+  font-size: 14px;
+  margin-right: 3px;
+  margin-top: 5px;
 }
 .item-activity-log {
   padding: 10px;
