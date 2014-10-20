@@ -1,3 +1,10 @@
-<ion-item ng-disabled="!isValid(command)" ng-click="execute(command)" ng-repeat="command in commands track by $index" class="item item-light command-set-item">
-  {{command.label}}
-</ion-item>
+<ion-view title="{{command_set.name}}: {{command_set.type}}">
+  <ion-content class="royal-bg has-subheader">
+    <ion-list>
+      <ion-item ng-disabled="!isValid(command)" ng-click="execute(command)" ng-repeat="command in commands track by $index" class="item item-light command-set-item">
+        {{command.label}}
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+
