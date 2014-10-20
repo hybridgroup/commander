@@ -22,7 +22,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
 
   // Presentation-related
   $scope.getClass = function(commandSetIndex) {
-    return  isCurrent(commandSetIndex) ? "button-balanced" : "button-energized";
+    return  isCurrent(commandSetIndex) ? "button-stable" : "button-balanced";
   }
 
   $scope.getTitle = function(commandSetIndex) {
