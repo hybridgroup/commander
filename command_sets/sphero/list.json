@@ -1,0 +1,50 @@
+{
+  "command_set":{
+    "name": "Sphero Command List",
+    "type": "list",
+    "commands":[
+      {
+        "label": "R+",
+        "robot": "sphero",
+        "device": "",
+        "name": "increaseRed",
+        "params": {}
+      },
+      {
+        "label": "R-",
+        "robot": "sphero",
+        "device": "",
+        "name": "decreaseRed",
+        "params": {}
+      },
+      {
+        "label": "G+",
+        "robot": "sphero",
+        "device": "",
+        "name": "increaseGreen",
+        "params": {}
+      },
+      {
+        "label": "G-",
+        "robot": "sphero",
+        "device": "",
+        "name": "decreaseGreen",
+        "params": {}
+      },
+      {
+        "label": "B+",
+        "robot": "sphero",
+        "device": "",
+        "name": "increaseBlue",
+        "params": {}
+      },
+      {
+        "label": "B-",
+        "robot": "sphero",
+        "device": "",
+        "name": "decreaseBlue",
+        "params": {}
+      }
+    ]
+  }
+}
