@@ -1,9 +1,146 @@
 Commander
 =====================
 
-An app to control robots from your device.
+An app to control robots from your mobile device.
 
-## Installation
+## How It Works
+
+The Commander mobile application can communicate with any device that supports the Common Protocol for Programming Physical I/O (http://cppp.io).
+
+You will need to be able to connect to your device via http, in order to use Commander to control it.
+
+Commander can load a "command set" that is a list of the commands you can send to your robot(s), along with the type of user interface that should be used for the command set. For example a "list" of commands, or a D-PAD interface.
+
+## Using Commander
+
+### Configure your robot API url
+
+1. Go to the right Menu -> Connection
+2. On the API URL field, type the url of your robot's API server.
+3. Click Save.
+
+### Loading command sets
+
+Currently, the only way to create commands is by loading a command set via a service (JSON API). This allows you to store your command set alongside your robot, and you won't need to enter command details manually.
+
+#### Steps
+
+1. Go to the right Menu -> Command Sets
+2. On the URL field, type the url of your command set service.
+3. Click Load button.
+4. On the Local Command Sets list, click the 'Use' button, to use your new loaded command set.
+
+
+#### Command Sets Format
+
+The service provider for this purpose must return the following structure in JSON format:
+
+**List Layout:**
+```json
+{
+  command_set: {
+    name: "Command set name",
+    type: "list or d-pad",
+    commands: [
+      {
+        label: "Command name 1",
+        robot: "Robot name",
+        device: "Device name",
+        name: "Command name",
+        params: {param1: "value1"}
+      },
+      {
+        label: "Command name 2",
+        robot: "Robot name",
+        device: "Device name",
+        name: "Command name",
+        params: {param1: "value1"}
+      }
+    ]
+  }
+}
+```
+Here is an example of a command set with a D-PAD layout to control a Sphero robot:
+
+**D-Pad Layout**
+```json
+{
+  "command_set":{
+    "name": "Sphero Command D-Pad",
+    "type": "d-pad",
+    "commands":[
+      {
+        "label": "Up",
+        "robot": "sphero",
+        "device": "",
+        "name": "up",
+        "params":{}
+      },
+      {
+        "label": "Down",
+        "robot": "sphero",
+        "device": "",
+        "name": "down",
+        "params":{}
+      },
+      {
+        "label": "Left",
+        "robot": "sphero",
+        "device": "",
+        "name": "left",
+        "params":{}
+      },
+      {
+        "label": "Right",
+        "robot": "sphero",
+        "device": "",
+        "name": "right",
+        "params":{}
+      }
+    ]
+  }
+}
+```
+
+#### Command set structure
+
+* `name` - The name of the command set, it must be unique. If you load a command set with the same twice the command set will be updated, not duplicated.
+* `type` - There are currently two possible options:
+  * `list` - A list of buttons
+  * `d-pad` - A directional pad (up, down, left, right)
+* `commands` - It's an array of commands
+
+#### Command structure
+
+* `label`  - For a button list, this is the label of the button.
+* `robot`  - Name of the robot the command that will be executed in.
+* `device` - Name of the device the command that will be executed in. If the command is a robot command, please leave this blank.
+* `name`   - Actual command name as defined in the API. Example: `sendNotification`
+* `params` - An object/hash that contains the params the command requires, it's optional.
+
+
+### Using Command Sets
+
+#### Select command set to use
+
+1. Go to the right Menu -> Command Sets
+2. On the Local Command Sets list, click the 'Use' button on the command set you want to use.
+
+
+#### Using a List Command Set
+
+1. Once selected a list command set, just tap on any of the commands on the list. This will execute the command on the robot api.
+
+#### Using a D-Pad Command Set
+
+1. Once selected a d-pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
+
+#### Command Activity Log
+
+1. You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.
+2. Click the green/red indicator for more info about the command execution status.
+
+## Building
 
 ### Getting ready to build.
 
@@ -33,7 +170,7 @@ $ git clone git@github.com:hybridgroup/commander.git
 $ cd commander
 ```
 
-Then install the application and run `gulp`in order to get dependencies working locally.
+Then install the application and run `gulp` in order to get dependencies working locally.
 
 ```bash
 $ npm install
@@ -169,141 +306,9 @@ $ cordova plugin add org.apache.cordova.device
 
 Note: You need to add your plugin to plugins.json config file in order to maintain the build process successful.
 
-
-
-## Using Commander.
-
-### Configure your robot api url.
-
-1. Go to the right Menu -> Connection
-2. On the API URL field, type the url of your robot api.
-3. Click Save.
-
-### Loading command sets
-
-Currently, the only way to create commands is by loading a command set via a service (JSON API), this way you won't need to typing them manually.
-
-#### Steps
-
-1. Go to the right Menu -> Command Sets
-2. On the URL field, type the url of your command set service.
-3. Click Load button.
-4. On the Local Command Sets list, click the 'Use' button, to use your new loaded command set.
-
-
-#### Command Sets Format
-
-The service provider for this purpose must return the following structure in JSON format:
-
-**List Layout:**
-```json
-{
-  command_set: {
-    name: "Command set name",
-    type: "list or d-pad",
-    commands: [
-      {
-        label: "Command name 1",
-        robot: "Robot name",
-        device: "Device name",
-        name: "Command name",
-        params: {param1: "value1"}
-      },
-      {
-        label: "Command name 2",
-        robot: "Robot name",
-        device: "Device name",
-        name: "Command name",
-        params: {param1: "value1"}
-      }
-    ]
-  }
-}
-```
-
-
-**D-Pad Layout**
-```json
-{
-  "command_set":{
-    "name": "D-pad Name",
-    "type": "d-pad",
-    "commands":[
-      {
-        "label": "Up",
-        "robot": "Robot Name",
-        "device": "Device Name",
-        "name": "Command Name",
-        "params":{}
-      },
-      {
-        "label": "Down",
-        "robot": "Robot Name",
-        "device": "Device Name",
-        "name": "Command Name",
-        "params":{}
-      },
-      {
-        "label": "Left",
-        "robot": "Robot Name",
-        "device": "Device Name",
-        "name": "Command Name",
-        "params":{}
-      },
-      {
-        "label": "Right",
-        "robot": "Robot Device",
-        "device": "Device Name",
-        "name": "Command Name",
-        "params":{}
-      }
-    ]
-  }
-}
-```
-
-#### Command set structure
-
-* `name` - The name of the command set, it must be unique. If you load a command set with the same twice the command set will be updated, not duplicated.
-* `type` - There two possible options:
-  * `list` - A list of buttons
-  * `d-pad` - A directional pad (up, down, left, right)
-* `commands` - It's an array of commands
-
-#### Command structure
-
-* `label`  - For a button list, this is the label of the button.
-* `robot`  - Name of the robot the command that will be executed in.
-* `device` - Name of the device the command that will be executed in. If the command is a robot command, please leave this blank.
-* `name`   - Actual command name as defined in the API. Example: `sendNotification`
-* `params` - An object/hash that contains the params the command requires, it's optional.
-
-
-### Using Command Sets
-
-#### Select command set to use
-
-1. Go to the right Menu -> Command Sets
-2. On the Local Command Sets list, click the 'Use' button on the command set you want to use.
-
-
-#### Using a List Command Set
-
-1. Once selected a list command set, just tap on any of the commands on the list. This will execute the command on the robot api.
-
-#### Using a D-Pad Command Set
-
-1. Once selected a d-pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
-
-#### Command Activity Log
-
-1. You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.
-2. Click the green/red indicator for more info about the command execution status.
-
-
 ## Testing
 
-A testing framework was previously installed on the commander app. In order to run it, make sure you have installed
+The code for Commander includes a number of automated tests. In order to run them, make sure you have installed
 the most recent packages dependencies for Commander app. Run this:
 
 ```bash
