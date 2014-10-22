@@ -1,0 +1,15 @@
+{
+  "command_set":{
+    "name": "Pebbel Command List",
+    "type": "list",
+    "commands":[
+      {
+        "label": "Send Notification 'Hello from Commander!'",
+        "robot": "pebble",
+        "device": "pebble",
+        "name": "send_notification",
+        "params": {"message":"Hello from Commander!"}
+      }
+    ]
+  }
+}
