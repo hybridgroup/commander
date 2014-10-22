@@ -32,6 +32,7 @@
   padding-left: 42px;
 }
 .d-pad .dpad-button {
+  position: relative;
   margin: 0 auto;
   z-index: 1001;
   width: 85px;
@@ -40,7 +41,7 @@
   border: 1px solid #E6E6E6;
   box-shadow: 0 1px 0 #535353, inset 0 0 10px rgba(10,10,10,0.3);
   appearance: none;
-  border-radius: 500px;
+  border-radius: 43px;
   cursor: pointer;
 }
 .d-pad .dpad-button:after {
@@ -51,7 +52,7 @@
   left: -12px;
   width: 95px;
   height: 95px;
-  border-radius: 60px;
+  border-radius: 48px;
   box-shadow: 0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5);
 }
 .d-pad .dpad-button:active {
