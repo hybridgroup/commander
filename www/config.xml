@@ -42,6 +42,5 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
-    <icon src="res/icons/" />
     <access origin="*" />
 </widget>
