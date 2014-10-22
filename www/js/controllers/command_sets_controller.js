@@ -1,4 +1,4 @@
-commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$location', 'activityLogger', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $location, activityLogger) {
+commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$location', 'activityLogger', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $location, activityLogger) {
 
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
@@ -34,13 +34,25 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
     return currentCommandSet == commandSetIndex;
   }
 
+  $scope.showLoadingSpinner = function() {
+    $ionicLoading.show({
+      template: "<i class='ion-loading-c'></i>"
+    });
+  };
+  $scope.hideLoadingSpinner = function(){
+    $ionicLoading.hide();
+  };
+
   // Loader
   $scope.loadCommandSet = function(url) {
+    $scope.showLoadingSpinner();
+
     if (!url) {
       $ionicPopup.alert({
         title: 'Error',
         template: 'Please specify an URL'
       });
+      $scope.hideLoadingSpinner();
       return;
     }
 
@@ -54,6 +66,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
           title: "JSON Error",
           template: 'Wrong JSON structure, you must wrap the command set definition in a "command_set" object.'
         });
+        $scope.hideLoadingSpinner();
         return;
       }
 
@@ -63,6 +76,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
           title: "Command set definition error",
           template: 'The command set must have a name.'
         });
+        $scope.hideLoader();
         return;
       }
 
@@ -72,6 +86,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
           title: "Command set definition error",
           template: 'The command set must have a type (value must be either <b>list</b> or <b>d-pad</b>).'
         });
+        $scope.hideLoadingSpinner();
         return;
       }
 
@@ -81,6 +96,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
           title: "Command set definition error",
           template: 'Please define at least one command.'
         });
+        $scope.hideLoadingSpinner();
         return;
       }
 
@@ -92,6 +108,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
             title: "Command definition error",
             template: 'Commands must have at least a name and a label. Please fix the problem and try again.'
           });
+          $scope.hideLoadingSpinner();
           return;
         }
       }
@@ -123,12 +140,15 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
         template: '<b>' + remoteSet.name + '</b> command set was successfuly ' + templateMessage + '.'
       });
 
+      $scope.hideLoadingSpinner();
+
     }).error(function(data, status, headers, config){
       console.log("Calling get... error")
       $ionicPopup.alert({
         title: 'Unknown Error',
         template: "Please make sure your server is running and that the URL is correct and try again."
       });
+      $scope.hideLoadingSpinner();
     });
   }
 }]);
