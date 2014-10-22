@@ -171,11 +171,27 @@ Note: You need to add your plugin to plugins.json config file in order to mainta
 
 
 
-# This are the basic steps to have Commander up and running locally.
+## Using Commander.
 
-## Loading command sets
+### Configure your robot api url.
+
+1. Go to the right Menu -> Connection
+2. On the API URL field, type the url of your robot api.
+3. Click Save.
+
+### Loading command sets
 
 Currently, the only way to create commands is by loading a command set via a service (JSON API), this way you won't need to typing them manually.
+
+#### Steps
+
+1. Go to the right Menu -> Command Sets
+2. On the URL field, type the url of your command set service.
+3. Click Load button.
+4. On the Local Command Sets list, click the 'Use' button, to use your new loaded command set.
+
+
+#### Command Sets Format
 
 The service provider for this purpose must return the following structure in JSON format:
 
@@ -246,7 +262,7 @@ The service provider for this purpose must return the following structure in JSO
 }
 ```
 
-### Command set structure
+#### Command set structure
 
 * `name` - The name of the command set, it must be unique. If you load a command set with the same twice the command set will be updated, not duplicated.
 * `type` - There two possible options:
@@ -254,16 +270,36 @@ The service provider for this purpose must return the following structure in JSO
   * `d-pad` - A directional pad (up, down, left, right)
 * `commands` - It's an array of commands
 
-### Command structure
+#### Command structure
 
 * `label`  - For a button list, this is the label of the button.
-* `robot`  - Name of the robot the command will be executed in.
-* `device` - Name of the device the command will be executed in.
+* `robot`  - Name of the robot the command that will be executed in.
+* `device` - Name of the device the command that will be executed in. If the command is a robot command, please leave this blank.
 * `name`   - Actual command name as defined in the API. Example: `sendNotification`
 * `params` - An object/hash that contains the params the command requires, it's optional.
 
-Once you have your service running and returning the aforementioned structure you will need to configure the Command Set Loader. Just tap the
-`Command sets` menu item in the right menu, paste the URL of your service (ie. http://localhost:4567/command_set) and click the `Load` button, you should see your new command set in the `Local Command Sets` section.
+
+### Using Command Sets
+
+#### Select command set to use
+
+1. Go to the right Menu -> Command Sets
+2. On the Local Command Sets list, click the 'Use' button on the command set you want to use.
+
+
+#### Using a List Command Set
+
+1. Once selected a list command set, just tap on any of the commands on the list. This will execute the command on the robot api.
+
+#### Using a D-Pad Command Set
+
+1. Once selected a d-pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
+
+#### Command Activity Log
+
+1. You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.
+2. Click the green/red indicator for more info about the command execution status.
+
 
 ## Testing
 
