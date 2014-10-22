@@ -3,7 +3,7 @@
 describe('CommandSetController', function() {
   var ctrl, httpBackend, scope, command;
 
-  var apiUrl = "http://localhost:8000/api";
+  var apiUrl = "http://localhost:8000";
 
   command = {
     label: 'Say hello',
@@ -109,7 +109,7 @@ describe('CommandSetController', function() {
           params: ''
         };
 
-        var expectedUrl = apiUrl + '/commands/' + mcpCommand.name;
+        var expectedUrl = apiUrl + '/api' + '/commands/' + mcpCommand.name;
         expect(scope.commandUrl(mcpCommand)).toEqual(expectedUrl)
       });
 
@@ -127,8 +127,7 @@ describe('CommandSetController', function() {
           params: ''
         };
 
-        var expectedUrl = apiUrl + '/robots/' + mcpCommand.robot + 
-                                   '/commands/' + mcpCommand.name;
+        var expectedUrl = apiUrl + '/api' + '/robots/' + mcpCommand.robot + '/commands/' + mcpCommand.name;
         expect(scope.commandUrl(mcpCommand)).toEqual(expectedUrl)
       });
 
@@ -146,9 +145,7 @@ describe('CommandSetController', function() {
           params: ''
         };
 
-        var expectedUrl = apiUrl + '/robots/' + mcpCommand.robot +
-                                   '/devices/' + mcpCommand.device +
-                                   '/commands/' + mcpCommand.name;
+        var expectedUrl = apiUrl + '/api' + '/robots/' + mcpCommand.robot + '/devices/' + mcpCommand.device + '/commands/' + mcpCommand.name;
         expect(scope.commandUrl(mcpCommand)).toEqual(expectedUrl)
       });
 

@@ -22,6 +22,8 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
     var buildCommandUrl = function(api, command) {
       var url = api;
 
+      url += '/api';
+
       if (command.robot) { url += '/robots/' + command.robot; }
       if (command.device) { url += '/devices/' + command.device; }
 
