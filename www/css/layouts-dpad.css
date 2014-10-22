@@ -5,8 +5,7 @@
   position: relative;
   /*background:#AD0F0F;*/
   width: 100%;
-  height: 400px;
-  padding: 30px 15px;
+  padding: 15px 15px;
   border-radius: 20px;
   /*border: 1px solid #410707;*/
   /*border-bottom-width: 5px;*/
@@ -16,7 +15,9 @@
 }
 
 .d-pad .dpad-row {
-  height: 90px;
+  height: 75px;
+  margin-top: 0px;
+  padding-top: 5px;
 }
 
 .d-pad .up-button-col, .d-pad .down-button-col {
@@ -24,36 +25,38 @@
 }
 .d-pad .left-button-col {
   text-align: right;
-  padding-right: 45px;
+  padding-right: 44px;
 }
 .d-pad .right-button-col {
   text-align: left;
-  padding-left: 45px;
+  padding-left: 42px;
 }
 .d-pad .dpad-button {
+  position: relative;
   margin: 0 auto;
   z-index: 1001;
-  width: 100px;
-  height: 100px;
+  width: 85px;
+  height: 85px;
   background: #FFFFFF;
   border: 1px solid #E6E6E6;
-  box-shadow: 0 3px 0 #535353, inset 0 0 10px rgba(10,10,10,0.3);
+  box-shadow: 0 1px 0 #535353, inset 0 0 10px rgba(10,10,10,0.3);
   appearance: none;
-  border-radius: 500px;
+  border-radius: 43px;
   cursor: pointer;
 }
 .d-pad .dpad-button:after {
   position: relative;
   display: block;
   content: "";
-  top: -23px;
+  top: -43px;
   left: -12px;
-  width: 110px;
-  height: 110px;
-  border-radius: 60px;
+  width: 95px;
+  height: 95px;
+  border-radius: 48px;
   box-shadow: 0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5);
 }
 .d-pad .dpad-button:active {
+  background: #e6e6e6;
   box-shadow: inset 0 1px 1px rgba(0,0,0,0.3);
   -webkit-transform:scale(0.9);
   -moz-transform:scale(0.9);
@@ -67,29 +70,39 @@
 }
 .d-pad .dpad-button:before {
   position: relative;
-  display: block;
-  content: "";
-  width: 15px;
-  height: 15px;
-  border-radius: 15px;
-  background: #5F5F5F;
-  box-shadow: 0 2px 2px rgba(50,50,50,0.25), inset 1px 1px 0 rgba(255,255,255,0.5);
+  top: 40px;
+  font-size: 34px;
+  display: inline-block;
+  font-family: "Ionicons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  color: #0B2F41;
 }
 .d-pad .up-button:before {
-  top: 4px;
-  left: 35px;
+  content: "\f126";
+  top: 24px;
+  left: 0;
 }
 .d-pad .down-button:before {
-  top: 74px;
-  left: 35px;
+  content: "\f123";
+  top: 24px;
+  left: 0;
 }
 .d-pad .left-button:before {
-  top: 40px;
-  left: 1px;
+  content: "\f124";
+  top: 25px;
+  left: 0px;
 }
 .d-pad .right-button:before {
-  top: 40px;
-  left: 70px;
+  content: "\f125";
+  top: 25px;
+  left: 0px;
 }
 .d-pad .dpad-button:active ~ .screen .char{
   transition: margin-top 2s linear,
@@ -99,18 +112,9 @@
 
 /*Platform specific changes*/
 .platform-ios .d-pad .dpad-button:after {
-  top: -21px;
+  top: -40px;
   left: -20px;
 }
-.platform-ios .d-pad .up-button:before {
-  left: 27px;
-}
-.platform-ios .d-pad .down-button:before {
-  left: 27px;
-}
-.platform-ios .d-pad .left-button:before {
-  left: -7px;
-}
-.platform-ios .d-pad .right-button:before {
-  left: 62px;
+.platform-android .d-pad .dpad-button:after {
+  top: -41px;
 }

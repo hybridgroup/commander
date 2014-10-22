@@ -21,3 +21,6 @@
 .list.commander-list .item:last-child{
   border-bottom: none;
 }
+.commander-item-light.item-light.activated {
+  background-color: #e6e6e6;
+} 
