@@ -7,9 +7,11 @@ An app to control robots from your mobile device.
 
 The Commander mobile application can communicate with any device that supports the Common Protocol for Programming Physical I/O (http://cppp.io).
 
-You will need to be able to connect to your device via http, in order to use Commander to control it.
+You will need to be able to connect to your device via http, in order to control it using Commander.
 
 Commander can load a "command set" that is a list of the commands you can send to your robot(s), along with the type of user interface that should be used for the command set. For example a "list" of commands, or a D-PAD interface.
+
+Once you have loaded a command set, you just tap on the various buttons in the user interface, and Commander will send the matching command to the associated robot. It's that easy!
 
 ## Using Commander
 
