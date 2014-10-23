@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Commander : Mobile application to control robots">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Commander</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/hybridgroup/commander">View on GitHub</a>
+
+          <h1 id="project_title">Commander</h1>
+          <h2 id="project_tagline">Mobile application to control robots</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/hybridgroup/commander/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/hybridgroup/commander/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="commander" class="anchor" href="#commander"><span class="octicon octicon-link"></span></a>Commander</h1>
+
+<p>An app to control robots from your mobile device.</p>
+
+<h2>
+<a name="how-it-works" class="anchor" href="#how-it-works"><span class="octicon octicon-link"></span></a>How It Works</h2>
+
+<p>The Commander mobile application can communicate with any device that supports the Common Protocol for Programming Physical I/O (<a href="http://cppp.io">http://cppp.io</a>).</p>
+
+<p>You will need to be able to connect to your device via http, in order to control it using Commander.</p>
+
+<p>Commander can load a "command set" that is a list of the commands you can send to your robot(s), along with the type of user interface that should be used for the command set. For example a "list" of commands, or a D-PAD interface.</p>
+
+<p>Once you have loaded a command set, you just tap on the various buttons in the user interface, and Commander will send the matching command to the associated robot. It's that easy!</p>
+
+<h2>
+<a name="using-commander" class="anchor" href="#using-commander"><span class="octicon octicon-link"></span></a>Using Commander</h2>
+
+<h3>
+<a name="configure-your-robot-api-url" class="anchor" href="#configure-your-robot-api-url"><span class="octicon octicon-link"></span></a>Configure your robot API url</h3>
+
+<ol>
+<li>Go to the right Menu -&gt; Connection</li>
+<li>On the API URL field, type the url of your robot's API server.</li>
+<li>Click Save.</li>
+</ol>
+
+<h3>
+<a name="loading-command-sets" class="anchor" href="#loading-command-sets"><span class="octicon octicon-link"></span></a>Loading command sets</h3>
+
+<p>Currently, the only way to create commands is by loading a command set via a service (JSON API). This allows you to store your command set alongside your robot, and you won't need to enter command details manually.</p>
+
+<h4>
+<a name="steps" class="anchor" href="#steps"><span class="octicon octicon-link"></span></a>Steps</h4>
+
+<ol>
+<li>Go to the right Menu -&gt; Command Sets</li>
+<li>On the URL field, type the url of your command set service.</li>
+<li>Click Load button.</li>
+<li>On the Local Command Sets list, click the 'Use' button, to use your new loaded command set.</li>
+</ol>
+
+<h4>
+<a name="command-sets-format" class="anchor" href="#command-sets-format"><span class="octicon octicon-link"></span></a>Command Sets Format</h4>
+
+<p>The service provider for this purpose must return the following structure in JSON format:</p>
+
+<p><strong>List Layout:</strong></p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+  <span class="err">command_set:</span> <span class="err">{</span>
+    <span class="err">name:</span> <span class="nt">"Command set name"</span><span class="p">,</span>
+    <span class="err">type:</span> <span class="nt">"list or d-pad"</span><span class="p">,</span>
+    <span class="err">commands:</span> <span class="err">[</span>
+      <span class="err">{</span>
+        <span class="err">label:</span> <span class="nt">"Command name 1"</span><span class="p">,</span>
+        <span class="err">robot:</span> <span class="nt">"Robot name"</span><span class="p">,</span>
+        <span class="err">device:</span> <span class="nt">"Device name"</span><span class="p">,</span>
+        <span class="err">name:</span> <span class="nt">"Command name"</span><span class="p">,</span>
+        <span class="err">params:</span> <span class="err">{param1:</span> <span class="nt">"value1"</span><span class="p">}</span>
+      <span class="err">},</span>
+      <span class="p">{</span>
+        <span class="err">label:</span> <span class="nt">"Command name 2"</span><span class="p">,</span>
+        <span class="err">robot:</span> <span class="nt">"Robot name"</span><span class="p">,</span>
+        <span class="err">device:</span> <span class="nt">"Device name"</span><span class="p">,</span>
+        <span class="err">name:</span> <span class="nt">"Command name"</span><span class="p">,</span>
+        <span class="err">params:</span> <span class="err">{param1:</span> <span class="nt">"value1"</span><span class="p">}</span>
+      <span class="err">}</span>
+    <span class="err">]</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+</pre></div>
+
+<p>Here is an example of a command set with a D-PAD layout to control a Sphero robot:</p>
+
+<p><strong>D-Pad Layout</strong></p>
+
+<div class="highlight highlight-json"><pre><span class="p">{</span>
+  <span class="nt">"command_set"</span><span class="p">:{</span>
+    <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"Sphero Command D-Pad"</span><span class="p">,</span>
+    <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"d-pad"</span><span class="p">,</span>
+    <span class="nt">"commands"</span><span class="p">:[</span>
+      <span class="p">{</span>
+        <span class="nt">"label"</span><span class="p">:</span> <span class="s2">"Up"</span><span class="p">,</span>
+        <span class="nt">"robot"</span><span class="p">:</span> <span class="s2">"sphero"</span><span class="p">,</span>
+        <span class="nt">"device"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"up"</span><span class="p">,</span>
+        <span class="nt">"params"</span><span class="p">:{}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">"label"</span><span class="p">:</span> <span class="s2">"Down"</span><span class="p">,</span>
+        <span class="nt">"robot"</span><span class="p">:</span> <span class="s2">"sphero"</span><span class="p">,</span>
+        <span class="nt">"device"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"down"</span><span class="p">,</span>
+        <span class="nt">"params"</span><span class="p">:{}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">"label"</span><span class="p">:</span> <span class="s2">"Left"</span><span class="p">,</span>
+        <span class="nt">"robot"</span><span class="p">:</span> <span class="s2">"sphero"</span><span class="p">,</span>
+        <span class="nt">"device"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"left"</span><span class="p">,</span>
+        <span class="nt">"params"</span><span class="p">:{}</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+        <span class="nt">"label"</span><span class="p">:</span> <span class="s2">"Right"</span><span class="p">,</span>
+        <span class="nt">"robot"</span><span class="p">:</span> <span class="s2">"sphero"</span><span class="p">,</span>
+        <span class="nt">"device"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+        <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"right"</span><span class="p">,</span>
+        <span class="nt">"params"</span><span class="p">:{}</span>
+      <span class="p">}</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4>
+<a name="command-set-structure" class="anchor" href="#command-set-structure"><span class="octicon octicon-link"></span></a>Command set structure</h4>
+
+<ul>
+<li>
+<code>name</code> - The name of the command set, it must be unique. If you load a command set with the same twice the command set will be updated, not duplicated.</li>
+<li>
+<code>type</code> - There are currently two possible options:
+
+<ul>
+<li>
+<code>list</code> - A list of buttons</li>
+<li>
+<code>d-pad</code> - A directional pad (up, down, left, right)</li>
+</ul>
+</li>
+<li>
+<code>commands</code> - It's an array of commands</li>
+</ul>
+
+<h4>
+<a name="command-structure" class="anchor" href="#command-structure"><span class="octicon octicon-link"></span></a>Command structure</h4>
+
+<ul>
+<li>
+<code>label</code>  - For a button list, this is the label of the button.</li>
+<li>
+<code>robot</code>  - Name of the robot the command that will be executed in.</li>
+<li>
+<code>device</code> - Name of the device the command that will be executed in. If the command is a robot command, please leave this blank.</li>
+<li>
+<code>name</code>   - Actual command name as defined in the API. Example: <code>sendNotification</code>
+</li>
+<li>
+<code>params</code> - An object/hash that contains the params the command requires, it's optional.</li>
+</ul>
+
+<h3>
+<a name="using-command-sets" class="anchor" href="#using-command-sets"><span class="octicon octicon-link"></span></a>Using Command Sets</h3>
+
+<h4>
+<a name="select-command-set-to-use" class="anchor" href="#select-command-set-to-use"><span class="octicon octicon-link"></span></a>Select command set to use</h4>
+
+<ol>
+<li>Go to the right Menu -&gt; Command Sets</li>
+<li>On the Local Command Sets list, click the 'Use' button on the command set you want to use.</li>
+</ol>
+
+<h4>
+<a name="using-a-list-command-set" class="anchor" href="#using-a-list-command-set"><span class="octicon octicon-link"></span></a>Using a List Command Set</h4>
+
+<ol>
+<li>Once selected a list command set, just tap on any of the commands on the list. This will execute the command on the robot api.</li>
+</ol>
+
+<h4>
+<a name="using-a-d-pad-command-set" class="anchor" href="#using-a-d-pad-command-set"><span class="octicon octicon-link"></span></a>Using a D-Pad Command Set</h4>
+
+<ol>
+<li>Once selected a d-pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.</li>
+</ol>
+
+<h4>
+<a name="command-activity-log" class="anchor" href="#command-activity-log"><span class="octicon octicon-link"></span></a>Command Activity Log</h4>
+
+<ol>
+<li>You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.</li>
+<li>Click the green/red indicator for more info about the command execution status.</li>
+</ol>
+
+<h2>
+<a name="building" class="anchor" href="#building"><span class="octicon octicon-link"></span></a>Building</h2>
+
+<h3>
+<a name="getting-ready-to-build" class="anchor" href="#getting-ready-to-build"><span class="octicon octicon-link"></span></a>Getting ready to build.</h3>
+
+<p>Here there are the basic steps to have running <a href="https://github.com/hybridgroup/commander">Commander</a> locally.</p>
+
+<ol>
+<li>Make sure you have installed <a href="http://nodejs.org/">Node.js</a>:</li>
+</ol>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>node -v
+v0.x.x
+</pre></div>
+
+<p>If not installed try using home brew <code>brew install node</code>, or directly from the <a href="http://nodejs.org/dist/v0.10.31/node-v0.10.31.pkg">package file</a>.</p>
+
+<ol>
+<li>Install Ionic, Gulp, Cordova and Phonegap:</li>
+</ol>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>sudo npm install -g cordova ionic gulp phonegap
+</pre></div>
+
+<p>If on Windows, avoid using <code>sudo</code>.</p>
+
+<ol>
+<li>Clone Commander repo and get into it:</li>
+</ol>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>git clone git@github.com:hybridgroup/commander.git
+<span class="nv">$ </span><span class="nb">cd </span>commander
+</pre></div>
+
+<p>Then install the application and run <code>gulp</code> in order to get dependencies working locally.</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>npm install
+<span class="nv">$ </span>gulp install
+</pre></div>
+
+<p>Now, you are ready to start playing with our application!</p>
+
+<h3>
+<a name="building-emulating-and-running" class="anchor" href="#building-emulating-and-running"><span class="octicon octicon-link"></span></a>Building, emulating and running.</h3>
+
+<p>There are multiple ways you can start playing with Commander. You can either run the web server, emulate the
+application using any emulator you prefer, run it as a native app directly on your mobile device or use the
+<a href="http://app.phonegap.com/">PhoneGap Developer App</a>. Either way you prefer, you first need to set up the devices
+properly.</p>
+
+<p>Here we will explain how to make it run, emulate and run the web service.</p>
+
+<h4>
+<a name="web-server" class="anchor" href="#web-server"><span class="octicon octicon-link"></span></a>Web server</h4>
+
+<p>For this purpose yo just need to run this command:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic serve
+</pre></div>
+
+<p>This will launch a browser tab that will automatically render your changes every time you update your code. Yo can
+use it to preview your changes on your mobile device browser as well.</p>
+
+<h4>
+<a name="emulaterun" class="anchor" href="#emulaterun"><span class="octicon octicon-link"></span></a>Emulate/Run</h4>
+
+<p>For this purpose you need to define the platforms you will be working on with the commander app, then set and
+configure the emulator properly, according to the <a href="http://docs.phonegap.com/en/edge/guide_platforms_index.md.html">PhoneGap Platform Guides</a>.</p>
+
+<p>First you need tell Commander which platforms you will be using, so you need to run:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic platform add android
+<span class="nv">$ </span>ionic platform add ios
+</pre></div>
+
+<p>NOTE: If you aren't on Mac, avoid adding the iOS platform.</p>
+
+<p>In case you need to add more platforms to Commander, you need to run the platform method including your new platforms
+as follows:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic platform add wp8
+</pre></div>
+
+<p>In the case of Android you need to install the <a href="http://developer.android.com/sdk/index.html">Android SDK</a> and configure
+the emulator beforehand. You might need to configure the <a href="http://developer.android.com/tools/devices/emulator.html">Android Emulator</a>.
+Then, in order to make works the Cordova CLI you need to add this to your '~.bash_profile`:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="k">${</span><span class="nv">PATH</span><span class="k">}</span>:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools
+</pre></div>
+
+<p>The address used on this case is the address you have your android SDK properly installed.</p>
+
+<p>Next you need to update the android project to add the location.properties file contaning the sdk location:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>android update project --subprojects -p platforms/android/
+</pre></div>
+
+<p>NOTE: For more detailed instructions follow the <a href="http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide">PhoneGap Android Platform Guide</a>.</p>
+
+<p>Once you have finished setting your Android SDK configuration, you're ready to emulate the android app. Execute this in
+order to build and emulate your app trough the CLI:</p>
+
+<p>With Ionic</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic build android
+<span class="nv">$ </span>ionic run android
+</pre></div>
+
+<p>With Cordova</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>cordova build android
+<span class="nv">$ </span>cordova emulate android
+</pre></div>
+
+<p>With PhoneGap</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>phonegap build android
+<span class="nv">$ </span>phonegap emulate android
+</pre></div>
+
+<p>Ionic runs the application for an Android device instead of emulating it, so we need to use <code>run</code> instead of <code>emulate</code>.
+You can also use a <a href="http://www.genymotion.com/">Genymotion</a> in order to emulate your app.</p>
+
+<p>Ionic recommends to run this command every time yo made some changes to the <code>www</code> folder.</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>cordova prepare android
+</pre></div>
+
+<p>For running your app directly on your device, you need to replace the command <code>emulate</code> with <code>run</code>. Example:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic run android
+</pre></div>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>cordova run android
+</pre></div>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>phonegap run android
+</pre></div>
+
+<h2>
+<a name="running" class="anchor" href="#running"><span class="octicon octicon-link"></span></a>Running</h2>
+
+<p>To run project in iOS emulator:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic emulate ios
+</pre></div>
+
+<p>To run project in android device (You can use <a href="http://www.genymotion.com/">Genymotion</a> too):</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>ionic run android
+</pre></div>
+
+<h2>
+<a name="plugins" class="anchor" href="#plugins"><span class="octicon octicon-link"></span></a>Plugins</h2>
+
+<p>If you need to add a plugin"</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>cordova plugin add org.apache.cordova.device
+</pre></div>
+
+<p>Note: You need to add your plugin to plugins.json config file in order to maintain the build process successful.</p>
+
+<h2>
+<a name="testing" class="anchor" href="#testing"><span class="octicon octicon-link"></span></a>Testing</h2>
+
+<p>The code for Commander includes a number of automated tests. In order to run them, make sure you have installed
+the most recent packages dependencies for Commander app. Run this:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>bower install
+<span class="nv">$ </span>gulp install
+</pre></div>
+
+<p>Then just run the test suite:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>npm <span class="nb">test</span>
+</pre></div>
+
+<p>It will automatically execute your tests every time you modify the observed files.</p>
+
+<h2>
+<a name="workarounds" class="anchor" href="#workarounds"><span class="octicon octicon-link"></span></a>Workarounds</h2>
+
+<p>Watch ionic SASS when in Development mode will be helpful. Execute the following command when customizing ionic SCSS files:</p>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css
+</pre></div>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Commander maintained by <a href="https://github.com/hybridgroup">hybridgroup</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
