@@ -28,5 +28,5 @@
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <access origin="*" />
 
-    <icon src="res/icons/" />
+    <icon src="res/icons/icon.png" />
 </widget>
