@@ -30,42 +30,42 @@
         // iOS >= 7 Settings icon
         // iOS <= 6.1 Small icon for Spotlight search results and Settings (recommended) iPhone
         'icon-29.png': 'icon-small.png',
-        'icon-29-2x.png': 'icon-small@2x.png',
+        'icon-29@2x.png': 'icon-small@2x.png',
 
         // iOS >= 7 Spotlight search results icon (recommended)
         'icon-40.png': 'icon-40.png',
-        'icon-40-2x.png': 'icon-40@2x.png',
+        'icon-40@2x.png': 'icon-40@2x.png',
 
         // iOS <= 6.1 Small icon for Spotlight search results and Settings (recommended) iPad
         'icon-50.png': 'icon-50.png',
-        'icon-50-2x.png': 'icon-50@2x.png',
+        'icon-50@2x.png': 'icon-50@2x.png',
 
         // iOS <= 6.1 App icon (required) iPhone
         'icon-57.png': 'icon.png',
-        'icon-57-2x.png': 'icon@2x.png',
+        'icon-57@2x.png': 'icon@2x.png',
 
         // iOS >= 7 App icon (required) iPhone
         'icon-60.png': 'icon-60.png',
-        'icon-60-2x.png': 'icon-60@2x.png',
+        'icon-60@2x.png': 'icon-60@2x.png',
 
         // iOS <= 6.1 App icon (required) iPad
         'icon-72.png': 'icon-72.png',
-        'icon-72-2x.png': 'icon-72@2x.png',
+        'icon-72@2x.png': 'icon-72@2x.png',
 
         // iOS 7 App icon (required) iPad
         'icon-76.png': 'icon-76.png',
-        'icon-76-2x.png': 'icon-76@2x.png',
+        'icon-76@2x.png': 'icon-76@2x.png',
 
         // 'screen-iphone-landscape.png': 'Default~iphone.png',
         'screen-ipad-portrait.png': 'Default-Portrait~ipad.png',
-        'screen-ipad-portrait-2x.png': 'Default-Portrait@2x~ipad.png',
+        'screen-ipad-portrait@2x.png': 'Default-Portrait@2x~ipad.png',
 
-        'screen-ipad-landscape-2x.png': 'Default-Landscape@2x~ipad.png',
+        'screen-ipad-landscape@2x.png': 'Default-Landscape@2x~ipad.png',
         'screen-ipad-landscape.png': 'Default-Landscape~ipad.png',
 
         'screen-iphone-portrait.png': 'Default~iphone.png',
-        'screen-iphone-portrait-2x.png': 'Default@2x~iphone.png',
-        'screen-iphone-portrait-568h-2x.png': 'Default-568h@2x~iphone.png'
+        'screen-iphone-portrait@2x.png': 'Default@2x~iphone.png',
+        'screen-iphone-portrait-568h@2x.png': 'Default-568h@2x~iphone.png'
       }
     },
     android: {
@@ -154,71 +154,25 @@
     });
   }
 
-  var allicons = projectConfig.doc.findall('icon');
-  if (allicons.length === 0 ) {
-    console.warn( projectConfig.doc );
-    console.warn( allicons );
-    console.warn( 'No icons to install, missing icon specs in config.xml' );
-  } else {
-    console.log( 'Update all icons for project: ' + projectConfig.name() );
-  }
+  var androidIcons = projectConfig.getIcons('android');
+  var iosIcons = projectConfig.getIcons('ios')
+  var androidSplashScreens = projectConfig.getSplashScreens('android')
+  var iosSplashScreens = projectConfig.getSplashScreens('android')
 
-  allicons.map(function (node) {
-    if (/\/$/.test(node.attrib.src) && node.attrib['gap:platform'] === undefined && node.attrib['gap:density'] === undefined) {
-
-      if (~projectPlatforms.indexOf('android')) {
-        // Android
-        copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.attrib.src + 'android/icon-36-ldpi.png', 'gap:density': 'ldpi' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.attrib.src + 'android/icon-48-mdpi.png', 'gap:density': 'mdpi' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.attrib.src + 'android/icon-72-hdpi.png', 'gap:density': 'hdpi' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.attrib.src + 'android/icon-96-xhdpi.png', 'gap:density': 'xhdpi' } });
-      }
-
-      if (~projectPlatforms.indexOf('ios')) {
-        // iOS >= 7 Settings icon
-        // iOS <= 6.1 Small icon for Spotlight search results and Settings (recommended) iPhone
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-29.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-29-2x.png' } });
-
-        // iOS >= 7 Spotlight search results icon (recommended)
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-40.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-40-2x.png' } });
-
-        // iOS <= 6.1 Small icon for Spotlight search results and Settings (recommended) iPad
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-50.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-50-2x.png' } });
-
-        // iOS <= 6.1 App icon (required) iPhone
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-57.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-57-2x.png' } });
-
-        // iOS >= 7 App icon (required) iPhone
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-60.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-60-2x.png' } });
-
-        // iOS <= 6.1 App icon (required) iPad
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-72.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-72-2x.png' } });
-
-        // iOS 7 App icon (required) iPad
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-76.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.attrib.src + 'ios/icon-76-2x.png' } });
-      }
-
-      if (~projectPlatforms.indexOf('wp8')) {
-        copyAsset('icon', { attrib: { 'gap:platform': 'winphone', src: node.attrib.src + 'wp/icon-62.png' } });
-        copyAsset('icon', { attrib: { 'gap:platform': 'winphone', src: node.attrib.src + 'wp/tile-173.png' } });
-      }
-
-    } else {
-      copyAsset ('icon', node);
-    }
+  androidIcons.map(function (node) {
+    copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
   });
 
-  projectConfig.doc.findall('*').filter(function (node) {
-    return (node.tag === 'gap:splash');
-  }).map(function (node) {
-    copyAsset ('splash', node);
+  iosIcons.map(function (node) {
+    copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.src } });
+  });
+
+  androidSplashScreens.map(function (node) {
+    copyAsset('splash', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+  });
+
+  iosSplashScreens.map(function (node) {
+    copyAsset('splash', { attrib: { 'gap:platform': 'ios', src: node.src } });
   });
 
 })();
