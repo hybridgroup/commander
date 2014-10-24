@@ -15,10 +15,10 @@
 
 
 /*Lists*/
-.list.commander-list {
+.commander-list .list{
   margin-bottom: 0;
 }
-.list.commander-list .item:last-child{
+.commander-list .list .item:last-child{
   border-bottom: none;
 }
 .commander-item-light.item-light.activated {

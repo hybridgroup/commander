@@ -40,12 +40,12 @@ describe('CommandSetsController', function(){
       storage.set('current_command_set', 1)
     });
 
-    it('returns button-balanced when item is the current command set', function(){
-      expect(scope.getClass(1)).toEqual('button-balanced');
+    it('returns button-stable when item is the current command set', function(){
+      expect(scope.getClass(1)).toEqual('button-stable');
     });
 
-    it('returns button-energized when item is not the current command set', function(){
-      expect(scope.getClass(0)).toEqual('button-energized');
+    it('returns button-balanced when item is not the current command set', function(){
+      expect(scope.getClass(0)).toEqual('button-balanced');
     });
   });
 
@@ -61,6 +61,37 @@ describe('CommandSetsController', function(){
 
     it('returns "Current" when item is the current command set', function(){
       expect(scope.getTitle(1)).toEqual('Current');
+    });
+  });
+
+  describe('removeCommandSet', function(){
+    it("should delete command set", function(){
+      storage.set('command_sets', [{name: 'cs1'}, {name: 'cs2'}]);
+      expect(scope.commandSets.length).toEqual(2)
+      scope.removeCommandSet(1)
+      expect(scope.commandSets.length).toEqual(1)
+    });
+
+    it("if deleted command set was the current one, should delete command set and set the first command set on the list as the new current", function(){
+      storage.set('command_sets', [{name: 'cs1'}, {name: 'cs2'}, {name: 'cs3'}]);
+      expect(scope.commandSets.length).toEqual(3)
+      scope.useCommandSet(1)
+      expect(scope.currentCommandSet).toEqual(storage.get('current_command_set'))
+      expect(scope.currentCommandSet).toEqual(1)
+      scope.removeCommandSet(1)
+      expect(scope.currentCommandSet).toEqual(storage.get('current_command_set'))
+      expect(scope.currentCommandSet).toEqual(0)
+    });
+
+    it("if deleted command set is not current, but the current is the last one on the list, should delete command set and set the current to the last one on the new list", function(){
+      storage.set('command_sets', [{name: 'cs1'}, {name: 'cs2'}, {name: 'cs3'}]);
+      expect(scope.commandSets.length).toEqual(3)
+      scope.useCommandSet(2)
+      expect(scope.currentCommandSet).toEqual(storage.get('current_command_set'))
+      expect(scope.currentCommandSet).toEqual(2)
+      scope.removeCommandSet(0)
+      expect(scope.currentCommandSet).toEqual(storage.get('current_command_set'))
+      expect(scope.currentCommandSet).toEqual(1)
     });
   });
 
