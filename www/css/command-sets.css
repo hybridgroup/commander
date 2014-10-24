@@ -1,0 +1,9 @@
+.command-sets-content .commander-list .list .item.item-button-right {
+  padding-right: 0;
+}
+.command-sets-content .commander-list .list .item .item-options .item-delete {
+  padding-top: 5px;
+}
+.command-sets-content .commander-list .list .item .item-options .item-delete:before {
+  font-size: 32px;
+}

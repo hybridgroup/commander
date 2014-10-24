@@ -1,4 +1,4 @@
-commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$location', 'activityLogger', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $location, activityLogger) {
+commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger) {
 
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
@@ -18,6 +18,24 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
     LocalStorageService.set('current_command_set', commandSetIndex)
     $scope.currentCommandSet = commandSetIndex;
     $location.path('/command_sets/' + commandSetIndex);
+  }
+
+  $scope.removeCommandSet = function(commandSetIndex) {
+    var localSets = LocalStorageService.commandSets();
+    var currentCommandSet = LocalStorageService.get('current_command_set')
+
+    localSets.splice(commandSetIndex, 1);
+    LocalStorageService.set('command_sets', localSets);
+
+    if (isCurrent(commandSetIndex) ) {
+      LocalStorageService.set('current_command_set', 0)
+      $scope.currentCommandSet = 0;
+    }
+    else if (currentCommandSet == localSets.length) {
+      LocalStorageService.set('current_command_set', currentCommandSet - 1)
+      $scope.currentCommandSet = currentCommandSet - 1;
+    }
+    $ionicListDelegate.closeOptionButtons();
   }
 
   // Presentation-related
