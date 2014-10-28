@@ -28,6 +28,8 @@
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <access origin="*" />
 
+    <icon src="res/icons/icon.png" />
+
     <platform name="android">
         <icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />
         <icon src="res/icons/android/icon-48-mdpi.png" density="mdpi" />

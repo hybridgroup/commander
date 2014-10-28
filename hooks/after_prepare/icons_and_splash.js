@@ -70,9 +70,11 @@
     },
     android: {
       icon:'res/drawable-{$density}',
+      iconNoDensity:'res/drawable',
       splash:'res/drawable-{$density}',
       platformsDir: 'android',
       nameMap: {
+        'icon.png': 'icon.png',
         'icon-36-ldpi.png': 'icon.png',
         'icon-48-mdpi.png': 'icon.png',
         'icon-72-hdpi.png': 'icon.png',
@@ -160,11 +162,18 @@
   var iosSplashScreens = projectConfig.getSplashScreens('android')
 
   androidIcons.map(function (node) {
-    copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+    if (node.density) {
+      copyAsset('icon', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+    }
+    else {
+      copyAsset('iconNoDensity', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': null } });
+    }
   });
 
   iosIcons.map(function (node) {
-    copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.src } });
+    if (node.width && node.height) {
+      copyAsset('icon', { attrib: { 'gap:platform': 'ios', src: node.src } });
+    }
   });
 
   androidSplashScreens.map(function (node) {
