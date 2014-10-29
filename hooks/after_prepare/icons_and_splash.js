@@ -57,21 +57,22 @@
         'icon-76@2x.png': 'icon-76@2x.png',
 
         // 'screen-iphone-landscape.png': 'Default~iphone.png',
-        'screen-ipad-portrait.png': 'Default-Portrait~ipad.png',
-        'screen-ipad-portrait@2x.png': 'Default-Portrait@2x~ipad.png',
+        'Default-Portrait~ipad.png': 'Default-Portrait~ipad.png',
+        'Default-Portrait@2x~ipad.png': 'Default-Portrait@2x~ipad.png',
 
-        'screen-ipad-landscape@2x.png': 'Default-Landscape@2x~ipad.png',
-        'screen-ipad-landscape.png': 'Default-Landscape~ipad.png',
+        'Default-Landscape@2x~ipad.png': 'Default-Landscape@2x~ipad.png',
+        'Default-Landscape~ipad.png': 'Default-Landscape~ipad.png',
 
-        'screen-iphone-portrait.png': 'Default~iphone.png',
-        'screen-iphone-portrait@2x.png': 'Default@2x~iphone.png',
-        'screen-iphone-portrait-568h@2x.png': 'Default-568h@2x~iphone.png'
+        'Default~iphone.png': 'Default~iphone.png',
+        'Default@2x~iphone.png': 'Default@2x~iphone.png',
+        'Default-568h@2x~iphone.png': 'Default-568h@2x~iphone.png'
       }
     },
     android: {
       icon:'res/drawable-{$density}',
       iconNoDensity:'res/drawable',
-      splash:'res/drawable-{$density}',
+      splashLandscape:'res/drawable-land-{$density}',
+      splashPortrait:'res/drawable-port-{$density}',
       platformsDir: 'android',
       nameMap: {
         'icon.png': 'icon.png',
@@ -79,10 +80,14 @@
         'icon-48-mdpi.png': 'icon.png',
         'icon-72-hdpi.png': 'icon.png',
         'icon-96-xhdpi.png': 'icon.png',
-        'screen-ldpi-portrait.png': 'ic_launcher.png',
-        'screen-mdpi-portrait.png': 'ic_launcher.png',
-        'screen-hdpi-portrait.png': 'ic_launcher.png',
-        'screen-xhdpi-portrait.png': 'ic_launcher.png'
+        'screen-landscape-ldpi.png': 'screen.png',
+        'screen-landscape-mdpi.png': 'screen.png',
+        'screen-landscape-hdpi.png': 'screen.png',
+        'screen-landscape-xhdpi.png': 'screen.png',
+        'screen-portrait-ldpi.png': 'screen.png',
+        'screen-portrait-mdpi.png': 'screen.png',
+        'screen-portrait-hdpi.png': 'screen.png',
+        'screen-portrait-xhdpi.png': 'screen.png'
       }
     },
     blackberry10: {},
@@ -159,7 +164,7 @@
   var androidIcons = projectConfig.getIcons('android');
   var iosIcons = projectConfig.getIcons('ios')
   var androidSplashScreens = projectConfig.getSplashScreens('android')
-  var iosSplashScreens = projectConfig.getSplashScreens('android')
+  var iosSplashScreens = projectConfig.getSplashScreens('ios')
 
   androidIcons.map(function (node) {
     if (node.density) {
@@ -177,11 +182,18 @@
   });
 
   androidSplashScreens.map(function (node) {
-    copyAsset('splash', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+    if (node.density && node.src.match(/landscape/)) {
+      copyAsset('splashLandscape', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+    }
+    else if (node.density && node.src.match(/portrait/)) {
+      copyAsset('splashPortrait', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+    }
   });
 
   iosSplashScreens.map(function (node) {
-    copyAsset('splash', { attrib: { 'gap:platform': 'ios', src: node.src } });
+    if (node.width && node.height) {
+      copyAsset('splash', { attrib: { 'gap:platform': 'ios', src: node.src } });
+    }
   });
 
 })();
