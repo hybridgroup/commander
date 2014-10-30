@@ -3,6 +3,10 @@
     <name>Commander</name>
     <description>Mobile application to control robots from your device</description>
     <author email="contact@hybridgroup.com" href="http://commander.io">Hybrid Group</author>
+
+    <gap:platform name="ios" />
+    <gap:platform name="android" />
+
     <preference name="permissions" value="none" />
     <preference name="phonegap-version" value="3.6.3" />
     <preference name="orientation" value="default" />
@@ -29,6 +33,7 @@
     <access origin="*" />
 
     <icon src="res/icons/icon.png" />
+    <gap:splash src="res/screens/screen.png" />
 
     <icon src="res/icons/android/icon-36-ldpi.png" gap:platform="android" gap:qualifier="ldpi" />
     <icon src="res/icons/android/icon-48-mdpi.png" gap:platform="android" gap:qualifier="mdpi" />
