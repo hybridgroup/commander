@@ -29,6 +29,7 @@
     <access origin="*" />
 
     <icon src="res/icons/icon.png" />
+    <splash src="res/icons/screen.png" />
 
     <platform name="android">
         <icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />

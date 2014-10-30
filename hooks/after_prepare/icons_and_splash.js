@@ -71,6 +71,7 @@
     android: {
       icon:'res/drawable-{$density}',
       iconNoDensity:'res/drawable',
+      splashNoDensity:'res/drawable',
       splashLandscape:'res/drawable-land-{$density}',
       splashPortrait:'res/drawable-port-{$density}',
       platformsDir: 'android',
@@ -80,6 +81,7 @@
         'icon-48-mdpi.png': 'icon.png',
         'icon-72-hdpi.png': 'icon.png',
         'icon-96-xhdpi.png': 'icon.png',
+        'screen.png': 'screen.png',
         'screen-landscape-ldpi.png': 'screen.png',
         'screen-landscape-mdpi.png': 'screen.png',
         'screen-landscape-hdpi.png': 'screen.png',
@@ -130,9 +132,10 @@
     } else {
       throw new Error('Unknown icon name for platform ' + platform);
     }
+    var dstPathDir = path.join(projectRoot, 'platforms', platform, assetDir);
     var dstPath = path.join(projectRoot, 'platforms', platform, assetDir, fileName);
 
-    if (!fs.existsSync (dstPath)) {
+    if (!fs.existsSync (dstPathDir)) {
       console.warn ('template file ' + dstPath + ' does not exist and will not be replaced' );
       return;
     }
@@ -187,6 +190,9 @@
     }
     else if (node.density && node.src.match(/portrait/)) {
       copyAsset('splashPortrait', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': node.density } });
+    }
+    else {
+      copyAsset('splashNoDensity', { attrib: { 'gap:platform': 'android', src: node.src, 'gap:density': null } }); 
     }
   });
 
