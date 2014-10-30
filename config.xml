@@ -43,7 +43,7 @@
     <!-- iOS 7.0+ -->
     <!-- iPhone / iPod Touch  -->
     <icon src="www/res/icons/ios/icon-60.png" width="60" height="60" />
-    <icon src="res/icons/ios/icon-60@2x.png" width="120" height="120" />
+    <icon src="www/res/icons/ios/icon-60@2x.png" width="120" height="120" />
     <!-- iPad -->
     <icon src="www/res/icons/ios/icon-76.png" width="76" height="76" />
     <icon src="www/res/icons/ios/icon-76@2x.png" width="152" height="152" />
