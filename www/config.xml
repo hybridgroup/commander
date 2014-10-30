@@ -18,7 +18,7 @@
     <preference name="ios-statusbarstyle" value="black-opaque" />
     <preference name="detect-data-types" value="true" />
     <preference name="exit-on-suspend" value="false" />
-    <preference name="show-splash-screen-spinner" value="true" />
+    <preference name="show-splash-screen-spinner" value="false" />
     <preference name="auto-hide-splash-screen" value="true" />
     <preference name="disable-cursor" value="false" />
     <preference name="android-minSdkVersion" value="7" />
@@ -29,7 +29,7 @@
     <access origin="*" />
 
     <icon src="res/icons/icon.png" />
-    <splash src="res/icons/screen.png" />
+    <splash src="res/screens/screen.png" />
 
     <platform name="android">
         <icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />
@@ -37,15 +37,15 @@
         <icon src="res/icons/android/icon-72-hdpi.png" density="hdpi" />
         <icon src="res/icons/android/icon-96-xhdpi.png" density="xhdpi" />
 
-        <splash src="res/icons/android/screen-landscape-ldpi.png" density="ldpi" />
-        <splash src="res/icons/android/screen-landscape-mdpi.png" density="mdpi" />
-        <splash src="res/icons/android/screen-landscape-hdpi.png" density="hdpi" />
-        <splash src="res/icons/android/screen-landscape-xhdpi.png" density="xhdpi" />
+        <splash src="res/screens/android/screen-landscape-ldpi.png" density="ldpi" />
+        <splash src="res/screens/android/screen-landscape-mdpi.png" density="mdpi" />
+        <splash src="res/screens/android/screen-landscape-hdpi.png" density="hdpi" />
+        <splash src="res/screens/android/screen-landscape-xhdpi.png" density="xhdpi" />
 
-        <splash src="res/icons/android/screen-portrait-ldpi.png" density="ldpi" />
-        <splash src="res/icons/android/screen-portrait-mdpi.png" density="mdpi" />
-        <splash src="res/icons/android/screen-portrait-hdpi.png" density="hdpi" />
-        <splash src="res/icons/android/screen-portrait-xhdpi.png" density="xhdpi" />
+        <splash src="res/screens/android/screen-portrait-ldpi.png" density="ldpi" />
+        <splash src="res/screens/android/screen-portrait-mdpi.png" density="mdpi" />
+        <splash src="res/screens/android/screen-portrait-hdpi.png" density="hdpi" />
+        <splash src="res/screens/android/screen-portrait-xhdpi.png" density="xhdpi" />
     </platform>
 
      <platform name="ios">
@@ -73,12 +73,12 @@
         <icon src="res/icons/ios/icon-50.png" width="50" height="50" />
         <icon src="res/icons/ios/icon-50@2x.png" width="100" height="100" />
 
-        <splash src="res/icons/ios/Default-Portrait~ipad.png" width="768" height="1024" />
-        <splash src="res/icons/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048" />
-        <splash src="res/icons/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536" />
-        <splash src="res/icons/ios/Default-Landscape~ipad.png" width="1024" height="768" />
-        <splash src="res/icons/ios/Default~iphone.png" width="320" height="480" />
-        <splash src="res/icons/ios/Default@2x~iphone.png" width="640" height="960" />
-        <splash src="res/icons/ios/Default-568h@2x~iphone.png" width="640" height="1136" />
+        <splash src="res/screens/ios/Default-Portrait~ipad.png" width="768" height="1024" />
+        <splash src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048" />
+        <splash src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536" />
+        <splash src="res/screens/ios/Default-Landscape~ipad.png" width="1024" height="768" />
+        <splash src="res/screens/ios/Default~iphone.png" width="320" height="480" />
+        <splash src="res/screens/ios/Default@2x~iphone.png" width="640" height="960" />
+        <splash src="res/screens/ios/Default-568h@2x~iphone.png" width="640" height="1136" />
     </platform>
 </widget>
