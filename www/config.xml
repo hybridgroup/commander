@@ -29,57 +29,5 @@
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <access origin="*" />
 
-    <icon src="res/icons/icon.png" />
-    <splash src="res/screens/screen.png" />
-
-    <platform name="android">
-        <icon src="res/icons/android/icon-36-ldpi.png" density="ldpi" />
-        <icon src="res/icons/android/icon-48-mdpi.png" density="mdpi" />
-        <icon src="res/icons/android/icon-72-hdpi.png" density="hdpi" />
-        <icon src="res/icons/android/icon-96-xhdpi.png" density="xhdpi" />
-
-        <splash src="res/screens/android/screen-landscape-ldpi.png" density="ldpi" />
-        <splash src="res/screens/android/screen-landscape-mdpi.png" density="mdpi" />
-        <splash src="res/screens/android/screen-landscape-hdpi.png" density="hdpi" />
-        <splash src="res/screens/android/screen-landscape-xhdpi.png" density="xhdpi" />
-
-        <splash src="res/screens/android/screen-portrait-ldpi.png" density="ldpi" />
-        <splash src="res/screens/android/screen-portrait-mdpi.png" density="mdpi" />
-        <splash src="res/screens/android/screen-portrait-hdpi.png" density="hdpi" />
-        <splash src="res/screens/android/screen-portrait-xhdpi.png" density="xhdpi" />
-    </platform>
-
-     <platform name="ios">
-        <!-- iOS 7.0+ -->
-        <!-- iPhone / iPod Touch  -->
-        <icon src="res/icons/ios/icon-60.png" width="60" height="60" />
-        <icon src="res/icons/ios/icon-60@2x.png" width="120" height="120" />
-        <!-- iPad -->
-        <icon src="res/icons/ios/icon-76.png" width="76" height="76" />
-        <icon src="res/icons/ios/icon-76@2x.png" width="152" height="152" />
-        <!-- iOS 6.1 -->
-        <!-- Spotlight Icon -->
-        <icon src="res/icons/ios/icon-40.png" width="40" height="40" />
-        <icon src="res/icons/ios/icon-40@2x.png" width="80" height="80" />
-        <!-- iPhone / iPod Touch -->
-        <icon src="res/icons/ios/icon-57.png" width="57" height="57" />
-        <icon src="res/icons/ios/icon-57@2x.png" width="114" height="114" />
-        <!-- iPad -->
-        <icon src="res/icons/ios/icon-72.png" width="72" height="72" />
-        <icon src="res/icons/ios/icon-72@2x.png" width="144" height="144" />
-        <!-- iPhone Spotlight and Settings Icon -->
-        <icon src="res/icons/ios/icon-29.png" width="29" height="29" />
-        <icon src="res/icons/ios/icon-29@2x.png" width="58" height="58" />
-        <!-- iPad Spotlight and Settings Icon -->
-        <icon src="res/icons/ios/icon-50.png" width="50" height="50" />
-        <icon src="res/icons/ios/icon-50@2x.png" width="100" height="100" />
-
-        <splash src="res/screens/ios/Default-Portrait~ipad.png" width="768" height="1024" />
-        <splash src="res/screens/ios/Default-Portrait@2x~ipad.png" width="1536" height="2048" />
-        <splash src="res/screens/ios/Default-Landscape@2x~ipad.png" width="2048" height="1536" />
-        <splash src="res/screens/ios/Default-Landscape~ipad.png" width="1024" height="768" />
-        <splash src="res/screens/ios/Default~iphone.png" width="320" height="480" />
-        <splash src="res/screens/ios/Default@2x~iphone.png" width="640" height="960" />
-        <splash src="res/screens/ios/Default-568h@2x~iphone.png" width="640" height="1136" />
-    </platform>
+    
 </widget>
