@@ -3,6 +3,7 @@
     "com.ionic.keyboard",
     "org.apache.cordova.device",
     "org.apache.cordova.statusbar",
-    "org.apache.cordova.console"
+    "org.apache.cordova.console",
+    "org.apache.cordova.splashscreen"
   ]
 }

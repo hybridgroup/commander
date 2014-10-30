@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.commander579528" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Commander</name>
-  <description>
-    An Ionic Framework and Cordova project.
-  </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-    Ionic Framework Team
-  </author>
+  <description>Mobile application to control robots from your device</description>
+  <author email="contact@hybridgroup.com" href="http://commander.io">Hybrid Group</author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="SplashScreen" value="screen" />
