@@ -17,7 +17,7 @@ if(!localStorage.commander){
   }
 })();
 
-commander = angular.module('commander', ['ionic'])
+commander = angular.module('commander', ['ionic', 'ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -32,6 +32,12 @@ commander = angular.module('commander', ['ionic'])
   });
 
   ionic.Platform.fullScreen(true, false);
+})
+
+.run(function($cordovaSplashscreen) {
+  setTimeout(function() {
+    $cordovaSplashscreen.hide()
+  }, 2000)
 });
 
 commander.controller('ContentController', ['$scope', '$ionicSideMenuDelegate', function($scope, $ionicSideMenuDelegate) {
