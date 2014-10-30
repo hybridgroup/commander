@@ -39,7 +39,7 @@
     <splash src="www/res/screens/android/screen-portrait-xhdpi.png" density="port-xhdpi" />
   </platform>
 
-   <platform name="ios">
+  <platform name="ios">
     <!-- iOS 7.0+ -->
     <!-- iPhone / iPod Touch  -->
     <icon src="www/res/icons/ios/icon-60.png" width="60" height="60" />
