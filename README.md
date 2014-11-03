@@ -3,6 +3,11 @@ Commander
 
 An app to control robots from your mobile device.
 
+## Build Status:
+
+[![Build Status](https://secure.travis-ci.org/hybridgroup/commander.png?branch=master)](http://travis-ci.org/commander/cylon)
+
+
 ## How It Works
 
 The Commander mobile application can communicate with any device that supports the Common Protocol for Programming Physical I/O (http://cppp.io).
