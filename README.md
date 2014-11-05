@@ -12,41 +12,40 @@ An app to control robots from your mobile device.
 [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.hybridgroup.commander)
 [![iTunes](http://i.imgur.com/rlNTuWQ.png)](#)
 
-## Screeshots
+## Screenshots
 
 ![screen1](http://i.imgur.com/kQkZAV7.jpg)
-![screen2](http://i.imgur.com/JqPfRxV.jpg)
-![screen3](http://i.imgur.com/lCc4irL.jpg)
-![screen4](http://i.imgur.com/L51DgtN.jpg)
+![screen2](http://i.imgur.com/lCc4irL.jpg)
+![screen3](http://i.imgur.com/L51DgtN.jpg)
 
 ## How It Works
 
 The Commander mobile application can communicate with any device that supports the Common Protocol for Programming Physical I/O (http://cppp.io).
 
-You will need to be able to connect to your device via http, in order to control it using Commander.
+You will need to be able to connect to your device via http in order to control it using Commander.
 
-Commander can load a "command set" that is a list of the commands you can send to your robot(s), along with the type of user interface that should be used for the command set. For example a "list" of commands, or a D-PAD interface.
+Commander can load a "command set" that is a list of the commands you can send to your robot(s), along with the type of user interface that should be used for the command set. For example a "list" of commands, or a D-Pad interface.
 
-Once you have loaded a command set, you just tap on the various buttons in the user interface, and Commander will send the matching command to the associated robot. It's that easy!
+Once you have loaded a command set, you just tap on the various buttons in the user interface and Commander will send the matching command to the associated robot. It's that easy!
 
 ## Using Commander
 
 ### Configure your robot API url
 
 1. Go to the right Menu -> Connection
-2. On the API URL field, type the url of your robot's API server.
-3. Click Save.
+2. On the API URL field, type the url of your robot's API server
+3. Click Save
 
 ### Loading command sets
 
-Currently, the only way to create commands is by loading a command set via a service (JSON API). This allows you to store your command set alongside your robot, and you won't need to enter command details manually.
+Currently, the only way to create commands is by loading a command set via a service (JSON API). This allows you to store your command set alongside your robot, therefore you won't need to enter command details manually.
 
 #### Steps
 
 1. Go to the right Menu -> Command Sets
-2. On the URL field, type the url of your command set service.
-3. Click Load button.
-4. On the Local Command Sets list, click the 'Use' button, to use your new loaded command set.
+2. On the URL field, type the url of your command set service
+3. Click Load button
+4. On the Local Command Sets list, click the 'Use' button, to use your new loaded command set
 
 
 #### Command Sets Format
@@ -78,7 +77,7 @@ The service provider for this purpose must return the following structure in JSO
   }
 }
 ```
-Here is an example of a command set with a D-PAD layout to control a Sphero robot:
+Here is an example of a command set with a D-Pad layout to control a Sphero robot:
 
 **D-Pad Layout**
 ```json
@@ -151,7 +150,7 @@ Here is an example of a command set with a D-PAD layout to control a Sphero robo
 
 #### Using a D-Pad Command Set
 
-1. Once selected a d-pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
+1. Once selected a D-Pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
 
 #### Command Activity Log
 
@@ -171,7 +170,7 @@ $ node -v
 v0.x.x
 ```
 
-If not installed try using home brew `brew install node`, or directly from the [package file](http://nodejs.org/dist/v0.10.31/node-v0.10.31.pkg).
+If not installed try using homebrew `brew install node`, or directly from the [package file](http://nodejs.org/dist/v0.10.31/node-v0.10.31.pkg).
 
 2. Install Ionic, Gulp, Cordova and Phonegap:
 
@@ -195,32 +194,27 @@ $ npm install
 $ gulp install
 ```
 
-Now, you are ready to start playing with our application!
+Now, you are ready to start playing with Commander!
 
 ### Building, emulating and running.
 
 There are multiple ways you can start playing with Commander. You can either run the web server, emulate the
-application using any emulator you prefer, run it as a native app directly on your mobile device or use the
-[PhoneGap Developer App](http://app.phonegap.com/). Either way you prefer, you first need to set up the devices
-properly.
-
-Here we will explain how to make it run, emulate and run the web service.
+application using an emulator of your choice, run it as a native app directly on your mobile device or use the
+[PhoneGap Developer App](http://app.phonegap.com/). Either way, you first need to setup the devices properly.
 
 #### Web server
 
-For this purpose yo just need to run this command:
+For this purpose you just need to run this command:
 
 ```bash
 $ ionic serve
 ```
 
-This will launch a browser tab that will automatically render your changes every time you update your code. Yo can
-use it to preview your changes on your mobile device browser as well.
+This will launch a browser tab that will automatically render your changes every time you update your code. You can use it to preview your changes on your mobile device's browser as well.
 
 #### Emulate/Run
 
-For this purpose you need to define the platforms you will be working on with the commander app, then set and
-configure the emulator properly, according to the [PhoneGap Platform Guides](http://docs.phonegap.com/en/edge/guide_platforms_index.md.html).
+For this purpose you need to define the platforms you will be working on with the commander app, then set and configure the emulator properly, according to the [PhoneGap Platform Guides](http://docs.phonegap.com/en/edge/guide_platforms_index.md.html).
 
 First you need tell Commander which platforms you will be using, so you need to run:
 
@@ -229,7 +223,7 @@ $ ionic platform add android
 $ ionic platform add ios
 ```
 
-NOTE: If you aren't on Mac, avoid adding the iOS platform.
+**NOTE: If you aren't on Mac, avoid adding the iOS platform.**
 
 In case you need to add more platforms to Commander, you need to run the platform method including your new platforms
 as follows:
@@ -246,18 +240,17 @@ Then, in order to make works the Cordova CLI you need to add this to your '~.bas
 export PATH=${PATH}:/Development/adt-bundle/sdk/platform-tools:/Development/adt-bundle/sdk/tools
 ```
 
-The address used on this case is the address you have your android SDK properly installed.
+The path used in this case is the path where you have your android SDK properly installed.
 
-Next you need to update the android project to add the location.properties file contaning the sdk location:
+Next you need to update the android project to add the location.properties file containing the SDK location:
 
 ```bash
 $ android update project --subprojects -p platforms/android/
 ```
 
-NOTE: For more detailed instructions follow the [PhoneGap Android Platform Guide](http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide).
+**NOTE: For more detailed instructions follow the [PhoneGap Android Platform Guide](http://docs.phonegap.com/en/edge/guide_platforms_android_index.md.html#Android%20Platform%20Guide).**
 
-Once you have finished setting your Android SDK configuration, you're ready to emulate the android app. Execute this in
-order to build and emulate your app trough the CLI:
+Once you have finished configuring your Android SDK, you're ready to emulate the Android app. Execute this in order to build and emulate your app trough the CLI:
 
 With Ionic
 ```bash
@@ -281,13 +274,13 @@ Ionic runs the application for an Android device instead of emulating it, so we 
 You can also use a [Genymotion](http://www.genymotion.com/) in order to emulate your app.
 
 
-Ionic recommends to run this command every time yo made some changes to the `www` folder.
+Ionic recommends to run this command any time you make changes to the `www` folder.
 
 ```bash
 $ cordova prepare android
 ```
 
-For running your app directly on your device, you need to replace the command `emulate` with `run`. Example:
+For running your app directly on your device, you need to replace the `emulate` command with `run`. Example:
 
 ```bash
 $ ionic run android
@@ -316,18 +309,17 @@ $ ionic run android
 
 ## Plugins
 
-If you need to add a plugin"
+If you need to add a plugin
 
 ```bash
 $ cordova plugin add org.apache.cordova.device
 ```
 
-Note: You need to add your plugin to plugins.json config file in order to maintain the build process successful.
+**Note: You need to add your plugin to plugins.json config file in order to maintain the build process successful.**
 
 ## Testing
 
-The code for Commander includes a number of automated tests. In order to run them, make sure you have installed
-the most recent packages dependencies for Commander app. Run this:
+The code for Commander includes a number of automated tests. In order to run them, make sure you've installed the most recent packages dependencies for Commander. In order to do this, run:
 
 ```bash
 $ bower install
@@ -344,7 +336,7 @@ It will automatically execute your tests every time you modify the observed file
 
 ## Workarounds
 
-Watch ionic Sass when in Development mode will be helpful. Execute the following command when customizing ionic SCSS files:
+Watching Ionic Sass for changes when in development mode is helpful when modifying styles. Execute the following command when customizing ionic SCSS files:
 
 ```bash
 $ sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css
