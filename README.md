@@ -7,6 +7,17 @@ An app to control robots from your mobile device.
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/commander.png?branch=master)](http://travis-ci.org/commander/cylon)
 
+## Available on:
+
+[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.hybridgroup.commander)
+[![iTunes](http://i.imgur.com/rlNTuWQ.png)](#)
+
+## Screeshots
+
+![screen1](http://i.imgur.com/kQkZAV7.jpg)
+![screen2](http://i.imgur.com/JqPfRxV.jpg)
+![screen3](http://i.imgur.com/lCc4irL.jpg)
+![screen4](http://i.imgur.com/L51DgtN.jpg)
 
 ## How It Works
 
