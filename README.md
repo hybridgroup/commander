@@ -344,7 +344,7 @@ It will automatically execute your tests every time you modify the observed file
 
 ## Workarounds
 
-Watch ionic SASS when in Development mode will be helpful. Execute the following command when customizing ionic SCSS files:
+Watch ionic Sass when in Development mode will be helpful. Execute the following command when customizing ionic SCSS files:
 
 ```bash
 $ sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css
