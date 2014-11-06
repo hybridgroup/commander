@@ -73,7 +73,8 @@ commander.directive('draggable', function($document) {
 
       if (positionChanged) {
         command = scope.commands[element.attr('data-command-index')];
-        scope.joystick_execute(command, "" + initXpos + "," + initYpos);
+        command.params.position = "" + initXpos + "," + initYpos;
+        scope.execute(command);
         positionChanged = false;
       }
       
@@ -90,7 +91,8 @@ commander.directive('draggable', function($document) {
       initYpos = 0;
 
       command = scope.commands[element.attr('data-command-index')];
-      scope.joystick_execute(command, "" + initXpos + "," + initYpos);
+      command.params.position = "" + initXpos + "," + initYpos;
+      scope.execute(command);
       positionChanged = false;
 
       element.css({
