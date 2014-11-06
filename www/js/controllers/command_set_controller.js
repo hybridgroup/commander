@@ -47,6 +47,20 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
     return true;
   };
 
+  $scope.joystick_execute = function(command, position) {
+    var params = command.params;
+    params.position = position;
+
+    $http.post($scope.commandUrl(command), params)
+    .success(function(data){
+      $scope.logActivity(true, command, data);
+    })
+    .error(function(data){
+      $scope.logActivity(false, command, data);
+    });
+    return true;
+  };
+
   $scope.isValid = function(command) {
     if (command.name && command.label){
       return true;
