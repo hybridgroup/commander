@@ -98,7 +98,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
         return;
       }
 
-      if (remoteSet.type != 'list' && remoteSet.type != 'd-pad')  {
+      if (remoteSet.type != 'list' && remoteSet.type != 'd-pad' && remoteSet.type != 'joystick')  {
         console.log("Calling get... bad type")
         $ionicPopup.alert({
           title: "Command set definition error",

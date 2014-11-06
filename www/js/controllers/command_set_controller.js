@@ -14,6 +14,15 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
   }
   else {
     $scope.commands = $scope.command_set.commands;
+    
+    if ($scope.command_set.type == 'joystick') {
+      $scope.joysticks = $scope.commands.filter(function(el){
+        return el.type == 'stick';
+      })
+      $scope.joysticksButtons = $scope.commands.filter(function(el){
+        return el.type == 'button';
+      })
+    }
   }
 
   $scope.commandUrl = function(command) {
@@ -34,7 +43,11 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
     return buildCommandUrl(api, command);
   };
 
-  $scope.execute = function(command) {
+  $scope.execute = function(command, params) {
+
+    if(params) {
+      angular.extend(command.params, params)
+    }
 
     $http.post($scope.commandUrl(command), command.params)
     .success(function(data){
