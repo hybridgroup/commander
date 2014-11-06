@@ -13,24 +13,27 @@ Cylon.api();
 Cylon.robot({
   name: 'sphero-dpad',
   connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/tty.Sphero-YBW-RN-SPP' },
+  device: { name: 'sphero', driver: 'sphero' },
 
   move: function(direction) {
+    var my = this;
+
     switch (direction) {
       case "up":
-        this.roll(100, 0);
+        my.sphero.roll(100, 0);
         break;
       case "down":
-        this.roll(100, 180);
+        my.sphero.roll(100, 180);
         break;
       case "left":
-        this.roll(100, 270);
+        my.sphero.roll(100, 270);
         break;
       case "right":
-        this.roll(100, 90);
+        my.sphero.roll(100, 90);
     }
 
     setTimeout(function() {
-      this.stop();
+      my.sphero.stop();
     }, 2000);
 
     return "ok";
