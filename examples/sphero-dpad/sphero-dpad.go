@@ -11,7 +11,6 @@ func main() {
 	gbot := gobot.NewGobot()
 	api := api.NewAPI(gbot)
 	api.Port = "8080"
-	api.Start()
 
 	adaptor := sphero.NewSpheroAdaptor("Sphero", "/dev/tty.Sphero-YBW-RN-SPP")
 	driver := sphero.NewSpheroDriver(adaptor, "sphero")
@@ -42,6 +41,6 @@ func main() {
 	})
 
 	gbot.AddRobot(robot)
-
+	api.Start()
 	gbot.Start()
 }
