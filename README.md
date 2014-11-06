@@ -101,23 +101,23 @@ Command sets are a json object with a `command_set` root and the following attri
 **List Layout:**
 ```json
 {
-  command_set: {
-    name: "Command set name",
-    type: "list",
-    commands: [
+  "command_set": {
+    "name": "Command set name",
+    "type": "list",
+    "commands": [
       {
-        label: "Robot move forward",
-        robot: "r2-d2",
-        device: "",
-        name: "move_forward",
-        params: {velocity: 1000}
+        "label": "Robot move forward",
+        "robot": "r2-d2",
+        "device": "",
+        "name": "move_forward",
+        "params": {"velocity": 1000}
       },
       {
-        label: "Device blink",
-        robot: "r2-d2",
-        device: "back_led",
-        name: "blink",
-        params: {color: "blue"}
+        "label": "Device blink",
+        "robot": "r2-d2",
+        "device": "back_led",
+        "name": "blink",
+        "params": {"color": "blue"}
       }
     ]
   }

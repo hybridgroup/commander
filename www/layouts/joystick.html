@@ -1,0 +1,24 @@
+<ion-view title="{{command_set.name}}: {{command_set.type}}">
+  <ion-content class="royal-bg has-subheader" scroll="false">
+    <div class="joystick">
+      <div class='row joystick-row' ng-if="joysticks">
+        <div class='col joystick-col' ng-repeat="command in joysticks track by $index">
+          <div class='joystick-background'>
+            <div class="joystick-stick" draggable data-command-index="{{$index}}" data-tap-disabled="true" id="joystick{{$index}}"></div>
+          </div>
+          <div>
+            <h3>{{command.label}}</h3>
+          </div>
+        </div>
+      </div>
+      <div class='joystick-buttons-row' ng-if="joysticksButtons">
+        <div class='joystick-buttons-col' ng-repeat="command in joysticksButtons track by $index">
+          <div class="joystick-button {{command.color ? command.color : 'white'}}" on-touch="execute(command, {action:'press'})" on-release="execute(command, {action:'release'})">
+            <p>{{command.label}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
