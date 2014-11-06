@@ -1,0 +1,78 @@
+/* Joystick */
+
+.joystick {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+.joystick .joystick-row {
+  height: 200px;
+  margin-top: 0px;
+  padding-top: 5px;
+}
+
+.joystick .col {
+  text-align: center;
+  height: 200px;
+}
+.joystick .joystick-button {
+  position: relative;
+  margin: 40px auto;
+  z-index: 1001;
+  width: 85px;
+  height: 85px;
+  background: #FFFFFF;
+  border: 1px solid #E6E6E6;
+  box-shadow: 0 1px 0 #535353, inset 0 0 10px rgba(10,10,10,0.3);
+  appearance: none;
+  border-radius: 43px;
+  cursor: pointer;
+}
+.joystick .joystick-button.left-top-shadow {
+  box-shadow: -5px -5px 2px #ccc, inset 0px 0px 10px rgba(10,10,10,0.3);
+}
+.joystick .joystick-button:after {
+  position: relative;
+  display: block;
+  content: "";
+  top: -43px;
+  left: -12px;
+  width: 95px;
+  height: 95px;
+  border-radius: 48px;
+  box-shadow: 0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5);
+}
+
+.joystick .joystick-button:before {
+  position: relative;
+  font-size: 34px;
+  display: inline-block;
+  font-family: "Ionicons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  color: #444;
+  top: 23px;
+  left: 0;
+  content: "\f263";
+}
+
+
+
+
+/*Platform specific changes*/
+.platform-ios .joystick .joystick-button:after {
+  top: -40px;
+  left: -20px;
+}
+.platform-android .joystick .joystick-button:after {
+  top: -41px;
+}
