@@ -14,7 +14,6 @@ Cylon.robot({
   name: 'sphero-dpad',
   connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/tty.Sphero-YBW-RN-SPP' },
 
-  work: function(my) { },
   move: function(direction) {
     switch (direction) {
       case "up":
@@ -34,7 +33,7 @@ Cylon.robot({
       this.stop();
     }, 2000);
 
-    return true;
+    return "ok";
   },
   commands: function() {
     return {

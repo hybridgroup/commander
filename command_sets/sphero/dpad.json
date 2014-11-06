@@ -5,28 +5,28 @@
     "commands":[
       {
         "label": "Up",
-        "robot": "sphero",
+        "robot": "sphero-dpad",
         "device": "",
         "name": "move",
         "params":{"direction":"up"}
       },
       {
         "label": "Down",
-        "robot": "sphero",
+        "robot": "sphero-dpad",
         "device": "",
         "name": "move",
         "params":{"direction":"down"}
       },
       {
         "label": "Left",
-        "robot": "sphero",
+        "robot": "sphero-dpad",
         "device": "",
         "name": "move",
         "params":{"direction":"left"}
       },
       {
         "label": "Right",
-        "robot": "sphero",
+        "robot": "sphero-dpad",
         "device": "",
         "name": "move",
         "params":{"direction":"right"}
