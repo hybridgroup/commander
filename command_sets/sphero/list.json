@@ -5,44 +5,44 @@
     "commands":[
       {
         "label": "R+",
-        "robot": "sphero",
+        "robot": "sphero-list",
         "device": "",
-        "name": "increaseRed",
+        "name": "increase_red",
         "params": {}
       },
       {
         "label": "R-",
-        "robot": "sphero",
+        "robot": "sphero-list",
         "device": "",
-        "name": "decreaseRed",
+        "name": "decrease_red",
         "params": {}
       },
       {
         "label": "G+",
-        "robot": "sphero",
+        "robot": "sphero-list",
         "device": "",
-        "name": "increaseGreen",
+        "name": "increase_green",
         "params": {}
       },
       {
         "label": "G-",
-        "robot": "sphero",
+        "robot": "sphero-list",
         "device": "",
-        "name": "decreaseGreen",
+        "name": "decrease_green",
         "params": {}
       },
       {
         "label": "B+",
-        "robot": "sphero",
+        "robot": "sphero-list",
         "device": "",
-        "name": "increaseBlue",
+        "name": "increase_blue",
         "params": {}
       },
       {
         "label": "B-",
-        "robot": "sphero",
+        "robot": "sphero-list",
         "device": "",
-        "name": "decreaseBlue",
+        "name": "decrease_blue",
         "params": {}
       }
     ]
