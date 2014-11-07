@@ -40,7 +40,7 @@ commander.directive('draggable', function($document,$timeout) {
         joystick_vars[joystickIndex].startY = touch.pageY - joystick_vars[joystickIndex].y;
       }
       resetJoysticks = false;
-      
+
       joystick_vars[joystickIndex].x = touch.pageX - joystick_vars[joystickIndex].startX;
       joystick_vars[joystickIndex].y = touch.pageY - joystick_vars[joystickIndex].startY;
 
@@ -75,7 +75,7 @@ commander.directive('draggable', function($document,$timeout) {
 
       if (joystick_vars[joystickIndex].positionChanged) {
         command = scope.commands[joystick.attr('data-command-index')];
-        command.params.position = "" + joystick_vars[joystickIndex].initXpos + "," + joystick_vars[joystickIndex].initYpos;
+        command.params.position = {'x': joystick_vars[joystickIndex].initXpos,'y': joystick_vars[joystickIndex].initYpos};
         scope.execute(command);
         joystick_vars[joystickIndex].positionChanged = false;
       }
@@ -88,7 +88,7 @@ commander.directive('draggable', function($document,$timeout) {
     element.on('release', function(event) {
       for(var i=0; i<domJoysticks.length; i++){
         command = scope.commands[domJoysticks[i].attr('data-command-index')];
-        command.params.position = "0,0";
+        command.params.position = {'x':0,'y':0};
         scope.execute(command);
 
         domJoysticks[i].css({
