@@ -5,74 +5,123 @@
   position: relative;
   width: 100%;
   padding: 5px 15px;
-  border-radius: 20px;
 }
 
 .joystick .joystick-row {
-  height: 200px;
   margin-top: 0px;
-  padding-top: 5px;
 }
 
-.joystick .col {
+.joystick .joystick-col {
   text-align: center;
-  height: 200px;
+}
+.joystick .joystick-background {
+  position: relative;
+  margin: 20px auto;
+  width: 130px;
+  height: 130px;
+  border-radius: 65px;
+  background-image: url('../img/joystick-background.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+  overflow: hidden;
+}
+.joystick .joystick-stick {
+  position: relative;
+  z-index: 1001;
+  margin-top: 35px;
+  margin-left: 35px;
+  width: 61px;
+  height: 61px;
+  border-radius: 33px;
+  background-image: url('../img/joystick-stick.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 .joystick .joystick-button {
   position: relative;
-  margin: 40px auto;
-  z-index: 1001;
-  width: 85px;
-  height: 85px;
-  background: #FFFFFF;
-  border: 1px solid #E6E6E6;
-  box-shadow: 0 1px 0 #535353, inset 0 0 10px rgba(10,10,10,0.3);
-  appearance: none;
-  border-radius: 43px;
-  cursor: pointer;
+  width: 72px;
+  height: 72px;
+  border-radius: 36px;
+  margin: 10px auto;
+  background-repeat: no-repeat;
+  background-position: center; 
+  background-size: contain;
 }
-.joystick .joystick-button.left-top-shadow {
-  box-shadow: -5px -5px 2px #ccc, inset 0px 0px 10px rgba(10,10,10,0.3);
-}
-.joystick .joystick-button:after {
-  position: relative;
-  display: block;
-  content: "";
-  top: -43px;
-  left: -12px;
-  width: 95px;
-  height: 95px;
-  border-radius: 48px;
+.joystick .joystick-button:active {
   box-shadow: 0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5);
 }
-
-.joystick .joystick-button:before {
-  position: relative;
-  font-size: 34px;
-  display: inline-block;
-  font-family: "Ionicons";
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  text-rendering: auto;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  color: #444;
-  top: 23px;
-  left: 0;
-  content: "\f263";
+.joystick .joystick-button p {
+  font-family: "Novecento wide";
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  width: 72px;
+  height: 72px;
+  line-height: 66px;
 }
 
+.joystick .joystick-buttons-row {
+  width: 100%;
+}
+.joystick .joystick-buttons-col {
+  width: 25%;
+  float: left;
+}
 
+.joystick .joystick-button.white {
+  background-image: url('../img/white-button.png');
+}
+.joystick .joystick-button.red {
+  background-image: url('../img/red-button.png');
+}
+.joystick .joystick-button.green {
+  background-image: url('../img/green-button.png');
+}
+.joystick .joystick-button.blue {
+  background-image: url('../img/blue-button.png');
+}
+.joystick .joystick-button.yellow {
+  background-image: url('../img/yellow-button.png');
+}
 
+.joystick .joystick-button.white p {
+  color: #6d7b83; /* text color */
+  text-shadow: 0 1px 0 #212a3e; /* drop shadow */
+}
+.joystick .joystick-button.red p {
+  color: #7c0000; /* text color */
+  text-shadow: 0 1px 0 #ef5f5f; /* drop shadow */
+}
+.joystick .joystick-button.green p {
+  color: #1d7c00; /* text color */
+  text-shadow: 0 1px 0 #d0ef5f; /* drop shadow */
+}
+.joystick .joystick-button.blue p {
+  color: #00277c; /* text color */
+  text-shadow: 0 1px 0 #5f8def; /* drop shadow */
+}
+.joystick .joystick-button.yellow p {
+  color: #7c7b00; /* text color */
+  text-shadow: 0 1px 0 #d0ef5f; /* drop shadow */
+}
+
+.joystick h3 {
+  color: #fff; /* text color */
+  font-size: 14px;
+  font-weight: bold;
+}
 
 /*Platform specific changes*/
-.platform-ios .joystick .joystick-button:after {
-  top: -40px;
-  left: -20px;
+.platform-ios .joystick .joystick-button p {
+  font-family: "AppleSDGothicNeo-Bold";
+  line-height: 75px;
 }
-.platform-android .joystick .joystick-button:after {
-  top: -41px;
+.platform-ios .joystick .joystick-background {
+  margin: 10px auto;  
+}
+.platform-android .joystick .joystick-button p {
+  line-height: 70px;
 }
