@@ -18,7 +18,7 @@ Cylon.robot({
         console.log(name + ": " + action);
       },
       joystick_event: function(name, position) {
-        console.log(name + ": " + position)
+        console.log(name + ": " + position.x + "," + position.y)
       }
     };
   }

@@ -20,15 +20,15 @@ func main() {
 	)
 
 	robot.AddCommand("joystick_event", func(params map[string]interface{}) interface{} {
-		value := params["name"].(string) + ": " + params["position"].(string)
-		fmt.Println(value)
+		value := params["name"].(string) + ": "
+		fmt.Println(value, params["position"])
 		return value
 	})
 
 	robot.AddCommand("button_event", func(params map[string]interface{}) interface{} {
 		value := params["name"].(string) + ": " + params["action"].(string)
 		fmt.Println(value)
-		return params["name"]
+		return value
 	})
 
 	gbot.AddRobot(robot)
