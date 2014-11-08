@@ -1,0 +1,84 @@
+{
+  "command_set":{
+    "name": "Joystick Double",
+    "type": "joystick",
+    "commands":[
+      {
+        "label": "Stick Left",
+        "type": "stick",
+        "robot": "joystick",
+        "device": "",
+        "name": "joystick_event",
+        "params":{
+          "name": "left",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      {
+        "label": "Stick Right",
+        "type": "stick",
+        "robot": "joystick",
+        "device": "",
+        "name": "joystick_event",
+        "params":{
+          "name": "right",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      },
+      {
+        "label": "A",
+        "type": "button",
+        "color":"green",
+        "robot": "joystick",
+        "device": "",
+        "name": "button_event",
+        "params":{
+          "name": "A",
+          "action": "press"
+        }
+      },
+      {
+        "label": "B",
+        "type": "button",
+        "color":"red",
+        "robot": "joystick",
+        "device": "",
+        "name": "button_event",
+        "params":{
+          "name": "B",
+          "action": "press"
+        }
+      },
+      {
+        "label": "X",
+        "type": "button",
+        "color":"blue",
+        "robot": "joystick",
+        "device": "",
+        "name": "button_event",
+        "params":{
+          "name": "X",
+          "action": "press"
+        }
+      },
+      {
+        "label": "Y",
+        "type": "button",
+        "color":"yellow",
+        "robot": "joystick",
+        "device": "",
+        "name": "button_event",
+        "params":{
+          "name": "Y",
+          "action": "press"
+        }
+      }
+    ]
+  }
+}
