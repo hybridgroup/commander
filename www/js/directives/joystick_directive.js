@@ -3,6 +3,7 @@ commander.directive('draggable', function($document,$timeout) {
     var domJoysticks = [];
     var joystick_vars = [{startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false},{startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false}];
     var resetJoysticks = true;
+    var joystickScale = 20;
 
     $timeout(function(){
       for(var i=0; i<scope.joysticks.length; i++){
@@ -44,24 +45,22 @@ commander.directive('draggable', function($document,$timeout) {
       joystick_vars[joystickIndex].x = touch.pageX - joystick_vars[joystickIndex].startX;
       joystick_vars[joystickIndex].y = touch.pageY - joystick_vars[joystickIndex].startY;
 
-      if(joystick_vars[joystickIndex].x < 20 && joystick_vars[joystickIndex].x > -20) {
+      if(joystick_vars[joystickIndex].x < joystickScale && joystick_vars[joystickIndex].x > -(joystickScale)) {
+        if (joystick_vars[joystickIndex].x > 0) { joystick_vars[joystickIndex].currentXpos = joystick_vars[joystickIndex].x/joystickScale;}
+        else if (joystick_vars[joystickIndex].x < 0) { joystick_vars[joystickIndex].currentXpos = (joystick_vars[joystickIndex].x/joystickScale);}
+        else { joystick_vars[joystickIndex].currentXpos = 0;}
         joystick.css({
           left:  joystick_vars[joystickIndex].x + 'px'
         });
       }
-      if(joystick_vars[joystickIndex].y < 20 && joystick_vars[joystickIndex].y > -20) {
+      if(joystick_vars[joystickIndex].y < joystickScale && joystick_vars[joystickIndex].y > -(joystickScale)) {
+        if (joystick_vars[joystickIndex].y > 0) { joystick_vars[joystickIndex].currentYpos = -(joystick_vars[joystickIndex].y/joystickScale);}
+        else if (joystick_vars[joystickIndex].y < 0) { joystick_vars[joystickIndex].currentYpos = (joystick_vars[joystickIndex].y/joystickScale);}
+        else { joystick_vars[joystickIndex].currentYpos = 0;}
         joystick.css({
           top: joystick_vars[joystickIndex].y + 'px'
         });
       }
-      
-      if (joystick_vars[joystickIndex].x > 0) { joystick_vars[joystickIndex].currentXpos = 1;}
-      else if (joystick_vars[joystickIndex].x < 0) { joystick_vars[joystickIndex].currentXpos = -1;}
-      else { joystick_vars[joystickIndex].currentXpos = 0;}
-
-      if (joystick_vars[joystickIndex].y > 0) { joystick_vars[joystickIndex].currentYpos = -1;}
-      else if (joystick_vars[joystickIndex].y < 0) { joystick_vars[joystickIndex].currentYpos = 1;}
-      else { joystick_vars[joystickIndex].currentYpos = 0;}
 
       if (joystick_vars[joystickIndex].initXpos!=joystick_vars[joystickIndex].currentXpos){
         joystick_vars[joystickIndex].initXpos = joystick_vars[joystickIndex].currentXpos;
