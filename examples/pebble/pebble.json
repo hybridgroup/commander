@@ -1,6 +1,6 @@
 {
   "command_set":{
-    "name": "Pebbel Command List",
+    "name": "Pebble Command List",
     "type": "list",
     "commands":[
       {

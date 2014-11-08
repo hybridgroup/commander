@@ -7,11 +7,6 @@ An app to control robots from your mobile device.
 
 [![Build Status](https://secure.travis-ci.org/hybridgroup/commander.png?branch=master)](http://travis-ci.org/commander/cylon)
 
-## Available on:
-
-[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.hybridgroup.commander)
-[![iTunes](http://i.imgur.com/rlNTuWQ.png)](#)
-
 ## Screenshots
 
 ![screen1](http://i.imgur.com/kQkZAV7.jpg)
@@ -20,104 +15,72 @@ An app to control robots from your mobile device.
 
 ## How It Works
 
-The Commander mobile application can communicate with any device that supports the Common Protocol for Programming Physical I/O (http://cppp.io).
+The Commander mobile application can communicate with any device using the [Common Protocol for Programming Physical I/O](http://cppp.io).
 
-You will need to be able to connect to your device via http in order to control it using Commander.
+[Cylon](http://cylonjs.com), [Gobot](http://gobot.io) and [Artoo](https://artoo.io) are frameworks that implement an API compatible with this protocol.
 
-Commander can load a "command set" that is a list of the commands you can send to your robot(s), along with the type of user interface that should be used for the command set. For example a "list" of commands, or a D-Pad interface.
+Commander can be used to send commands to your robots or listen for events coming from them.
 
-Once you have loaded a command set, you just tap on the various buttons in the user interface and Commander will send the matching command to the associated robot. It's that easy!
+You can load a "command set" that is a list of the preconfigured commands and you can choose between different types of layouts.
 
 ## Using Commander
 
+### Download:
+
+[![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.hybridgroup.commander)
+[![iTunes](http://i.imgur.com/rlNTuWQ.png)](#)
+
 ### Configure your robot API url
 
+This is where you set the robots server endpoint, frameworks by default use port 3000. Visit [API Guide](http://cylonjs.com/documentation/guides/api/) for more information.
+
+Use the ip of the machine where the server is running instead of localhost, so it can be reached from your phone. Also make sure you phone is connected to the same network.
+
 1. Go to the right Menu -> Connection
-2. On the API URL field, type the url of your robot's API server
+2. On the API URL field, type the url of your robot's API server. (Ex: http://192.168.15.11:3000)
 3. Click Save
 
 ### Loading command sets
 
-Currently, the only way to create commands is by loading a command set via a service (JSON API). This allows you to store your command set alongside your robot, therefore you won't need to enter command details manually.
+To create commands you need to load a command set from a json file. This allows you to store your command set alongside your robot, therefore you won't need to enter command details manually.
 
-#### Steps
+Visit https://github.com/hybridgroup/commander/tree/master/examples for some command set examples.
 
 1. Go to the right Menu -> Command Sets
-2. On the URL field, type the url of your command set service
+2. On the URL field, type the url where your json commande set is hosted. (Ex: https://raw.githubusercontent.com/hybridgroup/commander/master/examples/arduino/list.json)
 3. Click Load button
-4. On the Local Command Sets list, click the 'Use' button, to use your new loaded command set
 
+### Using Command Sets
 
-#### Command Sets Format
+#### Select command set to use
 
-The service provider for this purpose must return the following structure in JSON format:
+1. Go to the right Menu -> Command Sets
+2. On the Local Command Sets list, click the 'Use' button on the command set you want to use.
 
-**List Layout:**
-```json
-{
-  command_set: {
-    name: "Command set name",
-    type: "list or d-pad",
-    commands: [
-      {
-        label: "Command name 1",
-        robot: "Robot name",
-        device: "Device name",
-        name: "Command name",
-        params: {param1: "value1"}
-      },
-      {
-        label: "Command name 2",
-        robot: "Robot name",
-        device: "Device name",
-        name: "Command name",
-        params: {param1: "value1"}
-      }
-    ]
-  }
-}
-```
-Here is an example of a command set with a D-Pad layout to control a Sphero robot:
+##### List
 
-**D-Pad Layout**
-```json
-{
-  "command_set":{
-    "name": "Sphero Command D-Pad",
-    "type": "d-pad",
-    "commands":[
-      {
-        "label": "Up",
-        "robot": "sphero",
-        "device": "",
-        "name": "up",
-        "params":{}
-      },
-      {
-        "label": "Down",
-        "robot": "sphero",
-        "device": "",
-        "name": "down",
-        "params":{}
-      },
-      {
-        "label": "Left",
-        "robot": "sphero",
-        "device": "",
-        "name": "left",
-        "params":{}
-      },
-      {
-        "label": "Right",
-        "robot": "sphero",
-        "device": "",
-        "name": "right",
-        "params":{}
-      }
-    ]
-  }
-}
-```
+Once selected, just tap on any of the commands on the list. This will execute the command on the robot api.
+
+![screen3](http://i.imgur.com/L51DgtN.jpg)
+
+#### D-Pad
+
+Once selected, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
+
+![screen2](http://i.imgur.com/lCc4irL.jpg)
+
+### Command Activity Log
+
+1. You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.
+2. Click the green/red indicator for more info about the command execution status.
+
+#### Create your own command set
+
+Command sets are a json object with a `command_set` root and the following attributes:
+
+* name
+* type (list/d-pad)
+* commands
 
 #### Command set structure
 
@@ -131,33 +94,45 @@ Here is an example of a command set with a D-Pad layout to control a Sphero robo
 
 * `label`  - For a button list, this is the label of the button.
 * `robot`  - Name of the robot the command that will be executed in.
-* `device` - Name of the device the command that will be executed in. If the command is a robot command, please leave this blank.
+* `device` - Name of the device the command that will be executed in. If the command is a robot command, leave this blank.
 * `name`   - Actual command name as defined in the API. Example: `sendNotification`
 * `params` - An object/hash that contains the params the command requires, it's optional.
 
+**List Layout:**
+```json
+{
+  command_set: {
+    name: "Command set name",
+    type: "list",
+    commands: [
+      {
+        label: "Robot move forward",
+        robot: "r2-d2",
+        device: "",
+        name: "move_forward",
+        params: {velocity: 1000}
+      },
+      {
+        label: "Device blink",
+        robot: "r2-d2",
+        device: "back_led",
+        name: "blink",
+        params: {color: "blue"}
+      }
+    ]
+  }
+}
+```
 
-### Using Command Sets
+Here is an example of a command set with a D-Pad layout to control a Sphero robot: https://github.com/hybridgroup/commander/blob/master/command_sets/sphero/dpad.json
 
-#### Select command set to use
+### Help!
 
-1. Go to the right Menu -> Command Sets
-2. On the Local Command Sets list, click the 'Use' button on the command set you want to use.
+If you have any question or you found an issue, please [let us know](https://github.com/hybridgroup/commander/issues/new)
 
+You can also found us on irc channel #robotops
 
-#### Using a List Command Set
-
-1. Once selected a list command set, just tap on any of the commands on the list. This will execute the command on the robot api.
-
-#### Using a D-Pad Command Set
-
-1. Once selected a D-Pad command set, just tap on any of the buttons, up, down, left or right. This will execute the command on the robot api.
-
-#### Command Activity Log
-
-1. You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.
-2. Click the green/red indicator for more info about the command execution status.
-
-## Building
+## Development
 
 ### Getting ready to build.
 
