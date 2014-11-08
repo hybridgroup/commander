@@ -45,7 +45,7 @@ commander.directive('draggable', function($document,$timeout) {
       joystick_vars[joystickIndex].x = touch.pageX - joystick_vars[joystickIndex].startX;
       joystick_vars[joystickIndex].y = touch.pageY - joystick_vars[joystickIndex].startY;
 
-      if(joystick_vars[joystickIndex].x < joystickScale && joystick_vars[joystickIndex].x > -(joystickScale)) {
+      if(joystick_vars[joystickIndex].x <= joystickScale && joystick_vars[joystickIndex].x >= -(joystickScale)) {
         if (joystick_vars[joystickIndex].x > 0) { joystick_vars[joystickIndex].currentXpos = joystick_vars[joystickIndex].x/joystickScale;}
         else if (joystick_vars[joystickIndex].x < 0) { joystick_vars[joystickIndex].currentXpos = (joystick_vars[joystickIndex].x/joystickScale);}
         else { joystick_vars[joystickIndex].currentXpos = 0;}
@@ -53,9 +53,9 @@ commander.directive('draggable', function($document,$timeout) {
           left:  joystick_vars[joystickIndex].x + 'px'
         });
       }
-      if(joystick_vars[joystickIndex].y < joystickScale && joystick_vars[joystickIndex].y > -(joystickScale)) {
+      if(joystick_vars[joystickIndex].y <= joystickScale && joystick_vars[joystickIndex].y >= -(joystickScale)) {
         if (joystick_vars[joystickIndex].y > 0) { joystick_vars[joystickIndex].currentYpos = -(joystick_vars[joystickIndex].y/joystickScale);}
-        else if (joystick_vars[joystickIndex].y < 0) { joystick_vars[joystickIndex].currentYpos = (joystick_vars[joystickIndex].y/joystickScale);}
+        else if (joystick_vars[joystickIndex].y < 0) { joystick_vars[joystickIndex].currentYpos = -(joystick_vars[joystickIndex].y/joystickScale);}
         else { joystick_vars[joystickIndex].currentYpos = 0;}
         joystick.css({
           top: joystick_vars[joystickIndex].y + 'px'
