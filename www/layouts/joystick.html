@@ -13,7 +13,7 @@
       </div>
       <div class='joystick-buttons-row' ng-if="joysticksButtons">
         <div class='joystick-buttons-col' ng-repeat="command in joysticksButtons track by $index">
-          <div class="joystick-button {{command.color ? command.color : 'white'}}" ng-click="execute(command)">
+          <div class="joystick-button {{command.color ? command.color : 'white'}}" on-touch="execute(command, {action:'press'})" on-release="execute(command, {action:'release'})">
             <p>{{command.label}}</p>
           </div>
         </div>
