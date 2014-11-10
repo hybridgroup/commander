@@ -43,7 +43,11 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
     return buildCommandUrl(api, command);
   };
 
-  $scope.execute = function(command) {
+  $scope.execute = function(command, params) {
+
+    if(params) {
+      angular.extend(command.params, params)
+    }
 
     $http.post($scope.commandUrl(command), command.params)
     .success(function(data){
