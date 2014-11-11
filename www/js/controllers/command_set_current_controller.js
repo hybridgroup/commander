@@ -1,4 +1,4 @@
-commander.controller('CommandSetCurrentController', ['$scope', '$location', '$location', function($scope, $window, $location) {
+commander.controller('CommandSetCurrentController', ['$scope', '$location', '$location', '$ionicViewService', function($scope, $window, $location, $ionicViewService) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.current_command_set = $scope.configuration.current_command_set;
 
@@ -9,7 +9,9 @@ commander.controller('CommandSetCurrentController', ['$scope', '$location', '$lo
     if (current != null && current > -1) {
       location = location + '/' + $scope.current_command_set;
     }
-
+    $ionicViewService.nextViewOptions({
+      disableBack: true
+    });
     $location.path(location)
   }
 }]);
