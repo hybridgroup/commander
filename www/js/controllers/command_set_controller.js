@@ -51,7 +51,7 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
         $scope.popupVisible = true;
         $ionicPopup.alert({
           title: "Invalid API URL",
-          template: 'Please check the API URL on the connection side menu.'
+          template: "Please check the API URL by choosing 'Connection' on the 'Settings' menu"
         }).then(function(res) {
           $scope.popupVisible = false;
         });
