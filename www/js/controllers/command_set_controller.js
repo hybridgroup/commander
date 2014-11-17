@@ -1,6 +1,7 @@
-commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', '$location', 'activityLogger', 'LocalStorageService', function($scope, $http, $stateParams, $location, activityLogger, LocalStorageService) {
+commander.controller('CommandSetController', ['$scope', '$http', '$stateParams', '$location', 'activityLogger', 'LocalStorageService', '$ionicPopup', function($scope, $http, $stateParams, $location, activityLogger, LocalStorageService, $ionicPopup) {
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.activityLog = activityLogger;
+  $scope.popupVisible = false;
 
   if ($stateParams && $stateParams.index){
     $scope.index = $stateParams.index;
@@ -44,6 +45,19 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
   };
 
   $scope.execute = function(command, params) {
+
+    if ($scope.configuration.api.match(/localhost/)) {
+      if ($scope.popupVisible == false) {
+        $scope.popupVisible = true;
+        $ionicPopup.alert({
+          title: "Invalid API URL",
+          template: 'Please check the API URL on the connection side menu.'
+        }).then(function(res) {
+          $scope.popupVisible = false;
+        });
+      }
+      return false;
+    }
 
     if(params) {
       angular.extend(command.params, params)
