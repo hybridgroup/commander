@@ -1,7 +1,7 @@
 Commander
 =====================
 
-An app to control robots from your mobile device.
+A mobile app to control robots and connected devices.
 
 ## Build Status:
 
@@ -133,6 +133,8 @@ If you have any question or you found an issue, please [let us know](https://git
 You can also found us on irc channel #robotops
 
 ## Development
+
+Commander has been developed using PhoneGap (http://phonegap.com/) and Ionic Framework (http://ionicframework.com/)
 
 ### Getting ready to build.
 
