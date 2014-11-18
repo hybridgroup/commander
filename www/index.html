@@ -33,9 +33,9 @@
             <a href="#/log" class="badge activity-indicator" ng-class="{'success': 'badge-balanced', 'failed': 'badge-assertive', null: 'badge-royal', 'connecting':'hide'}[activityLog.status()]" ng-show="showActivityLogIndicator()">
               <i class="icon" ng-class="{'success': 'ion-help badge-balanced', 'failed': 'ion-alert badge-assertive', null: 'ion-help badge-stable'}[activityLog.status()]"></i>
             </a>
-            <div class="badge connection-indicator" ng-class="{true: 'badge-stable', false: 'hide', null: 'hide'}[activityLog.connectionIndicatorVisible()]" ng-show="showActivityLogIndicator()">
+            <a href="#/log" class="badge connection-indicator" ng-class="{true: 'badge-stable', false: 'hide', null: 'hide'}[activityLog.connectionIndicatorVisible()]" ng-show="showActivityLogIndicator()">
               <i class="icon ion-radio-waves"></i>
-            </div>
+            </a>
           </ion-nav-buttons>
         </ion-nav-bar>
 
