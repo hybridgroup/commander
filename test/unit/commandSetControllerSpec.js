@@ -47,8 +47,20 @@ describe('CommandSetController', function() {
   });
   
   describe('command execute:', function(){
+    it('should return false if API URL is invalid', function() {
+      var result = scope.execute(command);
+      expect(result).toEqual(false)
+    });
+
+    it('should return true if API URL is valid', function() {
+      scope.configuration.api = "http://127.0.0.1:8000";
+      var result = scope.execute(command);
+      expect(result).toEqual(true)
+    });
+
     it('when succeed should set activity logger results', function() {
-      var expectedCommand = 'http://localhost:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
+      scope.configuration.api = "http://127.0.0.1:8000";
+      var expectedCommand = 'http://127.0.0.1:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
       httpBackend.expectPOST(expectedCommand).respond(200, {result:'success'});
 
       scope.execute(command);
@@ -59,7 +71,8 @@ describe('CommandSetController', function() {
     });
 
     it('when fails should set activity logger results', function() {
-      var expectedCommand = 'http://localhost:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
+      scope.configuration.api = "http://127.0.0.1:8000";
+      var expectedCommand = 'http://127.0.0.1:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
       httpBackend.expectPOST(expectedCommand).respond(401);
 
       scope.execute(command);
