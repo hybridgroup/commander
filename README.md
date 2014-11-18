@@ -309,9 +309,16 @@ $ npm test
 
 It will automatically execute your tests every time you modify the observed files.
 
-## Workarounds
+## Styles
 
-Watching Ionic Sass for changes when in development mode is helpful when modifying styles. Execute the following command when customizing ionic SCSS files:
+In order to modify styles of commander application, you need to work on the www/scss files and use gulp to compile and watch changes on your files. Remember to compile before build and test on a device.
+
+```bash
+$ gulp commander # To compile scss files
+$ gulp watch-commander # To keep watching changes on scss files
+```
+
+In order to modify global styles of ionic framework, you need to watch for changes on www/lib/ionic/scss files.
 
 ```bash
 $ sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css

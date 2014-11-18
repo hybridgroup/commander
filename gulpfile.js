@@ -8,10 +8,15 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  ionic: ['./scss/**/*.scss'],
+  commander: ['www/scss/**/*.scss']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['commander-sass']);
+
+gulp.task('commander', ['commander-sass']);
+
+gulp.task('ionic', ['sass']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -25,8 +30,19 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+gulp.task('commander-sass', function(done) {
+  gulp.src('www/scss/commander.app.scss')
+    .pipe(sass({includePaths: ['www/scss']}))
+    .pipe(gulp.dest('www/css'))
+    .on('end', done);
+});
+
+gulp.task('watch-ionic', function() {
+  gulp.watch(paths.ionic, ['sass']);
+});
+
+gulp.task('watch-commander', function() {
+  gulp.watch(paths.commander, ['commander-sass']);
 });
 
 gulp.task('install', ['git-check'], function() {

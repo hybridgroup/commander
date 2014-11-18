@@ -1,0 +1,39 @@
+/*Buttons*/
+.commander-save-button {
+
+  &.button {
+    background-color: #2C875E;
+    border: none;
+    border-bottom: 2px solid #226C4B;
+    border-radius: 0px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    margin-top: 0;
+  }
+  &.button.activated {
+    background-color: #226C4B;
+    border: 1px solid #2C875E;
+  }
+}
+
+
+/*Lists*/
+.commander-list {
+
+  .list{
+    margin-bottom: 0;
+
+    .item:last-child{
+      border-bottom: none;
+    }
+  }  
+}
+
+.commander-item-light {
+
+  .item-light {
+    .activated {
+      background-color: #e6e6e6;
+    }
+  }
+} 

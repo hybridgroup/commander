@@ -1,0 +1,272 @@
+.top-logo img {
+  height: 33px; }
+
+.controls button {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+li {
+  white-space: normal !important; }
+
+.input-label {
+  width: 15%; }
+
+input[type=text] {
+  min-width: 85%; }
+
+.pane {
+  background-color: #0e2f40; }
+
+/*Buttons*/
+.commander-save-button.button {
+  background-color: #2C875E;
+  border: none;
+  border-bottom: 2px solid #226C4B;
+  border-radius: 0px;
+  border-bottom-right-radius: 2px;
+  border-bottom-left-radius: 2px;
+  margin-top: 0; }
+.commander-save-button.button.activated {
+  background-color: #226C4B;
+  border: 1px solid #2C875E; }
+
+/*Lists*/
+.commander-list .list {
+  margin-bottom: 0; }
+  .commander-list .list .item:last-child {
+    border-bottom: none; }
+
+.commander-item-light .item-light .activated {
+  background-color: #e6e6e6; }
+
+.command-sets-content .commander-list .list .item.item-button-right {
+  padding-right: 0; }
+.command-sets-content .commander-list .list .item .item-options .item-delete {
+  padding-top: 5px; }
+  .command-sets-content .commander-list .list .item .item-options .item-delete:before {
+    font-size: 32px; }
+
+.right-buttons .badge {
+  line-height: 18px;
+  width: 24px;
+  height: 24px;
+  border-radius: 22px;
+  font-size: 14px;
+  margin-right: 3px;
+  margin-top: 5px; }
+
+.item-activity-log {
+  padding: 10px;
+  font-size: 14px; }
+  .item-activity-log.item-icon-left {
+    padding-left: 45px; }
+  .item-activity-log .icon {
+    font-size: 14px; }
+
+.command-set-item {
+  padding: 14px; }
+
+/* Directional pad (D-Pad) */
+.d-pad {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding: 15px 15px;
+  border-radius: 20px; }
+  .d-pad .dpad-row {
+    height: 75px;
+    margin-top: 0px;
+    padding-top: 5px; }
+  .d-pad .up-button-col, .d-pad .down-button-col {
+    text-align: center; }
+  .d-pad .left-button-col {
+    text-align: right;
+    padding-right: 44px; }
+  .d-pad .right-button-col {
+    text-align: left;
+    padding-left: 42px; }
+  .d-pad .dpad-button {
+    position: relative;
+    margin: 0 auto;
+    z-index: 1001;
+    width: 85px;
+    height: 85px;
+    background: #FFFFFF;
+    border: 1px solid #E6E6E6;
+    box-shadow: 0 1px 0 #535353, inset 0 0 10px rgba(10, 10, 10, 0.3);
+    appearance: none;
+    border-radius: 43px;
+    cursor: pointer; }
+    .d-pad .dpad-button:after {
+      position: relative;
+      display: block;
+      content: "";
+      top: -43px;
+      left: -12px;
+      width: 95px;
+      height: 95px;
+      border-radius: 48px;
+      box-shadow: 0 2px 2px rgba(255, 255, 255, 0.25), inset 0 2px 2px rgba(0, 0, 0, 0.5); }
+    .d-pad .dpad-button:active {
+      background: #e6e6e6;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.3);
+      -webkit-transform: scale(0.9);
+      -moz-transform: scale(0.9);
+      -ms-transform: scale(0.9);
+      -o-transform: scale(0.9);
+      transform: scale(0.9);
+      -webkit-box-shadow: 0px 0px 20px #FFF;
+      -moz-box-shadow: 0px 0px 20px #FFF;
+      -o-box-shadow: 0px 0px 20px #FFF;
+      box-shadow: 0px 0px 20px #FFF; }
+    .d-pad .dpad-button:before {
+      position: relative;
+      top: 40px;
+      font-size: 34px;
+      display: inline-block;
+      font-family: "Ionicons";
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      text-rendering: auto;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      color: #0B2F41; }
+    .d-pad .dpad-button:active ~ .screen .char {
+      transition: margin-top 2s linear, margin-left 2s linear; }
+    .d-pad .dpad-button.up-button:before {
+      content: "\f126";
+      top: 24px;
+      left: 0; }
+    .d-pad .dpad-button.down-button:before {
+      content: "\f123";
+      top: 24px;
+      left: 0; }
+    .d-pad .dpad-button.left-button:before {
+      content: "\f124";
+      top: 25px;
+      left: 0px; }
+    .d-pad .dpad-button.right-button:before {
+      content: "\f125";
+      top: 25px;
+      left: 0px; }
+
+/*D-Pad Platform specific changes*/
+.platform-ios .d-pad .dpad-button:after {
+  top: -40px;
+  left: -20px; }
+
+.platform-android .d-pad .dpad-button:after {
+  top: -41px; }
+
+/* Joystick */
+.joystick {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding: 5px 15px; }
+  .joystick p {
+    font-family: "Novecento wide";
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    width: 72px;
+    height: 72px;
+    line-height: 66px; }
+  .joystick h3 {
+    color: #fff;
+    /* text color */
+    font-size: 14px;
+    font-weight: bold; }
+  .joystick .joystick-row {
+    margin-top: 0px; }
+  .joystick .joystick-col {
+    text-align: center; }
+  .joystick .joystick-buttons-row {
+    width: 100%; }
+  .joystick .joystick-buttons-col {
+    width: 25%;
+    float: left; }
+  .joystick .joystick-background {
+    position: relative;
+    margin: 20px auto;
+    width: 130px;
+    height: 130px;
+    border-radius: 65px;
+    background-image: url('../img/joystick-background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+    overflow: hidden; }
+  .joystick .joystick-stick {
+    position: relative;
+    z-index: 1001;
+    margin-top: 35px;
+    margin-left: 35px;
+    width: 61px;
+    height: 61px;
+    border-radius: 33px;
+    background-image: url('../img/joystick-stick.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; }
+  .joystick .joystick-button {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    margin: 10px auto;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain; }
+    .joystick .joystick-button:active {
+      box-shadow: 0 2px 2px rgba(255, 255, 255, 0.25), inset 0 2px 2px rgba(0, 0, 0, 0.5); }
+    .joystick .joystick-button.white {
+      background-image: url('../img/white-button.png'); }
+    .joystick .joystick-button.red {
+      background-image: url('../img/red-button.png'); }
+    .joystick .joystick-button.green {
+      background-image: url('../img/green-button.png'); }
+    .joystick .joystick-button.blue {
+      background-image: url('../img/blue-button.png'); }
+    .joystick .joystick-button.yellow {
+      background-image: url('../img/yellow-button.png'); }
+    .joystick .joystick-button.white p {
+      color: #6d7b83;
+      /* text color */
+      text-shadow: 0 1px 0 #212a3e;
+      /* drop shadow */ }
+    .joystick .joystick-button.red p {
+      color: #7c0000;
+      /* text color */
+      text-shadow: 0 1px 0 #ef5f5f;
+      /* drop shadow */ }
+    .joystick .joystick-button.green p {
+      color: #1d7c00;
+      /* text color */
+      text-shadow: 0 1px 0 #d0ef5f;
+      /* drop shadow */ }
+    .joystick .joystick-button.blue p {
+      color: #00277c;
+      /* text color */
+      text-shadow: 0 1px 0 #5f8def;
+      /* drop shadow */ }
+    .joystick .joystick-button.yellow p {
+      color: #7c7b00;
+      /* text color */
+      text-shadow: 0 1px 0 #d0ef5f;
+      /* drop shadow */ }
+
+/*Joystick Platform specific changes*/
+.platform-ios .joystick p {
+  font-family: "AppleSDGothicNeo-Bold";
+  line-height: 75px; }
+.platform-ios .joystick .joystick-background {
+  margin: 10px auto; }
+
+.platform-android .joystick p {
+  line-height: 70px; }

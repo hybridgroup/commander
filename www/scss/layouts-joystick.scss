@@ -1,0 +1,136 @@
+/* Joystick */
+
+.joystick {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding: 5px 15px;
+
+  p {
+    font-family: "Novecento wide";
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    width: 72px;
+    height: 72px;
+    line-height: 66px;  
+  }
+
+  h3 {
+    color: #fff; /* text color */
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .joystick-row {
+    margin-top: 0px;
+  }
+
+  .joystick-col {
+    text-align: center;
+  }
+
+  .joystick-buttons-row {
+    width: 100%;
+  }
+  .joystick-buttons-col {
+    width: 25%;
+    float: left;
+  }
+
+  .joystick-background {
+    position: relative;
+    margin: 20px auto;
+    width: 130px;
+    height: 130px;
+    border-radius: 65px;
+    background-image: url('../img/joystick-background.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .joystick-stick {
+    position: relative;
+    z-index: 1001;
+    margin-top: 35px;
+    margin-left: 35px;
+    width: 61px;
+    height: 61px;
+    border-radius: 33px;
+    background-image: url('../img/joystick-stick.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .joystick-button {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    border-radius: 36px;
+    margin: 10px auto;
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: contain;
+
+    &:active {
+      box-shadow: 0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5);
+    }
+
+    &.white {
+      background-image: url('../img/white-button.png');
+    }
+    &.red {
+      background-image: url('../img/red-button.png');
+    }
+    &.green {
+      background-image: url('../img/green-button.png');
+    }
+    &.blue {
+      background-image: url('../img/blue-button.png');
+    }
+    &.yellow {
+      background-image: url('../img/yellow-button.png');
+    }
+
+    &.white p {
+      color: #6d7b83; /* text color */
+      text-shadow: 0 1px 0 #212a3e; /* drop shadow */
+    }
+    &.red p {
+      color: #7c0000; /* text color */
+      text-shadow: 0 1px 0 #ef5f5f; /* drop shadow */
+    }
+    &.green p {
+      color: #1d7c00; /* text color */
+      text-shadow: 0 1px 0 #d0ef5f; /* drop shadow */
+    }
+    &.blue p {
+      color: #00277c; /* text color */
+      text-shadow: 0 1px 0 #5f8def; /* drop shadow */
+    }
+    &.yellow p {
+      color: #7c7b00; /* text color */
+      text-shadow: 0 1px 0 #d0ef5f; /* drop shadow */
+    }
+  }
+}
+
+/*Joystick Platform specific changes*/
+.platform-ios .joystick {
+  p {
+    font-family: "AppleSDGothicNeo-Bold";
+    line-height: 75px;
+  }
+  .joystick-background {
+    margin: 10px auto;  
+  }
+}
+.platform-android .joystick {
+  p {
+    line-height: 70px;
+  }
+}

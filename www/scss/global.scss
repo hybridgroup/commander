@@ -1,0 +1,29 @@
+.top-logo {
+  img {
+    height: 33px;
+  }
+}
+
+.controls {
+  button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+li {
+  white-space: normal !important;
+}
+
+.input-label {
+  width: 15%;
+}
+
+input[type=text] {
+  min-width: 85%;
+}
+
+.pane {
+  background-color: #0e2f40;
+}
