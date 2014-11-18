@@ -24,6 +24,11 @@ commander.config(function($stateProvider, $urlRouterProvider) {
       controller: 'ConnectionController'
     })
 
+    .state('about', {
+      url: '/about',
+      templateUrl: 'templates/about.html'
+    })
+
     .state('remotes', {
       url: '/remotes',
       templateUrl: 'templates/remotes.html',
