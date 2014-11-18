@@ -1,10 +1,11 @@
 <ion-view title="Log" ng-controller="CommandSetController">
   <ion-content class="light-bg has-subheader">
     <div class='list'>
-      <div class="item item-icon-left item-text-wrap item-activity-log" ng-repeat="log in activityLog.getLog() track by $index">
-        <i class="icon ion-alert {{log.status ? '' : 'assertive'}}"></i>
-        <span class="{{log.status ? '' : 'assertive'}}">{{log.message}}</span>
-      </div>
+      <ion-item class="item-icon-left item-text-wrap item-activity-log" ng-show="!activityLog.getLog().length"><i class="icon ion-alert"></i>No log entries yet.</ion-item>
+      <ion-item  class="item-icon-left item-text-wrap item-activity-log" ng-repeat="log in activityLog.getLog() track by $index">
+        <i class="icon {{log.status == 'success' ? 'ion-help' : 'ion-alert assertive'}}"></i>
+        <span class="{{log.status == 'success' ? '' : 'assertive'}}">{{log.message}}</span>
+      </ion-item >
     </div>
   </ion-content>
 </ion-view>

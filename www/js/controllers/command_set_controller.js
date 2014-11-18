@@ -63,6 +63,8 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
       angular.extend(command.params, params)
     }
 
+    $scope.activityLog.showConnectionIndicator();
+
     $http.post($scope.commandUrl(command), command.params)
     .success(function(data){
       $scope.logActivity(true, command, data);
@@ -83,6 +85,7 @@ commander.controller('CommandSetController', ['$scope', '$http', '$stateParams',
   };
 
   $scope.logActivity = function(success, command, data) {
+    $scope.activityLog.hideConnectionIndicator();
     if (success){
       $scope.message = 'Result of ' + command.name + ': ' + data.result;
     }

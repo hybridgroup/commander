@@ -66,8 +66,8 @@ describe('CommandSetController', function() {
       scope.execute(command);
       httpBackend.flush();
 
-      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Result of sendNotification: success', status : true });
-      expect(scope.activityLog.status()).toEqual(true);
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Result of sendNotification: success', status : 'success' });
+      expect(scope.activityLog.status()).toEqual('success');
     });
 
     it('when fails should set activity logger results', function() {
@@ -78,8 +78,8 @@ describe('CommandSetController', function() {
       scope.execute(command);
       httpBackend.flush();
 
-      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : false });
-      expect(scope.activityLog.status()).toEqual(false);
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : 'failed' });
+      expect(scope.activityLog.status()).toEqual('failed');
     });
   });
 
@@ -87,13 +87,13 @@ describe('CommandSetController', function() {
     it('should set activity logger results', function() {
       // Success Activiy log
       scope.logActivity(true, command, {result:'success'});
-      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Result of sendNotification: success', status : true });
-      expect(scope.activityLog.status()).toEqual(true);
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Result of sendNotification: success', status : 'success' });
+      expect(scope.activityLog.status()).toEqual('success');
 
       // Error Activiy log
       scope.logActivity(false, command, null);
-      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : false });
-      expect(scope.activityLog.status()).toEqual(false);
+      expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : 'failed' });
+      expect(scope.activityLog.status()).toEqual('failed');
     });
   });
 
