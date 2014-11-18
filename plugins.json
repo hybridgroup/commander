@@ -4,6 +4,7 @@
     "org.apache.cordova.device",
     "org.apache.cordova.statusbar",
     "org.apache.cordova.console",
-    "org.apache.cordova.splashscreen"
+    "org.apache.cordova.splashscreen",
+    "uk.co.whiteoctober.cordova.appversion"
   ]
 }

@@ -27,3 +27,35 @@ input[type=text] {
 .pane {
   background-color: #0e2f40;
 }
+
+.about-section {
+  width: 100%;
+  text-align: center;
+  color: #fff;
+
+  .about-logo {
+    width: 240px;
+    height: 141px;
+    margin: 30px auto 10px;
+    background-image: url('../img/logo-about.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .about-version {
+    margin: 5px auto;
+    font-weight: 300;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+  }
+
+  .about-copyright {
+    margin: 5px auto;
+    font-weight: 300;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-size: 14px;
+  }
+
+
+}
