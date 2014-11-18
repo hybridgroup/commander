@@ -1,26 +1,38 @@
 commander.factory('activityLogger', function() {
   return new function() {
     var self = this;
-    var executionSuccess = null;
+    var executionStatus = null;
+    var connectionIndicatorVisible = null;
     var log = [];
     
     this.saveLog = function(success, msg){
       if (success){
-        executionSuccess = true;
+        executionStatus = 'success';
       }
       else {
-        executionSuccess = false;
+        executionStatus = 'failed';
       }
-      log.unshift({message:msg, status: executionSuccess});
+      log.unshift({message:msg, status: executionStatus});
+    }
+
+    this.showConnectionIndicator = function(){
+      connectionIndicatorVisible = true;
+      executionStatus = 'connecting';
+    }
+
+    this.hideConnectionIndicator = function(){
+      connectionIndicatorVisible = false;
     }
     
     this.getLog = function(msg){ return log; }
 
-    this.status = function(){ return executionSuccess; }
+    this.status = function(){ return executionStatus; }
+
+    this.connectionIndicatorVisible = function(){ return connectionIndicatorVisible; }
 
     this.clear = function(){
       log = [];
-      executionSuccess = null;
+      executionStatus = null;
     }
   }
 })

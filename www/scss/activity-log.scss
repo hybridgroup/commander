@@ -1,13 +1,58 @@
 .right-buttons {
   .badge {
-    line-height: 18px;
-    width: 24px;
-    height: 24px;
-    border-radius: 22px;
-    font-size: 14px;
-    margin-right: 3px;
-    margin-top: 5px;
+
+    &.activity-indicator {
+      line-height: 18px;
+      width: 24px;
+      height: 24px;
+      border-radius: 22px;
+      font-size: 14px;
+      margin-right: 3px;
+      margin-top: 5px;
+    }
+
+    &.connection-indicator {
+      padding: 4px 6px;
+
+      .ion-radio-waves {
+        font-size: 26px;
+        color: #0e2f40;
+
+        -webkit-animation-name: blinker;
+        -webkit-animation-duration: 0.5s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+
+        -moz-animation-name: blinker;
+        -moz-animation-duration: 0.5s;
+        -moz-animation-timing-function: linear;
+        -moz-animation-iteration-count: infinite;
+
+        animation-name: blinker;
+        animation-duration: 0.5s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+      }
+    }
   }
+}
+
+@-moz-keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1.0; }
 }
 
 .item-activity-log {

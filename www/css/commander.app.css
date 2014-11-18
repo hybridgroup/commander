@@ -70,7 +70,7 @@ input[type=text] {
   .command-sets-content .commander-list .list .item .item-options .item-delete:before {
     font-size: 32px; }
 
-.right-buttons .badge {
+.right-buttons .badge.activity-indicator {
   line-height: 18px;
   width: 24px;
   height: 24px;
@@ -78,6 +78,53 @@ input[type=text] {
   font-size: 14px;
   margin-right: 3px;
   margin-top: 5px; }
+.right-buttons .badge.connection-indicator {
+  padding: 4px 6px; }
+  .right-buttons .badge.connection-indicator .ion-radio-waves {
+    font-size: 26px;
+    color: #0e2f40;
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+    animation-name: blinker;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; }
+
+@-moz-keyframes blinker {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 0.7; }
+
+  100% {
+    opacity: 1; } }
+
+@-webkit-keyframes blinker {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 0.7; }
+
+  100% {
+    opacity: 1; } }
+
+@keyframes blinker {
+  0% {
+    opacity: 1; }
+
+  50% {
+    opacity: 0.7; }
+
+  100% {
+    opacity: 1; } }
 
 .item-activity-log {
   padding: 10px;
