@@ -32,7 +32,7 @@ You can load a "command set" that is a list of the preconfigured commands and yo
 
 ### Configure your robot API url
 
-This is where you set the robots server endpoint, frameworks by default use port 3000. Visit [API Guide](http://cylonjs.com/documentation/guides/api/) for more information.
+This is where you set the robots server endpoint, frameworks by default use port 3000. Visit [API Guide](http://cylonjs.com/documentation/core/api/) for more information.
 
 Use the ip of the machine where the server is running instead of localhost, so it can be reached from your phone. Also make sure you phone is connected to the same network.
 
