@@ -25,7 +25,7 @@ commander.directive('draggable', function($document,$timeout) {
       event.preventDefault();
       return false;
     });
-
+    
     element.on('transform drag', function(event) {
       joystickIndex = parseInt(event.gesture.target.id.substring(8));
       var joystick = domJoysticks.filter(function(e){if (e[0].id == 'joystick'+joystickIndex){return e[0];}})[0];
@@ -83,21 +83,46 @@ commander.directive('draggable', function($document,$timeout) {
         'box-shadow': (joystick_vars[joystickIndex].x / 2) + 'px ' + (joystick_vars[joystickIndex].y / 2) + 'px 10px #333'
       });
     });
+
+    element.on('transformend', function(event) {
+      joystickIndex = parseInt(event.gesture.target.id.substring(8));
+      // Switch index since event is on the touch that is still pressed in order to reset the other joystick
+      if (joystickIndex == 1) {
+        joystickIndex = 0;
+      }
+      else {
+        joystickIndex = 1; 
+      }
+      var joystick = domJoysticks.filter(function(e){if (e[0].id == 'joystick'+joystickIndex){return e[0];}})[0];
+      command = scope.commands[joystick.attr('data-command-index')];
+      position = {'x':0,'y':0};
+      scope.execute(command, {position: position});
+
+      joystick.css({
+        top: '0px',
+        left: '0px',
+        'box-shadow': '0px 0px 20px #333'
+      });
+      //}
+      resetJoysticks = true;
+      joystick_vars[joystickIndex] = {startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false};
+    });
     
     element.on('release', function(event) {
-      for(var i=0; i<domJoysticks.length; i++){
-        command = scope.commands[domJoysticks[i].attr('data-command-index')];
-        position = {'x':0,'y':0};
-        scope.execute(command, {position: position});
+      joystickIndex = parseInt(event.gesture.target.id.substring(8));
+      var joystick = domJoysticks.filter(function(e){if (e[0].id == 'joystick'+joystickIndex){return e[0];}})[0];
+      command = scope.commands[joystick.attr('data-command-index')];
+      position = {'x':0,'y':0};
+      scope.execute(command, {position: position});
 
-        domJoysticks[i].css({
-          top: '0px',
-          left: '0px',
-          'box-shadow': '0px 0px 20px #333'
-        });
-      }
+      joystick.css({
+        top: '0px',
+        left: '0px',
+        'box-shadow': '0px 0px 20px #333'
+      });
+      //}
       resetJoysticks = true;
-      joystick_vars = [{startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false},{startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false}];
+      joystick_vars[joystickIndex] = {startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false};
     });
   };
 });
