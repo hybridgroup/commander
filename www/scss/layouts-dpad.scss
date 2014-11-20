@@ -4,7 +4,7 @@
   display: inline-block;
   position: relative;
   width: 100%;
-  padding: 15px 15px;
+  padding: 5px 15px;
   border-radius: 20px;
   
   .dpad-row {
@@ -105,6 +105,45 @@
       content: "\f125";
       top: 25px;
       left: 0px;
+    }
+  }
+}
+
+@media (max-height: 320px) {
+  .d-pad {
+    .dpad-row {
+      height: 65px;
+    }
+
+    .left-button-col {
+      padding-right: 31px;
+    }
+
+    .right-button-col {
+      padding-left: 31px;
+    }
+
+    .dpad-button {
+      width: 74px;
+      height: 74px;
+
+      &:after {
+        width: 84px;
+        height: 84px;
+      }
+
+      &.up-button:before {
+        top: 16px;
+      }
+      &.down-button:before {
+        top: 22px;
+      }
+      &.left-button:before {
+        top: 20px;
+      }
+      &.right-button:before {
+        top: 20px;
+      }
     }
   }
 }

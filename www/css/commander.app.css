@@ -142,7 +142,7 @@ input[type=text] {
   display: inline-block;
   position: relative;
   width: 100%;
-  padding: 15px 15px;
+  padding: 5px 15px;
   border-radius: 20px; }
   .d-pad .dpad-row {
     height: 75px;
@@ -224,6 +224,28 @@ input[type=text] {
       top: 25px;
       left: 0px; }
 
+@media (max-height: 320px) {
+  .d-pad .dpad-row {
+    height: 65px; }
+  .d-pad .left-button-col {
+    padding-right: 31px; }
+  .d-pad .right-button-col {
+    padding-left: 31px; }
+  .d-pad .dpad-button {
+    width: 74px;
+    height: 74px; }
+    .d-pad .dpad-button:after {
+      width: 84px;
+      height: 84px; }
+    .d-pad .dpad-button.up-button:before {
+      top: 16px; }
+    .d-pad .dpad-button.down-button:before {
+      top: 22px; }
+    .d-pad .dpad-button.left-button:before {
+      top: 20px; }
+    .d-pad .dpad-button.right-button:before {
+      top: 20px; } }
+
 /*D-Pad Platform specific changes*/
 .platform-ios .d-pad .dpad-button:after {
   top: -40px;
@@ -237,22 +259,25 @@ input[type=text] {
   display: inline-block;
   position: relative;
   width: 100%;
-  padding: 5px 15px; }
+  padding: 0px 15px; }
   .joystick p {
     font-family: "Novecento wide";
     font-size: 28px;
     font-weight: bold;
     text-align: center;
-    width: 72px;
-    height: 72px;
-    line-height: 66px; }
+    width: 68px;
+    height: 68px;
+    line-height: 64px; }
   .joystick h3 {
     color: #fff;
     /* text color */
     font-size: 14px;
-    font-weight: bold; }
+    font-weight: bold;
+    margin-bottom: 5px; }
   .joystick .joystick-row {
-    margin-top: 0px; }
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px; }
   .joystick .joystick-col {
     text-align: center; }
   .joystick .joystick-buttons-row {
@@ -262,10 +287,10 @@ input[type=text] {
     float: left; }
   .joystick .joystick-background {
     position: relative;
-    margin: 20px auto;
-    width: 130px;
-    height: 130px;
-    border-radius: 65px;
+    margin: 15px auto 15px;
+    width: 131px;
+    height: 131px;
+    border-radius: 66px;
     background-image: url('../img/joystick-background.png');
     background-repeat: no-repeat;
     background-position: center;
@@ -286,9 +311,9 @@ input[type=text] {
     background-size: contain; }
   .joystick .joystick-button {
     position: relative;
-    width: 72px;
-    height: 72px;
-    border-radius: 36px;
+    width: 68px;
+    height: 68px;
+    border-radius: 34px;
     margin: 10px auto;
     background-repeat: no-repeat;
     background-position: center;
@@ -331,12 +356,23 @@ input[type=text] {
       text-shadow: 0 1px 0 #d0ef5f;
       /* drop shadow */ }
 
+@media (max-height: 320px) {
+  .joystick .joystick-background {
+    width: 116px;
+    height: 116px;
+    margin: 10px auto 5px; }
+  .joystick .joystick-stick {
+    margin-left: 31px;
+    margin-top: 31px;
+    width: 55px;
+    height: 55px; }
+  .joystick .joystick-button {
+    margin: 0px auto 5px; } }
+
 /*Joystick Platform specific changes*/
 .platform-ios .joystick p {
   font-family: "AppleSDGothicNeo-Bold";
-  line-height: 75px; }
-.platform-ios .joystick .joystick-background {
-  margin: 10px auto; }
+  line-height: 72px; }
 
 .platform-android .joystick p {
-  line-height: 70px; }
+  line-height: 66px; }
