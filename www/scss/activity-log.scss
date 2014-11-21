@@ -9,13 +9,40 @@
       font-size: 14px;
       margin-right: 3px;
       margin-top: 5px;
+      padding: 0;
+
+      &.badge-balanced {
+        border: 1px solid #5CC41C;
+        box-shadow: inset 0 2px 2px rgba(255,255,255,0.2);
+      }
+      &.badge-assertive {
+        border: 1px solid #E4462D;
+        box-shadow: inset 0 2px 2px rgba(255,255,255,0.2);
+      }
+      &.badge-royal {
+        border: 1px solid #082F42;
+        box-shadow: inset 0 2px 2px rgba(255,255,255,0.2);
+      }
+
+      .icon {
+        font-size: 16px;
+        line-height: 23px;
+      }
+
+      .ion-help {
+
+      }
+
+      .ion-checkmark-round {
+
+      }
     }
 
     &.connection-indicator {
-      padding: 4px 6px;
+      padding: 4px 5px;
 
       .ion-radio-waves {
-        font-size: 26px;
+        font-size: 25px;
         color: #0e2f40;
 
         -webkit-animation-name: blinker;
