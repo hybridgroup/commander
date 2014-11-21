@@ -30,6 +30,7 @@
     <gap:plugin name="org.apache.cordova.splashscreen" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <gap:plugin name="com.ionic.keyboard" />
+    <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="uk.co.whiteoctober.cordova.appversion" version="0.1.4" />
 
     <access origin="*" />

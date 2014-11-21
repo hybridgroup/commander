@@ -4,7 +4,7 @@
       <div class='row joystick-row' ng-if="joysticks">
         <div class='col joystick-col' ng-repeat="command in joysticks track by $index">
           <div class='joystick-background'>
-            <div joystick class="joystick-stick" data-command-index="{{$index}}" data-tap-disabled="true" id="joystick{{$index}}"></div>
+            <div vibrate joystick class="joystick-stick" data-command-index="{{$index}}" data-tap-disabled="true" id="joystick{{$index}}"></div>
           </div>
           <div>
             <h3>{{command.label}}</h3>
@@ -13,7 +13,7 @@
       </div>
       <div class='joystick-buttons-row' ng-if="joysticksButtons">
         <div class='joystick-buttons-col' ng-repeat="command in joysticksButtons track by $index">
-          <div joystick class="joystick-button {{command.color ? command.color : 'white'}}" command-name="{{command.name}}">
+          <div vibrate joystick class="joystick-button {{command.color ? command.color : 'white'}}" command-name="{{command.name}}">
             <p id="button{{$index}}">{{command.label}}</p>
           </div>
         </div>
