@@ -77,11 +77,24 @@ input[type=text] {
   border-radius: 22px;
   font-size: 14px;
   margin-right: 3px;
-  margin-top: 5px; }
+  margin-top: 5px;
+  padding: 0; }
+  .right-buttons .badge.activity-indicator.badge-balanced {
+    border: 1px solid #5CC41C;
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.2); }
+  .right-buttons .badge.activity-indicator.badge-assertive {
+    border: 1px solid #E4462D;
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.2); }
+  .right-buttons .badge.activity-indicator.badge-royal {
+    border: 1px solid #082F42;
+    box-shadow: inset 0 2px 2px rgba(255, 255, 255, 0.2); }
+  .right-buttons .badge.activity-indicator .icon {
+    font-size: 16px;
+    line-height: 23px; }
 .right-buttons .badge.connection-indicator {
-  padding: 4px 6px; }
+  padding: 4px 5px; }
   .right-buttons .badge.connection-indicator .ion-radio-waves {
-    font-size: 26px;
+    font-size: 25px;
     color: #0e2f40;
     -webkit-animation-name: blinker;
     -webkit-animation-duration: 0.5s;
