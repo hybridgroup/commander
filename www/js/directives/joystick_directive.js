@@ -9,7 +9,7 @@ commander.directive('joystick', function($document,$timeout) {
       for(var i=0; i<scope.joysticks.length; i++){
         domJoysticks.push(angular.element(document.querySelector('#joystick'+i)));
       }
-    }); 
+    });
 
     element.on('tap', function(event) {
       event.preventDefault();
@@ -31,7 +31,7 @@ commander.directive('joystick', function($document,$timeout) {
           touch = event.gesture.touches[0]
         }
         else {
-          touch = event.gesture.touches[1] 
+          touch = event.gesture.touches[1]
         }
         if (resetJoysticks){
           joystick_vars[joystickIndex].startX = touch.pageX - joystick_vars[joystickIndex].x;
@@ -75,7 +75,7 @@ commander.directive('joystick', function($document,$timeout) {
           scope.execute(command, {position: position});
           joystick_vars[joystickIndex].positionChanged = false;
         }
-        
+
         joystick.css({
           'box-shadow': (joystick_vars[joystickIndex].x / 2) + 'px ' + (joystick_vars[joystickIndex].y / 2) + 'px 10px #333'
         });
@@ -118,7 +118,7 @@ commander.directive('joystick', function($document,$timeout) {
           joystickIndex = 0;
         }
         else {
-          joystickIndex = 1; 
+          joystickIndex = 1;
         }
         var joystick = domJoysticks.filter(function(e){if (e[0].id == 'joystick'+joystickIndex){return e[0];}})[0];
         command = scope.commands[joystick.attr('data-command-index')];
@@ -135,7 +135,7 @@ commander.directive('joystick', function($document,$timeout) {
         joystick_vars[joystickIndex] = {startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false};
       }
     });
-    
+
     element.on('release', function(event) {
       if (event.target.id.match(/button/) == undefined ) {
         joystickIndex = parseInt(event.gesture.target.id.substring(8));
