@@ -1,6 +1,6 @@
 {
   "name": "Commander",
-  "version": "0.0.1",
+  "version": "0.2.0",
   "description": "An app to control robots from your device",
   "repository": {
     "type": "git",
