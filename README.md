@@ -10,8 +10,8 @@ A mobile app to control robots and connected devices.
 ## Screenshots
 
 ![screen1](http://i.imgur.com/kQkZAV7.jpg)
-![screen2](http://i.imgur.com/lCc4irL.jpg)
-![screen3](http://i.imgur.com/L51DgtN.jpg)
+![screen2](http://i.imgur.com/sBfGocQ.jpg)
+![screen3](http://i.imgur.com/lCc4irL.jpg)
 
 ## How It Works
 
