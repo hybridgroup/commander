@@ -325,3 +325,7 @@ In order to modify global styles of ionic framework, you need to watch for chang
 ```bash
 $ sass --watch scss/ionic.app.scss:www/lib/ionic/css/ionic.css
 ```
+
+## License
+
+Copyright (c) 2014 The Hybrid Group. Licensed under the Apache 2.0 license.
