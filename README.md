@@ -28,7 +28,7 @@ You can load a "command set" that is a list of the preconfigured commands and yo
 ### Download:
 
 [![Google Play](http://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=com.hybridgroup.commander)
-[![iTunes](http://i.imgur.com/rlNTuWQ.png)](#)
+[![iTunes](http://i.imgur.com/rlNTuWQ.png)](https://itunes.apple.com/us/app/commander.io/id935923011?mt=8)
 
 ### Configure your robot API url
 
