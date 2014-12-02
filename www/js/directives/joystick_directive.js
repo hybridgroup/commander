@@ -84,7 +84,7 @@ commander.directive('joystick', function($document,$timeout) {
 
     element.on('touchstart', function(event) {
       if (event.target.id.match(/button/)) {
-        var command = scope.commands.filter(function(e){if (e.name == element.attr('command-name')){return e;}})[0];
+        var command = scope.joysticksButtons.filter(function(e,i){if ((e.name + i) == element.attr('command-name')){return e;}})[0];
         scope.execute(command, {action: 'press'});
         element.css({
           'box-shadow': '0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5)'
@@ -98,7 +98,7 @@ commander.directive('joystick', function($document,$timeout) {
 
     element.on('touchend', function(event) {
       if (event.target.id.match(/button/)) {
-        var command = scope.commands.filter(function(e){if (e.name == element.attr('command-name')){return e;}})[0];
+        var command = scope.joysticksButtons.filter(function(e,i){if ((e.name + i) == element.attr('command-name')){return e;}})[0];
         scope.execute(command, {action: 'release'});
         element.css({
           'box-shadow': '0 2px 2px rgba(255,255,255,0),inset 0 2px 2px rgba(0,0,0,0)'
