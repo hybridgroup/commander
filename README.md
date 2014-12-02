@@ -1,7 +1,7 @@
 Commander
 =====================
 
-A mobile app to control robots and connected devices.
+A mobile app to control robots, connected devices, and the Internet of Things.
 
 ## Build Status:
 
@@ -15,13 +15,13 @@ A mobile app to control robots and connected devices.
 
 ## How It Works
 
-The Commander mobile application can communicate with any device using the [Common Protocol for Programming Physical I/O](http://cppp.io).
-
-[Cylon](http://cylonjs.com), [Gobot](http://gobot.io) and [Artoo](https://artoo.io) are frameworks that implement an API compatible with this protocol.
-
 Commander can be used to send commands to your robots or listen for events coming from them.
 
 You can load a "command set" that is a list of the preconfigured commands and you can choose between different types of layouts.
+
+The Commander mobile application can communicate with any device that supports the [Common Protocol for Programming Physical I/O](http://cppp.io).
+
+[Cylon](http://cylonjs.com), [Gobot](http://gobot.io) and [Artoo](https://artoo.io) are frameworks that implement an API compatible with this protocol.
 
 ## Using Commander
 
