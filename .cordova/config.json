@@ -2,7 +2,7 @@
     "lib": {
         "www": {
             "id": "com.hybridgroup.commander",
-            "version": "0.2.0",
+            "version": "0.2.1",
             "uri": "https://github.com/hybridgroup/commander"
         }
     }
