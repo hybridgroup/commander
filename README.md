@@ -5,7 +5,7 @@ A mobile app to control robots and connected devices.
 
 ## Build Status:
 
-[![Build Status](https://secure.travis-ci.org/hybridgroup/commander.png?branch=master)](http://travis-ci.org/commander/cylon)
+[![Build Status](https://secure.travis-ci.org/hybridgroup/commander.png?branch=master)](https://travis-ci.org/hybridgroup/commander)
 
 ## Screenshots
 
