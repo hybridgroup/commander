@@ -90,10 +90,6 @@ commander.directive('joystick', function($document,$timeout) {
           'box-shadow': '0 2px 2px rgba(255,255,255,0.25),inset 0 2px 2px rgba(0,0,0,0.5)'
         });
       }
-      else {
-        event.preventDefault();
-        return false;
-      }
     });
 
     element.on('touchend', function(event) {
@@ -105,21 +101,7 @@ commander.directive('joystick', function($document,$timeout) {
         });
       }
       else {
-        event.preventDefault();
-        return false;
-      }
-    });
-
-    element.on('transformend', function(event) {
-      if (event.target.id.match(/button/) == undefined ) {
-        joystickIndex = parseInt(event.gesture.target.id.substring(8));
-        // Switch index in order to reset the other joystick since the event is fired on the touch that is still pressed
-        if (joystickIndex == 1) {
-          joystickIndex = 0;
-        }
-        else {
-          joystickIndex = 1;
-        }
+        joystickIndex = parseInt(event.target.id.substring(8));
         var joystick = domJoysticks.filter(function(e){if (e[0].id == 'joystick'+joystickIndex){return e[0];}})[0];
         command = scope.commands[joystick.attr('data-command-index')];
         position = {'x':0,'y':0};
@@ -130,7 +112,6 @@ commander.directive('joystick', function($document,$timeout) {
           left: '0px',
           'box-shadow': '0px 0px 20px #333'
         });
-        //}
         resetJoysticks = true;
         joystick_vars[joystickIndex] = {startX: 0, startY: 0, x: 0, y: 0, currentXpos: 0, currentYpos: 0, initXpos: 0, initYpos: 0, positionChanged: false};
       }
