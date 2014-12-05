@@ -89,6 +89,7 @@ Command sets are a json object with a `command_set` root and the following attri
   * `list` - A list of buttons
   * `d-pad` - A directional pad (up, down, left, right)
 * `commands` - It's an array of commands
+* `orientation` - Lock orientation on your device while using the current command set (landscape|portrait).
 
 #### Command structure
 
