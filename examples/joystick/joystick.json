@@ -2,6 +2,7 @@
   "command_set":{
     "name": "Joystick Double",
     "type": "joystick",
+    "orientation": "landscape",
     "commands":[
       {
         "label": "Stick Left",

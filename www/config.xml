@@ -33,6 +33,7 @@
     <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.vibration" />
     <gap:plugin name="uk.co.whiteoctober.cordova.appversion" version="0.1.4" />
+    <gap:plugin name="net.yoik.cordova.plugins.screenorientation" version="1.3.1" />
 
     <access origin="*" />
 

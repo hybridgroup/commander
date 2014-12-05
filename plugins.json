@@ -6,6 +6,7 @@
     "org.apache.cordova.console",
     "org.apache.cordova.splashscreen",
     "uk.co.whiteoctober.cordova.appversion",
-    "org.apache.cordova.Notification"
+    "org.apache.cordova.Notification",
+    "net.yoik.cordova.plugins.screenorientation"
   ]
 }
