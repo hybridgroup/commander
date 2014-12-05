@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.hybridgroup.commander" version="0.2.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.hybridgroup.commander" version="0.2.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Commander</name>
   <description>Mobile application to control robots from your device</description>
   <author email="contact@hybridgroup.com" href="http://commander.io">Hybrid Group</author>
