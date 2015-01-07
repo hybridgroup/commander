@@ -47,7 +47,7 @@ To create commands you need to load a command set from a json file. This allows 
 Visit https://github.com/hybridgroup/commander/tree/master/examples for some command set examples.
 
 1. Go to the right Menu -> Command Sets
-2. On the URL field, type the url where your json commande set is hosted. (Ex: https://raw.githubusercontent.com/hybridgroup/commander/master/examples/arduino/list.json)
+2. On the URL field, type the url where your json commande set is hosted. (Ex: https://raw.githubusercontent.com/hybridgroup/commander/master/examples/arduino/arduino.json)
 3. Click Load button
 
 ### Using Command Sets
@@ -125,7 +125,7 @@ Command sets are a json object with a `command_set` root and the following attri
 }
 ```
 
-Here is an example of a command set with a D-Pad layout to control a Sphero robot: https://github.com/hybridgroup/commander/blob/master/command_sets/sphero/dpad.json
+Here is an example of a command set with a D-Pad layout to control a Sphero robot: https://github.com/hybridgroup/commander/blob/master/examples/sphero-dpad/sphero-dpad.json
 
 ### Help!
 
