@@ -70,6 +70,13 @@ input[type=text] {
   .command-sets-content .commander-list .list .item .item-options .item-delete:before {
     font-size: 32px; }
 
+.connections-content .commander-list .list .item.item-button-right {
+  padding-right: 0; }
+.connections-content .commander-list .list .item .item-options .item-delete {
+  padding-top: 5px; }
+  .connections-content .commander-list .list .item .item-options .item-delete:before {
+    font-size: 32px; }
+
 .right-buttons .badge.activity-indicator {
   line-height: 18px;
   width: 24px;

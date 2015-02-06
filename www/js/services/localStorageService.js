@@ -19,7 +19,9 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
       localStorage.commander = JSON.stringify({
         api: "",
         command_sets: [],
+        connections: [],
         current_command_set: null,
+        current_connection: null,
         log: ""
       })
     }
@@ -44,6 +46,7 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
     }
 
     this.api = function() { return fetchData()['api'] }
+
     this.commandSets = function() {
       var sets = fetchData()['command_sets']
       if (!sets) {
@@ -51,6 +54,15 @@ commander.factory('LocalStorageService', ['$rootScope', function($rootScope){
       }
       return fetchData()['command_sets']
     }
+
+    this.connections = function() {
+      var cons = fetchData()['connections']
+      if (!cons) {
+        this.set('connections', []);
+      }
+      return fetchData()['connections']
+    }
+
     this.log = function() { return fetchData()['log'] }
 
     // Events

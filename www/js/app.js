@@ -2,7 +2,9 @@ if(!localStorage.commander){
   localStorage.commander = JSON.stringify({
     api: 'http://localhost:3000',
     command_sets: [],
+    connections: [],
     current_command_set: null,
+    current_connection: null,
     log: ''
   });
 }
