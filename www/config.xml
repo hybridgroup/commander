@@ -29,6 +29,7 @@
 
     <gap:plugin name="org.apache.cordova.device" />
     <gap:plugin name="org.apache.cordova.splashscreen" />
+    <gap:plugin name="org.apache.cordova.Notification" />
     <gap:plugin name="com.phonegap.plugin.statusbar" />
     <gap:plugin name="com.ionic.keyboard" />
     <gap:plugin name="org.apache.cordova.vibration" />
