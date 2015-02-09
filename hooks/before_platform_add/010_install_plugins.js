@@ -1,29 +1,20 @@
 #!/usr/bin/env node
- 
-//this hook installs all your plugins
- 
-// add your plugins to this list--either 
-// the identifier, the filesystem location 
-// or the URL
-console.log('--------------------------------------');
-console.log("==========Installing Plugins==========");
-console.log('--------------------------------------');
- 
-var fs = require('fs');
-var path = require('path');
-var sys = require('sys')
+
+/**
+ * Install all plugins listed in package.json
+ * https://raw.githubusercontent.com/diegonetto/generator-ionic/master/templates/hooks/after_platform_add/install_plugins.js
+ */
 var exec = require('child_process').exec;
+var path = require('path');
+var sys = require('sys');
 
-var rootdir = process.argv[2];
+var packageJSON = require('../../package.json');
+var cmd = process.platform === 'win32' ? 'cordova.cmd' : 'cordova';
+// var script = path.resolve(__dirname, '../../node_modules/cordova/bin', cmd);
 
-var configobj = JSON.parse(fs.readFileSync("plugins.json", 'utf8'));
-console.log(configobj.plugins)
-var pluginlist = configobj.plugins;
- 
-function puts(error, stdout, stderr) {
-  sys.puts(stdout)
-}
- 
-pluginlist.forEach(function(plug) {
-  exec("cordova plugin add " + plug, puts);
+packageJSON.cordovaPlugins = packageJSON.cordovaPlugins || [];
+packageJSON.cordovaPlugins.forEach(function (plugin) {
+  exec('cordova plugin add ' + plugin, function (error, stdout, stderr) {
+    sys.puts(stdout);
+  });
 });

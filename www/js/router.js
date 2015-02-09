@@ -18,10 +18,10 @@ commander.config(function($stateProvider, $urlRouterProvider) {
       controller: 'CommandSetController'
     })
 
-    .state('connection', {
-      url: '/connection',
-      templateUrl: 'templates/connection.html',
-      controller: 'ConnectionController'
+    .state('connections', {
+      url: '/connections',
+      templateUrl: 'templates/connections.html',
+      controller: 'ConnectionsController'
     })
 
     .state('about', {

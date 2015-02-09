@@ -68,7 +68,7 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
     if (!url) {
       $ionicPopup.alert({
         title: 'Error',
-        template: 'Please specify an URL'
+        template: 'Please specify a valid URL'
       });
       $scope.hideLoadingSpinner();
       return;
