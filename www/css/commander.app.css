@@ -72,6 +72,21 @@ input[type=text] {
 
 .connections-content .commander-list .list .item.item-button-right {
   padding-right: 0; }
+.connections-content .commander-list .list .item input {
+  height: 20px;
+  font-size: 16px;
+  line-height: 16px;
+  padding: 0;
+  margin: 0;
+  color: #000; }
+.connections-content .commander-list .list .item button.button-icon:before {
+  font-size: 34px;
+  line-height: 36px; }
+.connections-content .commander-list .list .item button.save-button {
+  color: #66cc33;
+  padding-right: 0; }
+.connections-content .commander-list .list .item button.cancel-button {
+  margin-right: 30px; }
 .connections-content .commander-list .list .item .item-options .item-delete {
   padding-top: 5px; }
   .connections-content .commander-list .list .item .item-options .item-delete:before {

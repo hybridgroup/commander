@@ -96,6 +96,20 @@ describe('ConnectionsController', function() {
     });
   });
 
+  describe('saveConnection', function(){
+    it("should update the connection", function(){
+      storage.set('connections', ['http://127.0.0.1:8080', 'http://127.0.0.1:8081']);
+      expect(scope.connections[0]).toEqual('http://127.0.0.1:8080');
+      expect(scope.connections[1]).toEqual('http://127.0.0.1:8081');
+
+      scope.saveConnection(0, 'http://127.0.0.1:3000')
+      expect(scope.connections[0]).toEqual('http://127.0.0.1:3000');
+
+      scope.saveConnection(1, 'new-value')
+      expect(scope.connections[1]).toEqual('new-value');
+    });    
+  });
+
   describe('addConnection', function(){
     it("should add a new connection", function(){
       storage.set('connections', ['http://127.0.0.1:8080', 'http://127.0.0.1:8081']);
