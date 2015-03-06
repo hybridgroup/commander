@@ -1,4 +1,4 @@
-commander.controller('ConnectionsController', [ '$scope', '$http', 'LocalStorageService', '$location', 'activityLogger', '$ionicPopup', '$ionicListDelegate', function($scope, $http, LocalStorageService, $location, activityLogger, $ionicPopup, $ionicListDelegate) {
+commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http', 'LocalStorageService', '$location', 'activityLogger', '$ionicPopup', '$ionicListDelegate', function($scope, $rootScope, $http, LocalStorageService, $location, activityLogger, $ionicPopup, $ionicListDelegate) {
 
   // Local connections
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
@@ -11,7 +11,29 @@ commander.controller('ConnectionsController', [ '$scope', '$http', 'LocalStorage
 
   updateLocalConnectionsView()
 
+  $scope.closeOpenSockets = function(){
+    var localSets = LocalStorageService.commandSets();
+    var currentCommandSet = LocalStorageService.get('current_command_set')
+    var command_set = localSets[currentCommandSet];
+
+    if ($rootScope.sockets && command_set && command_set.protocol && command_set.protocol === 'socketio'){
+      angular.forEach(command_set.commands, function(command, index){
+        if(command.device && $rootScope.sockets[command.robot + '/' + command.device]){
+          $rootScope.sockets[command.robot + '/' + command.device].disconnect();
+          $rootScope.sockets[command.robot + '/' + command.device] = null;
+        }
+        else if($rootScope.sockets[command.robot]){
+          $rootScope.sockets[command.robot].disconnect();
+          $rootScope.sockets[command.robot] = null;
+        }
+      });
+      $rootScope.sockets = {};
+    }
+  }
+
   $scope.useConnection = function(connectionIndex) {
+    $scope.closeOpenSockets();
+
     if (!isCurrent(connectionIndex)){
       activityLogger.clear();
     }

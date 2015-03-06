@@ -4,6 +4,7 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
+      'https://cdn.socket.io/socket.io-1.2.0.js',
       'bower_components/ionic/js/ionic.bundle.js',
       'bower_components/angular-mocks/angular-mocks.js',
       'www/js/**/*.js',
