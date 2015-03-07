@@ -12,6 +12,13 @@
         <div class='row dpad-row'>
           <div class='col down-button-col'><button vibrate class="dpad-button down-button" ng-click="execute(commands[1])"></button></div>
         </div>
+        <div class='d-pad-extra-buttons-row'>
+          <div class='d-pad-buttons-col' ng-repeat="command in dPadButtons track by $index">
+            <div vibrate class="joystick-button {{command.color ? command.color : 'white'}}" on-touch="execute(command,{action:'press'})" on-release="execute(command, {action:'release'})" command-name="{{command.name}}{{$index}}">
+              <p id="button{{$index}}">{{command.label}}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </ion-list>
   </ion-content>

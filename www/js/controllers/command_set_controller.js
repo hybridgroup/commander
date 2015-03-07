@@ -82,10 +82,12 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
         return el.type == 'button';
       })
     }
-  };
 
-  if(!$scope.command_set) {
-    $location.path('/command_sets');
+    if ($scope.command_set.type == 'd-pad') {
+      $scope.dPadButtons = $scope.commands.filter(function(el){
+        return el.type == 'button';
+      })
+    }
   }
   else {
     if($location.path()!='/log'){
