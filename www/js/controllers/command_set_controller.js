@@ -78,15 +78,13 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
       $scope.joysticks = $scope.commands.filter(function(el){
         return el.type == 'stick';
       })
-      $scope.joysticksButtons = $scope.commands.filter(function(el){
+      $scope.buttons = $scope.commands.filter(function(el){
         return el.type == 'button';
       })
     }
 
     if ($scope.command_set.type == 'd-pad') {
-      $scope.dPadButtons = $scope.commands.filter(function(el){
-        return el.type == 'button';
-      })
+      $scope.buttons = $scope.commands;
     }
   }
   else {

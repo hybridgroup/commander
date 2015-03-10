@@ -3,19 +3,19 @@
     <ion-list>
       <div class="d-pad">
         <div class='row dpad-row'>
-          <div class='col up-button-col'><button vibrate class="dpad-button up-button" ng-click="execute(commands[0])"></button></div>
+          <div class='col up-button-col'><button vibrate button class="dpad-button up-button" command-name="{{commands[0].name}}0"></button></div>
         </div>
         <div class='row dpad-row'>
-          <div class='col col-50 left-button-col'><button vibrate class="dpad-button left-button" ng-click="execute(commands[2])"></button></div>
-          <div class='col col-50 right-button-col'><button vibrate class="dpad-button right-button" ng-click="execute(commands[3])"></button></div>
+          <div class='col col-50 left-button-col'><button vibrate button class="dpad-button left-button" command-name="{{commands[2].name}}2"></button></div>
+          <div class='col col-50 right-button-col'><button vibrate button class="dpad-button right-button" command-name="{{commands[3].name}}3"></button></div>
         </div>
         <div class='row dpad-row'>
-          <div class='col down-button-col'><button vibrate class="dpad-button down-button" ng-click="execute(commands[1])"></button></div>
+          <div class='col down-button-col'><button vibrate button class="dpad-button down-button" command-name="{{commands[1].name}}1"></button></div>
         </div>
-        <div class='d-pad-extra-buttons-row'>
-          <div class='d-pad-buttons-col' ng-repeat="command in dPadButtons track by $index">
-            <div vibrate class="joystick-button {{command.color ? command.color : 'white'}}" on-touch="execute(command,{action:'press'})" on-release="execute(command, {action:'release'})" command-name="{{command.name}}{{$index}}">
-              <p id="button{{$index}}">{{command.label}}</p>
+        <div class='d-pad-extra-buttons-row' ng-if="buttons">
+          <div class='d-pad-buttons-col' ng-repeat="command in buttons.slice(4) track by $index">
+            <div vibrate button class="joystick-button {{command.color ? command.color : 'white'}}" command-name="{{command.name}}{{$index+4}}">
+              <p id="button{{$index+4}}">{{command.label}}</p>
             </div>
           </div>
         </div>

@@ -11,9 +11,9 @@
           </div>
         </div>
       </div>
-      <div class='joystick-buttons-row' ng-if="joysticksButtons">
-        <div class='joystick-buttons-col' ng-repeat="command in joysticksButtons track by $index">
-          <div vibrate joystick class="joystick-button {{command.color ? command.color : 'white'}}" command-name="{{command.name}}{{$index}}">
+      <div class='joystick-buttons-row' ng-if="buttons">
+        <div class='joystick-buttons-col' ng-repeat="command in buttons track by $index">
+          <div vibrate button class="joystick-button {{command.color ? command.color : 'white'}}" command-name="{{command.name}}{{$index}}">
             <p id="button{{$index}}">{{command.label}}</p>
           </div>
         </div>
