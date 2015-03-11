@@ -1,31 +1,16 @@
 {
   "command_set":{
-    "name": "Joystick Double socketio",
+    "name": "Joystick Single + Buttons",
     "type": "joystick",
-    "protocol": "socketio",
     "commands":[
       {
-        "label": "Stick Left",
+        "label": "Single Stick",
         "type": "stick",
         "robot": "joystick",
         "device": "",
         "name": "joystick_event",
         "params":{
-          "name": "left",
-          "position": {
-            "x": 0,
-            "y": 0
-          }
-        }
-      },
-      {
-        "label": "Stick Right",
-        "type": "stick",
-        "robot": "joystick",
-        "device": "",
-        "name": "joystick_event",
-        "params":{
-          "name": "right",
+          "name": "single",
           "position": {
             "x": 0,
             "y": 0

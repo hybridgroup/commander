@@ -1,0 +1,71 @@
+{
+  "command_set":{
+    "name": "Sphero d-pad + Buttons",
+    "type": "d-pad",
+    "commands":[
+      {
+        "label": "Up",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "move",
+        "params":{"direction":"up"}
+      },
+      {
+        "label": "Down",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "move",
+        "params":{"direction":"down"}
+      },
+      {
+        "label": "Left",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "move",
+        "params":{"direction":"left"}
+      },
+      {
+        "label": "Right",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "move",
+        "params":{"direction":"right"}
+      },
+      {
+        "label": "R",
+        "type": "button",
+        "color":"red",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "change_color",
+        "params":{"color": "red"}
+      },
+      {
+        "label": "G",
+        "type": "button",
+        "color":"green",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "change_color",
+        "params":{"color": "green"}
+      },
+      {
+        "label": "B",
+        "type": "button",
+        "color":"blue",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "change_color",
+        "params":{"color": "blue"}
+      },
+      {
+        "label": "W",
+        "type": "button",
+        "robot": "sphero-dpad",
+        "device": "",
+        "name": "change_color",
+        "params":{"color": "white"}
+      }
+    ]
+  }
+}

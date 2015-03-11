@@ -1,0 +1,22 @@
+{
+  "command_set":{
+    "name": "Joystick Single",
+    "type": "joystick",
+    "commands":[
+      {
+        "label": "Stick",
+        "type": "stick",
+        "robot": "joystick",
+        "device": "",
+        "name": "joystick_event",
+        "params":{
+          "name": "single",
+          "position": {
+            "x": 0,
+            "y": 0
+          }
+        }
+      }
+    ]
+  }
+}

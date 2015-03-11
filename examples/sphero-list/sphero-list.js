@@ -1,15 +1,5 @@
 var Cylon = require('cylon');
 
-Cylon.config({
-  api: {
-    ssl: false,
-    port: '8080',
-    host: '0.0.0.0',
-  }
-});
-
-Cylon.api();
-
 Cylon.robot({
   name: 'sphero-list',
   connection: { name: 'sphero', adaptor: 'sphero', port: '/dev/tty.Sphero-YBW-RN-SPP' },
@@ -52,21 +42,29 @@ Cylon.robot({
       increase_red: function() {
         this.changeColor("red", 10);
       },
-      decrease_red: function() {
+      decrease_red: function(params) {
         this.changeColor("red", -10);
       },
-      increase_green: function() {
+      increase_green: function(params) {
         this.changeColor("green", 10);
       },
-      decrease_green: function() {
+      decrease_green: function(params) {
         this.changeColor("green", -10);
       },
-      increase_blue: function() {
+      increase_blue: function(params) {
         this.changeColor("blue", 10);
       },
-      decrease_blue: function() {
+      decrease_blue: function(params) {
         this.changeColor("blue", -10);
       }
     };
   }
-}).start();
+});
+
+Cylon.api('http',{
+  host: '0.0.0.0',
+  port: '8080',
+  ssl:  false
+});
+
+Cylon.start();
