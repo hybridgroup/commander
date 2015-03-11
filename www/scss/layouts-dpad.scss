@@ -6,11 +6,42 @@
   width: 100%;
   padding: 5px 15px;
   border-radius: 20px;
+
+  p {
+    font-family: "Novecento wide";
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    width: 68px;
+    height: 68px;
+    line-height: 64px;  
+  }
   
   .dpad-row {
     height: 75px;
     margin-top: 0px;
     padding-top: 5px;
+  }
+
+  .d-pad-row {
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+
+  .d-pad-col {
+    text-align: center;
+  }
+
+  .d-pad-extra-buttons-row{
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+  }
+  .d-pad-buttons-col {
+    width: 25%;
+    float: left;
   }
 
   .up-button-col, .down-button-col {
@@ -25,6 +56,54 @@
   .right-button-col {
     text-align: left;
     padding-left: 42px;
+  }
+
+  .joystick-button {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    border-radius: 34px;
+    margin: 10px auto;
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: contain;
+
+    &.white {
+      background-image: url('../img/white-button.png');
+    }
+    &.red {
+      background-image: url('../img/red-button.png');
+    }
+    &.green {
+      background-image: url('../img/green-button.png');
+    }
+    &.blue {
+      background-image: url('../img/blue-button.png');
+    }
+    &.yellow {
+      background-image: url('../img/yellow-button.png');
+    }
+
+    &.white p {
+      color: #6d7b83; /* text color */
+      text-shadow: 0 1px 0 #212a3e; /* drop shadow */
+    }
+    &.red p {
+      color: #7c0000; /* text color */
+      text-shadow: 0 1px 0 #ef5f5f; /* drop shadow */
+    }
+    &.green p {
+      color: #1d7c00; /* text color */
+      text-shadow: 0 1px 0 #d0ef5f; /* drop shadow */
+    }
+    &.blue p {
+      color: #00277c; /* text color */
+      text-shadow: 0 1px 0 #5f8def; /* drop shadow */
+    }
+    &.yellow p {
+      color: #7c7b00; /* text color */
+      text-shadow: 0 1px 0 #d0ef5f; /* drop shadow */
+    }
   }
 
   .dpad-button {
@@ -123,6 +202,10 @@
       padding-left: 31px;
     }
 
+    .joystick-button {
+      margin: 0px auto 5px;
+    }
+
     .dpad-button {
       width: 74px;
       height: 74px;
@@ -151,6 +234,10 @@
 
 /*D-Pad Platform specific changes*/
 .platform-ios .d-pad {
+  p {
+    font-family: "AppleSDGothicNeo-Bold";
+    line-height: 72px;
+  }
   .dpad-button {
     &:after {
       top: -40px;
@@ -159,9 +246,13 @@
   }
 }
 .platform-android .d-pad {
+  p {
+    line-height: 66px;
+  }
   .dpad-button {
     &:after {
       top: -41px;
     }
   }
 }
+
