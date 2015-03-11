@@ -86,6 +86,11 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
     if ($scope.command_set.type == 'd-pad') {
       $scope.buttons = $scope.commands;
     }
+  };
+
+
+  if(!$scope.command_set) {
+    $location.path('/command_sets');
   }
   else {
     if($location.path()!='/log'){
