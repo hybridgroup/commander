@@ -75,6 +75,19 @@ commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http',
     return currentConnection == connectionIndex;
   }
 
+  $scope.saveConnection = function(connectionIndex, newUrl){
+    if (!newUrl) {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: 'Please specify a valid URL'
+      });
+      return false;
+    }
+    $scope.connections[connectionIndex] = newUrl;
+    LocalStorageService.set('connections', $scope.connections);
+    return true;
+  }
+
   $scope.addConnection = function(apiUrl) {
     if (!apiUrl) {
       $ionicPopup.alert({

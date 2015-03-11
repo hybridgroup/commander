@@ -6,8 +6,11 @@
       </ion-item>
       <ion-item class="item-calm" ng-show="!connections.length">There aren't any connections yet.</ion-item>
       <ion-item class="item-button-right" ng-repeat="connection in connections track by $index">
-        {{connection}}
-        <button ng-click="useConnection($index)" ng:class="getClass($index)" class="button">{{getTitle($index)}}</button>
+        <span ng-hide="editMode" ng-click="editMode = true">{{connection}}</span>
+        <button ng-hide="editMode" ng-click="useConnection($index)" ng:class="getClass($index)" class="button">{{getTitle($index)}}</button>
+        <input ng-show="editMode" type="text" ng-model="connection" placeholder="API URL" ng-required autofocus/>
+        <button ng-show="editMode" ng-click="editMode = false" class="button button-icon icon ion-close-circled cancel-button"></button>
+        <button ng-show="editMode" ng-click="editMode = !saveConnection($index, connection)" class="button button-icon icon ion-checkmark-circled save-button"></button>
         <ion-option-button class="button button-stable item-delete icon ion-ios7-trash" ng-click="removeConnection($index)"></ion-option-button>
       </ion-item>
     </ion-list>

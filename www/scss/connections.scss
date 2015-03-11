@@ -5,7 +5,32 @@
         &.item-button-right {
           padding-right: 0;
         }
+        input {
+          height: 20px;
+          font-size: 16px;
+          line-height: 16px;
+          padding: 0;
+          margin: 0;
+          color: #000;
+        }
 
+        button.button-icon {
+          &:after {
+
+          }
+          &:before {
+            font-size: 34px;
+            line-height: 36px;
+          }
+        }
+
+        button.save-button {
+          color: #66cc33;
+          padding-right: 0;
+        }
+        button.cancel-button {
+          margin-right: 30px;
+        }
         .item-options {
           .item-delete {
             padding-top: 5px;
