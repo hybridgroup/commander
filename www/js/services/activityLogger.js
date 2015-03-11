@@ -6,11 +6,14 @@ commander.factory('activityLogger', function() {
     var log = [];
     
     this.saveLog = function(success, msg){
-      if (success){
+      if (success === true){
         executionStatus = 'success';
       }
-      else {
+      else if (success === false) {
         executionStatus = 'failed';
+      }
+      else if (success === 'socketio') {
+        executionStatus = 'socketio';
       }
       log.unshift({message:msg, status: executionStatus});
     }

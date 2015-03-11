@@ -69,6 +69,12 @@ Once selected, just tap on any of the buttons, up, down, left or right. This wil
 
 ![screen2](http://i.imgur.com/lCc4irL.jpg)
 
+#### Joystick
+
+Once selected, just move the joystick or touch the buttons. This will execute the command on the robot api.
+
+![screen2](http://i.imgur.com/sBfGocQ.jpg)
+
 ### Command Activity Log
 
 1. You should see a green/red indicator on the top/right corner of a command set window. That indicates the execution status of the last command tapped.
@@ -81,6 +87,8 @@ Command sets are a json object with a `command_set` root and the following attri
 * name
 * type (list/d-pad)
 * commands
+* protocol
+* orientation
 
 #### Command set structure
 
@@ -88,7 +96,9 @@ Command sets are a json object with a `command_set` root and the following attri
 * `type` - There are currently two possible options:
   * `list` - A list of buttons
   * `d-pad` - A directional pad (up, down, left, right)
+  * `joystick` - A single or double joystick with action buttons.
 * `commands` - It's an array of commands
+* `protocol` - Type of protocol to use, currently we support `http` and `socketio`. If not present, default is `http`.
 * `orientation` - Lock orientation on your device while using the current command set (landscape|portrait).
 
 #### Command structure
@@ -97,9 +107,19 @@ Command sets are a json object with a `command_set` root and the following attri
 * `robot`  - Name of the robot the command that will be executed in.
 * `device` - Name of the device the command that will be executed in. If the command is a robot command, leave this blank.
 * `name`   - Actual command name as defined in the API. Example: `sendNotification`
+* `type`   - Used to render a `stick` for joysticks or a `button` for `joystick` and `d-pad` command sets.
+* `color`   - Used for buttons only, when color is present (red|gree|blue|yellow), the button style will be rendered with the specified color, default is `white`.
 * `params` - An object/hash that contains the params the command requires, it's optional.
 
-**List Layout:**
+####Command Structure Extras
+
+* You can combine buttons within `d-pad` or `joystick` command sets. If commands of type `button` are present, buttons will be rendered bellow the `joystick` or `d-pad`.
+* You can have a single or a double `joystick`.
+* `button` commands will send 2 requests with an extra `action` param, one request for the press action `action:'press'` and one for the release action `action:'release'`.
+* `stick` commands will send a single request every time the position of the stick changes, sending the position param as `position:{'x':0.1,'y':0.5}`.
+
+
+**List Layout Structure Example:**
 ```json
 {
   "command_set": {

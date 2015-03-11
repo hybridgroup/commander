@@ -1,4 +1,4 @@
-commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', function($scope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger) {
+commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', function($scope, $rootScope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger) {
 
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
@@ -11,7 +11,29 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
 
   updateLocalCommandsView()
 
+  $scope.closeOpenSockets = function(){
+    var localSets = LocalStorageService.commandSets();
+    var currentCommandSet = LocalStorageService.get('current_command_set')
+    var command_set = localSets[currentCommandSet];
+
+    if ($rootScope.sockets && command_set && command_set.protocol && command_set.protocol === 'socketio'){
+      angular.forEach(command_set.commands, function(command, index){
+        if(command.device && $rootScope.sockets[command.robot + '/' + command.device]){
+          $rootScope.sockets[command.robot + '/' + command.device].disconnect();
+          $rootScope.sockets[command.robot + '/' + command.device] = null;
+        }
+        else if($rootScope.sockets[command.robot]){
+          $rootScope.sockets[command.robot].disconnect();
+          $rootScope.sockets[command.robot] = null;
+        }
+      });
+      $rootScope.sockets = {};
+    }
+  }
+
   $scope.useCommandSet = function(commandSetIndex) {
+    $scope.closeOpenSockets();
+
     if (!isCurrent(commandSetIndex)){
       activityLogger.clear();
     }
@@ -21,6 +43,8 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
   }
 
   $scope.removeCommandSet = function(commandSetIndex) {
+    $scope.closeOpenSockets();
+
     var localSets = LocalStorageService.commandSets();
     var currentCommandSet = LocalStorageService.get('current_command_set')
 
@@ -75,11 +99,9 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
     }
 
     $http.get(url).success(function(data, status, headers, config){
-    console.log("Calling get... success")
       var remoteSet = data.command_set
 
       if (!remoteSet) {
-        console.log("Calling get... no command_set")
         $ionicPopup.alert({
           title: "JSON Error",
           template: 'Wrong JSON structure, you must wrap the command set definition in a "command_set" object.'
@@ -89,7 +111,6 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
       }
 
       if (!remoteSet.name) {
-        console.log("Calling get... no name")
         $ionicPopup.alert({
           title: "Command set definition error",
           template: 'The command set must have a name.'
@@ -99,7 +120,6 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
       }
 
       if (remoteSet.type != 'list' && remoteSet.type != 'd-pad' && remoteSet.type != 'joystick')  {
-        console.log("Calling get... bad type")
         $ionicPopup.alert({
           title: "Command set definition error",
           template: 'The command set must have a type (value must be either <b>list</b> or <b>d-pad</b>).'
@@ -109,7 +129,6 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
       }
 
       if (!remoteSet.commands || !remoteSet.commands instanceof Array || remoteSet.commands.length == 0)  {
-        console.log("Calling get... no commands array")
         $ionicPopup.alert({
           title: "Command set definition error",
           template: 'Please define at least one command.'
@@ -121,7 +140,6 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
       for(i = 0; i < remoteSet.commands.length; i++){
         command = remoteSet.commands[i];
         if (!command.name || !command.label) {
-          console.log("Calling get... command does not have name or label")
           $ionicPopup.alert({
             title: "Command definition error",
             template: 'Commands must have at least a name and a label. Please fix the problem and try again.'
@@ -161,7 +179,6 @@ commander.controller('CommandSetsController', ['$scope', '$http', 'LocalStorageS
       $scope.hideLoadingSpinner();
 
     }).error(function(data, status, headers, config){
-      console.log("Calling get... error")
       $ionicPopup.alert({
         title: 'Unknown Error',
         template: "Please make sure your server is running and that the URL is correct and try again."
