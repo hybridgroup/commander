@@ -1,15 +1,5 @@
 var Cylon = require('cylon');
 
-Cylon.config({
-  api: {
-    ssl: false,
-    port: '8080',
-    host: '0.0.0.0'
-  }
-});
-
-Cylon.api();
-
 Cylon.robot({
   name: 'joystick',
   commands: function() {
@@ -18,8 +8,18 @@ Cylon.robot({
         console.log(name + ": " + action);
       },
       joystick_event: function(name, position) {
-        console.log(name + ": " + position.x + "," + position.y)
+        if (position ) {
+          console.log(name + ": " + position.x + "," + position.y);
+        }
       }
     };
   }
-}).start();
+});
+
+Cylon.api('http', {
+  host: '0.0.0.0',
+  port: '8080',
+  ssl:  false
+});
+
+Cylon.start();
