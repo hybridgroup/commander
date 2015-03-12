@@ -10,9 +10,6 @@ commander.controller('CommandSetCurrentController', ['$scope', '$location', '$lo
     if (current != null && current > -1) {
       location = location + '/' + $scope.current_command_set;
     }
-    $ionicViewService.nextViewOptions({
-      disableBack: true
-    });
     $location.path(location)
   }
 }]);
