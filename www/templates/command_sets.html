@@ -21,6 +21,13 @@
         <input ng-model="url" type="url" placeholder="http://server:port/command_set_endpoint">
       </label>
       <button ng-click="loadCommandSet(url)" class="button button-positive button-block commander-save-button">Load</button>
+      <ion-item class="item item-divider">
+        Load command sets from connection
+      </ion-item>
+      <label class="item item-input">
+        <span class="input-label">Current Connection: {{currentConnection}}</span>
+      </label>
+      <button ng-click="loadCommandSetFromConnection()" class="button button-positive button-block commander-save-button">Load</button>
     </ion-list>
   </ion-content>
 </ion-view>

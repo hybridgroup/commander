@@ -1,5 +1,4 @@
 commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', function($scope, $rootScope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger) {
-
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
     updateLocalCommandsView();
@@ -7,6 +6,7 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
 
   var updateLocalCommandsView = function() {
     $scope.commandSets = LocalStorageService.commandSets();
+    $scope.currentConnection = LocalStorageService.api();
   }
 
   updateLocalCommandsView()
@@ -184,6 +184,10 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
   }
 
   // Loader
+  $scope.loadCommandSetFromConnection = function() {
+    $scope.loadCommandSet($scope.currentConnection + '/api');
+  }
+
   $scope.loadCommandSet = function(url) {
     $scope.showLoadingSpinner();
 
