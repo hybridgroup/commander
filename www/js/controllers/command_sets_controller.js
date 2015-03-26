@@ -4,9 +4,12 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
     updateLocalCommandsView();
   });
 
+  $scope.editMode = 'json';
+
   var updateLocalCommandsView = function() {
     $scope.commandSets = LocalStorageService.commandSets();
     $scope.currentConnection = LocalStorageService.api();
+    $scope.connections = LocalStorageService.connections();
   }
 
   updateLocalCommandsView()
@@ -63,6 +66,23 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
   }
 
   // Presentation-related
+  $scope.showFromJson = function(){
+    if($scope.editMode === 'json'){
+      $scope.editMode = 'connection';
+    }
+    else{
+      $scope.editMode = 'json';
+    }
+  }
+  $scope.showFromConnection = function(){
+    if($scope.editMode === 'connection'){
+      $scope.editMode = 'json';
+    }
+    else{
+      $scope.editMode = 'connection';
+    }
+  }
+
   $scope.getClass = function(commandSetIndex) {
     return  isCurrent(commandSetIndex) ? "button-stable" : "button-balanced";
   }
@@ -98,6 +118,7 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
     });
     var command_set = {
       type: 'list',
+      protocol: robot.protocol || 'http',
       name: robot.name + ' Commands',
       commands: commands
     }
@@ -185,7 +206,99 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
 
   // Loader
   $scope.loadCommandSetFromConnection = function() {
-    $scope.loadCommandSet($scope.currentConnection + '/api');
+    $scope.showLoadingSpinner();
+
+    $http.get($scope.currentConnection + '/api').success(function(data, status, headers, config){
+      var remoteSet = null;
+
+      if (data.command_set) {
+        remoteSet = data.command_set;
+      }
+      else{
+        if (data.MCP && data.MCP.robots[0]){
+          remoteSet = $scope.buildCommandSet(data.MCP.robots[0]);
+        }
+        else if (data.robot){
+          remoteSet = $scope.buildCommandSet(data.robot);
+        }
+        else if (data.commands){
+          angular.extend(data, {name: url.match(/robots\/(.*)\/commands/)[1]})
+          remoteSet = $scope.buildCommandSet(data);
+        }
+      }
+
+      $scope.saveCommandSet(remoteSet)
+      
+
+    }).error(function(data, status, headers, config){
+      socket = io($scope.currentConnection + '/api/robots', {multiplex:false});
+
+      socket.on('reconnect_error', function(obj) {
+        $scope.$apply(function(){
+          socket.disconnect();
+          $ionicPopup.alert({
+            title: 'Unknown Error',
+            template: "Please make sure your server is running and that the URL is correct and try again."
+          });
+          $scope.hideLoadingSpinner();
+        });
+      });
+      socket.on('robots', function(robots) {
+        if (robots.length > 0){
+          robot = io($scope.currentConnection + '/api/robots/' + robots[0], {multiplex:false});
+          robot.on('reconnect_error', function(obj) {
+            $scope.$apply(function(){
+              robot.disconnect();
+              socket.disconnect();
+              $ionicPopup.alert({
+                title: 'Unknown Error',
+                template: "Please make sure your server is running and that the URL is correct and try again."
+              });
+              $scope.hideLoadingSpinner();
+            });
+          });
+          robot.on('commands', function(commands) {
+            if (commands.length > 0){
+              $scope.$apply(function(){
+                var data = {
+                  name: robots[0],
+                  protocol: 'socketio',
+                  commands: commands
+                }
+                var remoteSet = $scope.buildCommandSet(data);
+                $scope.saveCommandSet(remoteSet)
+                robot.disconnect();
+                socket.disconnect();
+              });
+            }
+            else{
+              $scope.$apply(function(){
+                robot.disconnect();
+                socket.disconnect();
+                $ionicPopup.alert({
+                  title: 'Unknown Error',
+                  template: "Please make sure your server is running and that the URL is correct and try again."
+                });
+                $scope.hideLoadingSpinner();
+              });
+            }
+          });
+          robot.connect();
+          robot.emit('commands')
+        }
+        else {
+          $scope.$apply(function(){
+            socket.disconnect()
+            $ionicPopup.alert({
+              title: 'Unknown Error',
+              template: "Please make sure your server is running and that the URL is correct and try again."
+            });
+            $scope.hideLoadingSpinner();
+          });
+        }
+      });
+      socket.connect();
+    });
   }
 
   $scope.loadCommandSet = function(url) {
