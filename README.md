@@ -36,19 +36,63 @@ This is where you set the robots server endpoint, frameworks by default use port
 
 Use the ip of the machine where the server is running instead of localhost, so it can be reached from your phone. Also make sure you phone is connected to the same network.
 
+To Add a Connection:
+
 1. Go to the right Menu -> Connection
 2. On the API URL field, type the url of your robot's API server. (Ex: http://192.168.15.11:3000)
 3. Click Save
 
-### Loading command sets
 
-To create commands you need to load a command set from a json file. This allows you to store your command set alongside your robot, therefore you won't need to enter command details manually.
+To Edit a Connection:
+
+1. Go to the right Menu -> Connection
+2. Click on the connection you want to edit.
+3. Enter the new url for your connection.
+4. Click on the arrow button to save.
+5. Click on the cancel button to cancel.
+
+
+To Switch to a different Connection:
+
+1. Go to the right Menu -> Connection
+2. Locatet the connection you want to use and click on the 'Use' button.
+
+
+### Loading Command Sets
+
+To create commands you need to load a command set from a json file or from your current API connection. This allows you to store your command set alongside your robot, therefore you won't need to enter command details manually.
 
 Visit https://github.com/hybridgroup/commander/tree/master/examples for some command set examples.
 
+Loading command sets from a json file gives you the opportunity to define your type of command set layout to use, like a `joystick` for example, define how many joysticks do you want, if you need buttons, etc.
+
+Loading command sets from API or current connection, will create a default `list` command set.
+
+
+#### Loading From JSON file.
+
+Loading from a json file hosted on a server.
+
 1. Go to the right Menu -> Command Sets
-2. On the URL field, type the url where your json commande set is hosted. (Ex: https://raw.githubusercontent.com/hybridgroup/commander/master/examples/arduino/arduino.json)
+2. Locate and expand the Load command sets from json section, On the URL field, type the url where your json command set is hosted. (Ex: https://raw.githubusercontent.com/hybridgroup/commander/master/examples/arduino/arduino-list.json)
 3. Click Load button
+4. Once loaded, click on the 'Use' button.
+
+Loading from a json file returned by an API compatible with cppp-io.
+
+1. Go to the right Menu -> Command Sets
+2. Locate and expand the Load command sets from json section, On the URL field, type the url of your API. (Ex. http://127.0.0.1:8080/api, http://127.0.0.1:8080/api/robots/my-robot, http://127.0.0.1:8080/api/robots/my-robot/commands)
+3. Click Load button
+4. Once loaded, click on the 'Use' button.
+
+
+#### Loading From Current Connection.
+
+1. Go to the right Menu -> Command Sets
+2. Locate and expand the Load command sets from connection.
+3. Click Load button
+
+
 
 ### Using Command Sets
 
