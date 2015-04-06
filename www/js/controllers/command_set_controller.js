@@ -2,6 +2,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
   $scope.configuration = JSON.parse(localStorage.commander);
   $scope.activityLog = activityLogger;
   $scope.popupVisible = false;
+  $scope.robotName = null;
 
   // Used for http connections
   $rootScope.urls = {};
@@ -55,21 +56,71 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
 
         var commandUrl = "";
         var commandName = "";
-        if(command.device){
-          commandName = command.robot + '/' + command.device + '/' + command.name;
-          commandUrl = '/api/robots/' + command.robot + '/devices/' + command.device + '/commands/' + command.name;
-        }
-        else if(command.robot){ 
-          commandName = command.robot + '/' + command.name;
-          commandUrl = '/api/robots/' + command.robot + '/commands/' + command.name;
-        }
-        else { 
-          commandName = command.name;
-          commandUrl = '/api/commands/' + command.name;
-        }
+        if(command.robot && command.robot === '*'){
+          if ($scope.robotName) {
+            command.robot = $scope.robotName;
+            if(command.device){
+              commandName = command.robot + '/' + command.device + '/' + command.name;
+              commandUrl = '/api/robots/' + command.robot + '/devices/' + command.device + '/commands/' + command.name;
+            }
+            else if(command.robot){ 
+              commandName = command.robot + '/' + command.name;
+              commandUrl = '/api/robots/' + command.robot + '/commands/' + command.name;
+            }
+            else { 
+              commandName = command.name;
+              commandUrl = '/api/commands/' + command.name;
+            }
 
-        if(!$rootScope.urls[commandName]){
-          $rootScope.urls[commandName] = commandUrl;
+            if(!$rootScope.urls[commandName]){
+              $rootScope.urls[commandName] = commandUrl;
+            }
+          }
+          else {
+            $http.get($scope.configuration.api + '/api').success(function(data, status, headers, config){
+              if (data.MCP && data.MCP.robots[0]){
+                $scope.robotName = data.MCP.robots[0].name;
+                command.robot = $scope.robotName;
+                if(command.device){
+                  commandName = command.robot + '/' + command.device + '/' + command.name;
+                  commandUrl = '/api/robots/' + command.robot + '/devices/' + command.device + '/commands/' + command.name;
+                }
+                else if(command.robot){ 
+                  commandName = command.robot + '/' + command.name;
+                  commandUrl = '/api/robots/' + command.robot + '/commands/' + command.name;
+                }
+                else { 
+                  commandName = command.name;
+                  commandUrl = '/api/commands/' + command.name;
+                }
+
+                if(!$rootScope.urls[commandName]){
+                  $rootScope.urls[commandName] = commandUrl;
+                }
+              }
+            }).error(function(data, status, headers, config){
+
+            })
+
+          }
+        }
+        else {
+          if(command.device){
+            commandName = command.robot + '/' + command.device + '/' + command.name;
+            commandUrl = '/api/robots/' + command.robot + '/devices/' + command.device + '/commands/' + command.name;
+          }
+          else if(command.robot){ 
+            commandName = command.robot + '/' + command.name;
+            commandUrl = '/api/robots/' + command.robot + '/commands/' + command.name;
+          }
+          else { 
+            commandName = command.name;
+            commandUrl = '/api/commands/' + command.name;
+          }
+
+          if(!$rootScope.urls[commandName]){
+            $rootScope.urls[commandName] = commandUrl;
+          }
         }
       });
     }

@@ -1,12 +1,15 @@
 commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', function($scope, $rootScope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger) {
-
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
     updateLocalCommandsView();
   });
 
+  $scope.editMode = 'json';
+
   var updateLocalCommandsView = function() {
     $scope.commandSets = LocalStorageService.commandSets();
+    $scope.currentConnection = LocalStorageService.api();
+    $scope.connections = LocalStorageService.connections();
   }
 
   updateLocalCommandsView()
@@ -63,6 +66,23 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
   }
 
   // Presentation-related
+  $scope.showFromJson = function(){
+    if($scope.editMode === 'json'){
+      $scope.editMode = 'connection';
+    }
+    else{
+      $scope.editMode = 'json';
+    }
+  }
+  $scope.showFromConnection = function(){
+    if($scope.editMode === 'connection'){
+      $scope.editMode = 'json';
+    }
+    else{
+      $scope.editMode = 'connection';
+    }
+  }
+
   $scope.getClass = function(commandSetIndex) {
     return  isCurrent(commandSetIndex) ? "button-stable" : "button-balanced";
   }
@@ -85,7 +105,202 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
     $ionicLoading.hide();
   };
 
+  $scope.buildCommandSet = function(robot){
+    var commands = [];
+    angular.forEach(robot.commands, function(command, index){
+      commands.push({
+        label: command,
+        robot: robot.name,
+        device: '',
+        name: command,
+        params:{}
+      });
+    });
+    var command_set = {
+      type: 'list',
+      protocol: robot.protocol || 'http',
+      name: robot.name + ' Commands',
+      commands: commands
+    }
+    return command_set;
+  }
+
+  $scope.saveCommandSet = function(remoteSet){
+    if (!remoteSet) {
+      $ionicPopup.alert({
+        title: "JSON Error",
+        template: 'Wrong JSON structure, you must wrap the command set definition in a "command_set" object.'
+      });
+      $scope.hideLoadingSpinner();
+      return;
+    }
+
+    if (!remoteSet.name) {
+      $ionicPopup.alert({
+        title: "Command set definition error",
+        template: 'The command set must have a name.'
+      });
+      $scope.hideLoader();
+      return;
+    }
+
+    if (remoteSet.type != 'list' && remoteSet.type != 'd-pad' && remoteSet.type != 'joystick')  {
+      $ionicPopup.alert({
+        title: "Command set definition error",
+        template: 'The command set must have a type (value must be either <b>list</b> or <b>d-pad</b>).'
+      });
+      $scope.hideLoadingSpinner();
+      return;
+    }
+
+    if (!remoteSet.commands || !remoteSet.commands instanceof Array || remoteSet.commands.length == 0)  {
+      $ionicPopup.alert({
+        title: "Command set definition error",
+        template: 'Please define at least one command.'
+      });
+      $scope.hideLoadingSpinner();
+      return;
+    }
+
+    for(i = 0; i < remoteSet.commands.length; i++){
+      command = remoteSet.commands[i];
+      if (!command.name || !command.label) {
+        $ionicPopup.alert({
+          title: "Command definition error",
+          template: 'Commands must have at least a name and a label. Please fix the problem and try again.'
+        });
+        $scope.hideLoadingSpinner();
+        return;
+      }
+    }
+
+    var localSets = LocalStorageService.commandSets();
+
+    // Add new command set or update an existing one?
+    var indexToUpdate = null;
+    var templateMessage = null;
+
+    for(i = 0; i < localSets.length; i++){
+      if(localSets[i].name == remoteSet.name) {
+        indexToUpdate = i;
+      }
+    }
+
+    if(indexToUpdate == null) {
+      localSets.push(remoteSet);
+      templateMessage = "loaded";
+    } else {
+      localSets[indexToUpdate] = remoteSet;
+      templateMessage = "updated";
+    }
+
+    LocalStorageService.set('command_sets', localSets);
+
+    $ionicPopup.alert({
+      title: "Success",
+      template: '<b>' + remoteSet.name + '</b> command set was successfuly ' + templateMessage + '.'
+    });
+
+    $scope.hideLoadingSpinner();
+  }
+
   // Loader
+  $scope.loadCommandSetFromConnection = function() {
+    $scope.showLoadingSpinner();
+
+    $http.get($scope.currentConnection + '/api').success(function(data, status, headers, config){
+      var remoteSet = null;
+
+      if (data.command_set) {
+        remoteSet = data.command_set;
+      }
+      else{
+        if (data.MCP && data.MCP.robots[0]){
+          remoteSet = $scope.buildCommandSet(data.MCP.robots[0]);
+        }
+        else if (data.robot){
+          remoteSet = $scope.buildCommandSet(data.robot);
+        }
+        else if (data.commands){
+          angular.extend(data, {name: url.match(/robots\/(.*)\/commands/)[1]})
+          remoteSet = $scope.buildCommandSet(data);
+        }
+      }
+
+      $scope.saveCommandSet(remoteSet)
+      
+
+    }).error(function(data, status, headers, config){
+      socket = io($scope.currentConnection + '/api/robots', {multiplex:false});
+
+      socket.on('reconnect_error', function(obj) {
+        $scope.$apply(function(){
+          socket.disconnect();
+          $ionicPopup.alert({
+            title: 'Unknown Error',
+            template: "Please make sure your server is running and that the URL is correct and try again."
+          });
+          $scope.hideLoadingSpinner();
+        });
+      });
+      socket.on('robots', function(robots) {
+        if (robots.length > 0){
+          robot = io($scope.currentConnection + '/api/robots/' + robots[0], {multiplex:false});
+          robot.on('reconnect_error', function(obj) {
+            $scope.$apply(function(){
+              robot.disconnect();
+              socket.disconnect();
+              $ionicPopup.alert({
+                title: 'Unknown Error',
+                template: "Please make sure your server is running and that the URL is correct and try again."
+              });
+              $scope.hideLoadingSpinner();
+            });
+          });
+          robot.on('commands', function(commands) {
+            if (commands.length > 0){
+              $scope.$apply(function(){
+                var data = {
+                  name: robots[0],
+                  protocol: 'socketio',
+                  commands: commands
+                }
+                var remoteSet = $scope.buildCommandSet(data);
+                $scope.saveCommandSet(remoteSet)
+                robot.disconnect();
+                socket.disconnect();
+              });
+            }
+            else{
+              $scope.$apply(function(){
+                robot.disconnect();
+                socket.disconnect();
+                $ionicPopup.alert({
+                  title: 'Unknown Error',
+                  template: "Please make sure your server is running and that the URL is correct and try again."
+                });
+                $scope.hideLoadingSpinner();
+              });
+            }
+          });
+          robot.connect();
+          robot.emit('commands')
+        }
+        else {
+          $scope.$apply(function(){
+            socket.disconnect()
+            $ionicPopup.alert({
+              title: 'Unknown Error',
+              template: "Please make sure your server is running and that the URL is correct and try again."
+            });
+            $scope.hideLoadingSpinner();
+          });
+        }
+      });
+      socket.connect();
+    });
+  }
+
   $scope.loadCommandSet = function(url) {
     $scope.showLoadingSpinner();
 
@@ -99,84 +314,26 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
     }
 
     $http.get(url).success(function(data, status, headers, config){
-      var remoteSet = data.command_set
+      var remoteSet = null;
 
-      if (!remoteSet) {
-        $ionicPopup.alert({
-          title: "JSON Error",
-          template: 'Wrong JSON structure, you must wrap the command set definition in a "command_set" object.'
-        });
-        $scope.hideLoadingSpinner();
-        return;
+      if (data.command_set) {
+        remoteSet = data.command_set;
       }
-
-      if (!remoteSet.name) {
-        $ionicPopup.alert({
-          title: "Command set definition error",
-          template: 'The command set must have a name.'
-        });
-        $scope.hideLoader();
-        return;
-      }
-
-      if (remoteSet.type != 'list' && remoteSet.type != 'd-pad' && remoteSet.type != 'joystick')  {
-        $ionicPopup.alert({
-          title: "Command set definition error",
-          template: 'The command set must have a type (value must be either <b>list</b> or <b>d-pad</b>).'
-        });
-        $scope.hideLoadingSpinner();
-        return;
-      }
-
-      if (!remoteSet.commands || !remoteSet.commands instanceof Array || remoteSet.commands.length == 0)  {
-        $ionicPopup.alert({
-          title: "Command set definition error",
-          template: 'Please define at least one command.'
-        });
-        $scope.hideLoadingSpinner();
-        return;
-      }
-
-      for(i = 0; i < remoteSet.commands.length; i++){
-        command = remoteSet.commands[i];
-        if (!command.name || !command.label) {
-          $ionicPopup.alert({
-            title: "Command definition error",
-            template: 'Commands must have at least a name and a label. Please fix the problem and try again.'
-          });
-          $scope.hideLoadingSpinner();
-          return;
+      else{
+        if (data.MCP && data.MCP.robots[0]){
+          remoteSet = $scope.buildCommandSet(data.MCP.robots[0]);
+        }
+        else if (data.robot){
+          remoteSet = $scope.buildCommandSet(data.robot);
+        }
+        else if (data.commands){
+          angular.extend(data, {name: url.match(/robots\/(.*)\/commands/)[1]})
+          remoteSet = $scope.buildCommandSet(data);
         }
       }
 
-      var localSets = LocalStorageService.commandSets();
-
-      // Add new command set or update an existing one?
-      var indexToUpdate = null;
-      var templateMessage = null;
-
-      for(i = 0; i < localSets.length; i++){
-        if(localSets[i].name == remoteSet.name) {
-          indexToUpdate = i;
-        }
-      }
-
-      if(indexToUpdate == null) {
-        localSets.push(remoteSet);
-        templateMessage = "loaded";
-      } else {
-        localSets[indexToUpdate] = remoteSet;
-        templateMessage = "updated";
-      }
-
-      LocalStorageService.set('command_sets', localSets);
-
-      $ionicPopup.alert({
-        title: "Success",
-        template: '<b>' + remoteSet.name + '</b> command set was successfuly ' + templateMessage + '.'
-      });
-
-      $scope.hideLoadingSpinner();
+      $scope.saveCommandSet(remoteSet)
+      
 
     }).error(function(data, status, headers, config){
       $ionicPopup.alert({

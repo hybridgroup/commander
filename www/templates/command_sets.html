@@ -13,14 +13,25 @@
     </ion-list>
 
     <ion-list class="commander-list">
-      <ion-item class="item item-divider">
+      <ion-item class="item item-divider" ng-click="showFromJson()">
+        <i class="icon" ng-class="editMode === 'json' ? 'ion-minus' : 'ion-plus'"></i>&nbsp;
         Load command sets from JSON
       </ion-item>
-      <label class="item item-input">
+      <label class="item item-input" ng-show="editMode === 'json'">
         <span class="input-label">URL</span>
         <input ng-model="url" type="url" placeholder="http://server:port/command_set_endpoint">
       </label>
-      <button ng-click="loadCommandSet(url)" class="button button-positive button-block commander-save-button">Load</button>
+      <div ng-show="connections.length">
+        <ion-item class="item item-divider" ng-click="showFromConnection()">
+          <i class="icon" ng-class="editMode === 'connection' ? 'ion-minus' : 'ion-plus'"></i>&nbsp;
+          Load command sets from connection
+        </ion-item>
+        <label class="item item-input" ng-show="editMode === 'connection'">
+          <span class="input-label">Current Connection: {{currentConnection}}</span>
+        </label>
+      </div>
+      <button ng-click="loadCommandSet(url)" ng-show="editMode === 'json'" class="button button-positive button-block commander-save-button">Load</button>
+      <button ng-click="loadCommandSetFromConnection()" ng-show="editMode === 'connection'" class="button button-positive button-block commander-save-button">Load</button>
     </ion-list>
   </ion-content>
 </ion-view>
