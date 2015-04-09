@@ -29,6 +29,19 @@ commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http',
       });
       $rootScope.sockets = {};
     }
+    if ($rootScope.mqtts && command_set && command_set.protocol && command_set.protocol === 'mqtt'){
+      angular.forEach(command_set.commands, function(command, index){
+        if(command.device && $rootScope.mqtts[command.robot + '/' + command.device]){
+          $rootScope.mqtts[command.robot + '/' + command.device].end();
+          $rootScope.mqtts[command.robot + '/' + command.device] = null;
+        }
+        else if($rootScope.mqtts[command.robot]){
+          $rootScope.mqtts[command.robot].end();
+          $rootScope.mqtts[command.robot] = null;
+        }
+      });
+      $rootScope.mqtts = {}; 
+    }
   }
 
   $scope.useConnection = function(connectionIndex) {
