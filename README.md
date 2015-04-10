@@ -21,7 +21,10 @@ The Commander mobile application can communicate with any device using the [Comm
 
 Commander can be used to send commands to your robots or listen for events coming from them.
 
+The connection to your robots can be accomplished by using http, web sockets or mqtt protocols.
+
 You can load a "command set" that is a list of the preconfigured commands and you can choose between different types of layouts.
+
 
 ## Using Commander
 
@@ -92,6 +95,32 @@ Loading from a json file returned by an API compatible with cppp-io.
 2. Locate and expand the Load command sets from connection.
 3. Click Load button
 
+
+### Defining Protocols
+
+#### HTTP:
+
+This is the default protocol commander uses. The command set can include a `protocol` key with the `http` value, if not included, http will be used.
+
+Commander current connection should point to your robot http api.
+
+Commands will be execute by sending simple REST requests.
+
+#### WS:
+
+Enable connection through web socket by setting the `protocol` key on your command set to `socketio`.
+
+A web socket will be created using the current commander connection host and port.
+
+Commands will be executed by emitting events through the web socket.
+
+#### MQTT:
+
+Enable connection through mqtt by setting the `protocol` key on your command set to `mqtt`.
+
+A web socket will be created using the current commander connection host and port.
+
+Commands will be executed by publishing messages to the mqtt broker.
 
 
 ### Using Command Sets
