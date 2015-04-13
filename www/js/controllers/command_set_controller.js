@@ -51,6 +51,39 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
         }
       });
     }
+    else if ($scope.command_set.protocol && $scope.command_set.protocol === 'mqtt'){
+      angular.forEach($scope.commands, function(command, index){
+        
+        var mqttUrl = "";
+        var mqttName = "";
+        if(command.device){
+          mqttName = command.robot + '/' + command.device;
+          mqttUrl = '/api/robots/' + command.robot + '/devices/' + command.device;
+        }
+        else {
+          mqttName = command.robot;
+          mqttUrl = '/api/robots/' + command.robot;
+        }
+
+        if(!$rootScope.mqtts[mqttName]){
+          $scope.activityLog.showConnectionIndicator();
+          $rootScope.mqtts[mqttName] = mqtt.connect($scope.configuration.api);
+
+          $rootScope.mqtts[mqttName].on('connect', function(obj) {
+            $scope.$apply(function(){
+              $scope.activityLog.hideConnectionIndicator();
+              $scope.activityLog.saveLog('socketio', 'MQTT Connected: ' + mqttName);  
+            });
+          });
+          $rootScope.mqtts[mqttName].on('error', function(obj) {
+            $scope.$apply(function(){
+              $scope.activityLog.showConnectionIndicator();
+              $scope.activityLog.saveLog(false, 'Connection Error:' + mqttName);  
+            });
+          });
+        }
+      });
+    }
     else {
       angular.forEach($scope.commands, function(command, index){
 
@@ -162,7 +195,6 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
   };
   
   $scope.execute = function(command, params) {
-
     if(params) {
       angular.extend(command.params, params)
     }
@@ -173,6 +205,15 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
       }
       else {
         $rootScope.sockets[command.robot].emit(command.name, command.params);
+      }
+      $scope.activityLog.saveLog('socketio', 'Command ' + command.name + ' sent.');
+    }
+    else if ($scope.command_set.protocol && $scope.command_set.protocol === 'mqtt'){
+      if(command.device){
+        $rootScope.mqtts[command.robot + '/' + command.device].publish('/api/robots/' + command.robot + '/devices/' + command.device + '/' + command.name, JSON.stringify(command.params));  
+      }
+      else {
+        $rootScope.mqtts[command.robot].publish('/api/robots/' + command.robot + '/' + command.name, JSON.stringify(command.params));
       }
       $scope.activityLog.saveLog('socketio', 'Command ' + command.name + ' sent.');
     }

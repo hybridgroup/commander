@@ -58,4 +58,5 @@ commander.controller('ContentController', ['$scope', '$rootScope', '$ionicSideMe
     }
   };
   $rootScope.sockets = {};
+  $rootScope.mqtts = {};
 }]);
