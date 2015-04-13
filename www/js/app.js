@@ -23,7 +23,7 @@ commander = angular.module('commander', ['ionic'])
 
 .run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
-    $rootScope.appVersion = "0.3.0";
+    $rootScope.appVersion = "0.4.0";
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if(window.navigator && window.navigator.splashscreen) {
