@@ -89,7 +89,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
 
         var commandUrl = "";
         var commandName = "";
-        if(command.robot && command.robot === '*'){
+        if((command.robot === undefined) || (command.robot && command.robot === '*' )){
           if ($scope.robotName) {
             command.robot = $scope.robotName;
             if(command.device){
