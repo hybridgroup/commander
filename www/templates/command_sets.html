@@ -19,7 +19,24 @@
       </ion-item>
       <label class="item item-input" ng-show="editMode === 'json'">
         <span class="input-label">URL</span>
-        <input ng-model="url" type="url" placeholder="http://server:port/command_set_endpoint">
+        <input ng-model="form.url" type="url" placeholder="http://server:port/command_set_endpoint">
+      </label>
+      <label class="item item-input item-select"  ng-show="editMode === 'json'">
+        <div class="input-label">
+          Authentication
+        </div>
+        <select ng-model="form.auth">
+          <option value='none' selected>None</option>
+          <option value='basic'>Basic</option>
+        </select>
+      </label>
+      <label class="item item-input" ng-show="editMode === 'json' && form.auth == 'basic'">
+        <span class="input-label">Username</span>
+        <input ng-model="form.username" type="text" placeholder="username">
+      </label>
+      <label class="item item-input" ng-show="editMode === 'json' && form.auth == 'basic'">
+        <span class="input-label">Password</span>
+        <input ng-model="form.password" type="password" placeholder="password">
       </label>
       <div ng-show="connections.length">
         <ion-item class="item item-divider" ng-click="showFromConnection()">
@@ -27,10 +44,10 @@
           Load command sets from connection
         </ion-item>
         <label class="item item-input" ng-show="editMode === 'connection'">
-          <span class="input-label">Current Connection: {{currentConnection}}</span>
+          <span class="input-label">Current Connection: {{api.url}}</span>
         </label>
       </div>
-      <button ng-click="loadCommandSet(url)" ng-show="editMode === 'json'" class="button button-positive button-block commander-save-button">Load</button>
+      <button ng-click="loadCommandSet(form)" ng-show="editMode === 'json'" class="button button-positive button-block commander-save-button">Load</button>
       <button ng-click="loadCommandSetFromConnection()" ng-show="editMode === 'connection'" class="button button-positive button-block commander-save-button">Load</button>
     </ion-list>
   </ion-content>

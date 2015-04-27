@@ -1,6 +1,13 @@
 if(!localStorage.commander){
   localStorage.commander = JSON.stringify({
-    api: 'http://localhost:3000',
+    api: {
+      url:'http://localhost:3000',
+      auth:'none',
+      user: null,
+      password: null,
+      token: null,
+      tokenHeader: null
+    },
     command_sets: [],
     connections: [],
     current_command_set: null,
@@ -8,16 +15,47 @@ if(!localStorage.commander){
     log: ''
   });
 }
-
-// Making sure api is a string, not an object as before
-(function() {
-  var storage = JSON.parse(localStorage.commander);
-  var api = storage.api
-  if(api.host){
-    storage.api = api.host + ':' + api.port;
-    localStorage.commander = JSON.stringify(storage);
+else {
+  var configuration = JSON.parse(localStorage.commander);
+  
+  var newApi = configuration.api; 
+  if (typeof configuration.api === "string") {
+    var newApi = {
+      url: configuration.api,
+      auth:'none',
+      user: null,
+      password: null,
+      token: null,
+      tokenHeader: null
+    }
   }
-})();
+
+  var newConnections = [];
+  angular.forEach(configuration.connections, function(connection, index){
+    if (typeof connection === "string") {
+      newConnections.push({
+        url: connection,
+        auth: 'none',
+        user: null,
+        password: null,
+        token: null,
+        tokenHeader: null
+      });
+    }
+    else{
+      newConnections.push(connection);
+    }
+  });
+  localStorage.commander = JSON.stringify({
+    api: newApi,
+    command_sets: configuration.command_sets,
+    connections: newConnections,
+    current_command_set: configuration.current_command_set,
+    current_connection: configuration.current_connection,
+    log: configuration.log
+  });
+}
+
 
 commander = angular.module('commander', ['ionic'])
 
@@ -59,4 +97,5 @@ commander.controller('ContentController', ['$scope', '$rootScope', '$ionicSideMe
   };
   $rootScope.sockets = {};
   $rootScope.mqtts = {};
+  $rootScope.editConnectionMode = false;
 }]);

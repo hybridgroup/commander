@@ -1,4 +1,5 @@
-commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', function($scope, $rootScope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger) {
+commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 'LocalStorageService', '$ionicNavBarDelegate', '$ionicPopup', '$ionicLoading', '$ionicListDelegate', '$location', 'activityLogger', 'base64Service', function($scope, $rootScope, $http, LocalStorageService, $ionicNavBarDelegate, $ionicPopup, $ionicLoading, $ionicListDelegate, $location, activityLogger, base64Service) {
+  $scope.form = {url:'',auth:'none',user: null,password: null,token: null,tokenHeader: null};
   // Local command sets
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
     updateLocalCommandsView();
@@ -8,7 +9,7 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
 
   var updateLocalCommandsView = function() {
     $scope.commandSets = LocalStorageService.commandSets();
-    $scope.currentConnection = LocalStorageService.api();
+    $scope.api = LocalStorageService.api();
     $scope.connections = LocalStorageService.connections();
   }
 
@@ -222,7 +223,14 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
   $scope.loadCommandSetFromConnection = function() {
     $scope.showLoadingSpinner();
 
-    $http.get($scope.currentConnection + '/api').success(function(data, status, headers, config){
+    var config = {};
+    if ($scope.api.auth && $scope.api.auth !== 'none'){
+      config.headers = {
+        'Authorization': $scope.api.tokenHeader
+      };
+    }
+
+    $http.get($scope.api.url + '/api', config).success(function(data, status, headers, config){
       var remoteSet = null;
 
       if (data.command_set) {
@@ -245,7 +253,7 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
       
 
     }).error(function(data, status, headers, config){
-      socket = io($scope.currentConnection + '/api/robots', {multiplex:false});
+      socket = io($scope.api.url + '/api/robots', {multiplex:false});
 
       socket.on('reconnect_error', function(obj) {
         $scope.$apply(function(){
@@ -259,7 +267,7 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
       });
       socket.on('robots', function(robots) {
         if (robots.length > 0){
-          robot = io($scope.currentConnection + '/api/robots/' + robots[0], {multiplex:false});
+          robot = io($scope.api.url + '/api/robots/' + robots[0], {multiplex:false});
           robot.on('reconnect_error', function(obj) {
             $scope.$apply(function(){
               robot.disconnect();
@@ -315,10 +323,10 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
     });
   }
 
-  $scope.loadCommandSet = function(url) {
+  $scope.loadCommandSet = function(form) {
     $scope.showLoadingSpinner();
 
-    if (!url) {
+    if (!form.url) {
       $ionicPopup.alert({
         title: 'Error',
         template: 'Please specify a valid URL'
@@ -327,7 +335,38 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
       return;
     }
 
-    $http.get(url).success(function(data, status, headers, config){
+    var config = {};
+
+    if (form.auth == 'basic'){
+      if(!form.username || !form.password){
+        $ionicPopup.alert({
+          title: 'Authentication Error',
+          template: "Please enter a valid username/password."
+        });
+        $scope.hideLoadingSpinner();
+        return;
+      }
+      var token = form.username + ':' + form.password;
+      var tokenHeader = 'Basic ' + base64Service.encode(token);
+      config.headers = {
+        'Authorization': tokenHeader
+      };
+    }
+    if (form.auth == 'oauth2'){
+      if(!form.token){
+        $ionicPopup.alert({
+          title: 'Error',
+          template: 'Please specify a valid access token'
+        });
+        $scope.hideLoadingSpinner();
+        return;
+      }
+      var token = form.token;
+      var tokenHeader = 'Bearer ' + token;
+    }
+
+
+    $http.get(form.url, config).success(function(data, status, headers, config){
       var remoteSet = null;
 
       if (data.command_set) {
@@ -341,19 +380,27 @@ commander.controller('CommandSetsController', ['$scope', '$rootScope', '$http', 
           remoteSet = $scope.buildCommandSet(data.robot);
         }
         else if (data.commands){
-          angular.extend(data, {name: url.match(/robots\/(.*)\/commands/)[1]})
+          angular.extend(data, {name: form.url.match(/robots\/(.*)\/commands/)[1]})
           remoteSet = $scope.buildCommandSet(data);
         }
       }
 
       $scope.saveCommandSet(remoteSet)
-      
+      $scope.form = {url:'',auth:'none',user: null,password: null,token: null,tokenHeader: null};
 
     }).error(function(data, status, headers, config){
-      $ionicPopup.alert({
-        title: 'Unknown Error',
-        template: "Please make sure your server is running and that the URL is correct and try again."
-      });
+      if(status === 401){
+        $ionicPopup.alert({
+          title: 'Authentication Error',
+          template: "Please enter a valid authentication credentials."
+        });
+      }
+      else {
+        $ionicPopup.alert({
+          title: 'Unknown Error',
+          template: "Please make sure your server is running and that the URL is correct and try again."
+        });
+      }
       $scope.hideLoadingSpinner();
     });
   }

@@ -10,7 +10,7 @@ li {
   white-space: normal !important; }
 
 .input-label {
-  width: 15%; }
+  width: 22%; }
 
 input[type=text] {
   min-width: 85%; }
@@ -55,6 +55,18 @@ input[type=text] {
   background-color: #226C4B;
   border: 1px solid #2C875E; }
 
+.item-edit-divider {
+  background-color: #f7f7f7;
+  color: #444;
+  font-weight: bold;
+  padding: 10px 16px; }
+  .item-edit-divider button {
+    font-size: 16px !important;
+    line-height: 15px !important;
+    min-height: 30px !important;
+    height: 28px !important;
+    top: 5px !important; }
+
 /*Lists*/
 .commander-list .list {
   margin-bottom: 0; }
@@ -73,13 +85,15 @@ input[type=text] {
 
 .connections-content .commander-list .list .item.item-button-right {
   padding-right: 0; }
+.connections-content .commander-list .list .item .item-content {
+  color: #6a6a6a; }
 .connections-content .commander-list .list .item input {
   height: 20px;
   font-size: 16px;
   line-height: 16px;
   padding: 0;
   margin: 0;
-  color: #000; }
+  color: #333; }
 .connections-content .commander-list .list .item button.button-icon:before {
   font-size: 34px;
   line-height: 36px; }

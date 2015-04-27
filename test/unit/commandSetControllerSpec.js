@@ -3,7 +3,14 @@
 describe('CommandSetController', function() {
   var ctrl, httpBackend, scope, rootScope, command, singleCommand, robotCommand, deviceCommand, scopeUrls;
 
-  var apiUrl = "http://localhost:8000";
+  var apiUrl = {
+    url:'http://localhost:3000',
+    auth:'none',
+    user: null,
+    password: null,
+    token: null,
+    tokenHeader: null
+  };
 
   command = {
     label: 'Say hello',
@@ -144,13 +151,13 @@ describe('CommandSetController', function() {
       });
 
       it('should return true if API URL is valid', function() {
-        scope.configuration.api = "http://127.0.0.1:8000";
+        scope.configuration.api.url = "http://127.0.0.1:8000";
         var result = scope.execute(command);
         expect(result).toEqual(true)
       });
 
       it('when succeed should set activity logger results', function() {
-        scope.configuration.api = "http://127.0.0.1:8000";
+        scope.configuration.api.url = "http://127.0.0.1:8000";
         var expectedCommand = 'http://127.0.0.1:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
         httpBackend.expectPOST(expectedCommand).respond(200, {result:'success'});
 
@@ -162,14 +169,14 @@ describe('CommandSetController', function() {
       });
 
       it('when fails should set activity logger results', function() {
-        scope.configuration.api = "http://127.0.0.1:8000";
+        scope.configuration.api.url = "http://127.0.0.1:8000";
         var expectedCommand = 'http://127.0.0.1:8000/api/robots/pebble/devices/pebble/commands/sendNotification';
-        httpBackend.expectPOST(expectedCommand).respond(401);
+        httpBackend.expectPOST(expectedCommand).respond(401, 'failed');
 
         scope.execute(command);
         httpBackend.flush();
 
-        expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : 'failed' });
+        expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification:failed', status : 'failed' });
         expect(scope.activityLog.status()).toEqual('failed');
       });
     });
@@ -182,8 +189,8 @@ describe('CommandSetController', function() {
         expect(scope.activityLog.status()).toEqual('success');
 
         // Error Activiy log
-        scope.logActivity(false, command, null);
-        expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification', status : 'failed' });
+        scope.logActivity(false, command, 'failed');
+        expect(scope.activityLog.getLog()[0]).toEqual({ message : 'Error executing command: sendNotification:failed', status : 'failed' });
         expect(scope.activityLog.status()).toEqual('failed');
       });
     });
@@ -205,7 +212,7 @@ describe('CommandSetController', function() {
 
         it('should return an URL like api/commands/{command}', function(){
 
-          var expectedUrl = apiUrl + '/api' + '/commands/' + singleCommand.name;
+          var expectedUrl = apiUrl.url + '/api' + '/commands/' + singleCommand.name;
           expect(scope.commandUrl(singleCommand)).toEqual(expectedUrl)
         });
 
@@ -215,7 +222,7 @@ describe('CommandSetController', function() {
 
         it('should return an URL like api/robots/{robot}/commands/{command}', function(){
 
-          var expectedUrl = apiUrl + '/api' + '/robots/' + robotCommand.robot + '/commands/' + robotCommand.name;
+          var expectedUrl = apiUrl.url + '/api' + '/robots/' + robotCommand.robot + '/commands/' + robotCommand.name;
           expect(scope.commandUrl(robotCommand)).toEqual(expectedUrl)
         });
 
@@ -225,7 +232,7 @@ describe('CommandSetController', function() {
 
         it('should return an URL like api/robots/{robot}/devices/{device}/commands/{command}', function(){
 
-          var expectedUrl = apiUrl + '/api' + '/robots/' + deviceCommand.robot + '/devices/' + deviceCommand.device + '/commands/' + deviceCommand.name;
+          var expectedUrl = apiUrl.url + '/api' + '/robots/' + deviceCommand.robot + '/devices/' + deviceCommand.device + '/commands/' + deviceCommand.name;
           expect(scope.commandUrl(deviceCommand)).toEqual(expectedUrl)
         });
 

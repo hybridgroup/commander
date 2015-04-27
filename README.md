@@ -43,16 +43,17 @@ To Add a Connection:
 
 1. Go to the right Menu -> Connection
 2. On the API URL field, type the url of your robot's API server. (Ex: http://192.168.15.11:3000)
-3. Click Save
+3. In case your serve requires Authentication, please select the type of authentication required by your server. We currently only support `basic` authentication. 
+4. Click Save
 
 
 To Edit a Connection:
 
 1. Go to the right Menu -> Connection
 2. Click on the connection you want to edit.
-3. Enter the new url for your connection.
-4. Click on the arrow button to save.
-5. Click on the cancel button to cancel.
+3. Enter the new details of your connection.
+4. Click on the save button.
+5. Click on the cancel button to cancel the action.
 
 
 To Switch to a different Connection:
@@ -78,8 +79,9 @@ Loading from a json file hosted on a server.
 
 1. Go to the right Menu -> Command Sets
 2. Locate and expand the Load command sets from json section, On the URL field, type the url where your json command set is hosted. (Ex: https://raw.githubusercontent.com/hybridgroup/commander/master/examples/arduino/arduino-list.json)
-3. Click Load button
-4. Once loaded, click on the 'Use' button.
+3. In case your json file is hosted on a server that requires authentication, please select the authentication type and enter the authentication details.
+4. Click Load button
+5. Once loaded, click on the 'Use' button.
 
 Loading from a json file returned by an API compatible with cppp-io.
 
