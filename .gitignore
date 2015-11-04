@@ -5,6 +5,8 @@ local.properties
 node_modules/
 platforms/
 plugins/
+resources/
 *.log
+*.err
 .idea
 .sass-cache/
