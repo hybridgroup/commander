@@ -28,7 +28,7 @@
         </ion-header-bar>
 
         <ion-nav-bar class="bar-stable sub-bar">
-          <ion-nav-back-button class="button-icon ion-arrow-left-c" ng-click="myGoBack()">
+          <ion-nav-back-button class="button-icon ion-arrow-left-c" ng-click="myGoBack()" ng-hide="editConnectionMode">
           </ion-nav-back-button>
           <ion-nav-buttons side="right" ng-controller="CommandSetController">
             <a href="#/log" class="badge activity-indicator" ng-class="{'success': 'badge-balanced', 'failed': 'badge-assertive', null: 'badge-royal', 'connecting':'hide', 'socketio':'badge-royal'}[activityLog.status()]" ng-show="showActivityLogIndicator()">
@@ -75,6 +75,8 @@
     <script src="js/router.js"></script>
     <script src="js/services/localStorageService.js"></script>
     <script src="js/services/activityLogger.js"></script>
+    <script src="js/services/base64Service.js"></script>
+    <script src="js/services/httpInterceptorService.js"></script>
     <script src="js/controllers/command_sets_controller.js"></script>
     <script src="js/controllers/command_set_controller.js"></script>
     <script src="js/controllers/connections_controller.js"></script>

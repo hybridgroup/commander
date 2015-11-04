@@ -1,29 +1,86 @@
 <ion-view title="Connections" orientation>
   <ion-content class="has-subheader royal-bg connections-content">
-    <ion-list class="commander-list">
+    <ion-list class="commander-list"  ng-hide="editConnectionMode">
       <ion-item class="item-divider">
         Local Connections
       </ion-item>
       <ion-item class="item-calm" ng-show="!connections.length">There aren't any connections yet.</ion-item>
       <ion-item class="item-button-right" ng-repeat="connection in connections track by $index">
-        <span ng-hide="editMode" ng-click="editMode = true">{{connection}}</span>
-        <button ng-hide="editMode" ng-click="useConnection($index)" ng:class="getClass($index)" class="button">{{getTitle($index)}}</button>
-        <input ng-show="editMode" type="text" ng-model="connection" placeholder="API URL" ng-required autofocus/>
-        <button ng-show="editMode" ng-click="editMode = false" class="button button-icon icon ion-close-circled cancel-button"></button>
-        <button ng-show="editMode" ng-click="editMode = !saveConnection($index, connection)" class="button button-icon icon ion-checkmark-circled save-button"></button>
+        <span ng-click="editConnection($index)">{{connection.url}}</span>
+        <button ng-click="useConnection($index)" ng:class="getClass($index)" class="button">{{getTitle($index)}}</button>
         <ion-option-button class="button button-stable item-delete icon ion-ios7-trash" ng-click="removeConnection($index)"></ion-option-button>
       </ion-item>
     </ion-list>
 
-    <ion-list class="commander-list">
+    <ion-list class="commander-list" ng-show="editConnectionMode">
+      <ion-item class="item item-edit-divider item-button-right">
+        Edit Connection
+        <button ng-click="cancelEditConnection()" class="button button-stable button-small">Cancel</button>
+      </ion-item>
+
+      <form name="testForm">
+        <label class="item item-input">
+          <span class="input-label">API URL</span>
+          <input ng-model="connectionForm.url" type="url" placeholder="http://localhost:8080/api">
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Authentication
+          </div>
+          <select ng-model="connectionForm.auth">
+            <option value='none'>None</option>
+            <option value='basic'>Basic</option>
+          </select>
+        </label>
+
+        <label class="item item-input" ng-show="connectionForm.auth == 'basic'">
+          <span class="input-label">User</span>
+          <input ng-model="connectionForm.user" type="text" placeholder="Username">
+        </label>
+        <label class="item item-input" ng-show="connectionForm.auth == 'basic'">
+          <span class="input-label">Password</span>
+          <input ng-model="connectionForm.password" type="password" placeholder="Password">
+        </label>
+
+        <input type='submit' ng-click="saveConnection(connectionForm, editIndex)" class="button button-positive button-block commander-save-button" value="Save">
+      </form>
+
+    </ion-list>
+
+    <ion-list class="commander-list" ng-hide="editConnectionMode">
       <ion-item class="item item-divider">
         Add Connections
       </ion-item>
-      <label class="item item-input">
-        <span class="input-label">API URL</span>
-        <input ng-model="apiUrl" type="url" placeholder="http://localhost:8080/api">
-      </label>
-      <button ng-click="addConnection(apiUrl)" class="button button-positive button-block commander-save-button">Add</button>
+
+      <form name="testForm">
+        <label class="item item-input">
+          <span class="input-label">API URL</span>
+          <input ng-model="connectionForm.url" type="url" placeholder="http://localhost:8080/api">
+        </label>
+
+        <label class="item item-input item-select">
+          <div class="input-label">
+            Authentication
+          </div>
+          <select ng-model="connectionForm.auth">
+            <option value='none'>None</option>
+            <option value='basic'>Basic</option>
+          </select>
+        </label>
+
+        <label class="item item-input" ng-show="connectionForm.auth == 'basic'">
+          <span class="input-label">User</span>
+          <input ng-model="connectionForm.user" type="text" placeholder="Username">
+        </label>
+        <label class="item item-input" ng-show="connectionForm.auth == 'basic'">
+          <span class="input-label">Password</span>
+          <input ng-model="connectionForm.password" type="password" placeholder="Password">
+        </label>
+
+        <input type='submit' ng-click="saveConnection(connectionForm, null)" class="button button-positive button-block commander-save-button" value="Add">
+      </form>
+
     </ion-list>
 
   </ion-content>

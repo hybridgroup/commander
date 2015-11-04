@@ -34,7 +34,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
 
         if(!$rootScope.sockets[socketName]){
           $scope.activityLog.showConnectionIndicator();
-          $rootScope.sockets[socketName] = io($scope.configuration.api + socketUrl, {multiplex:false}).connect();
+          $rootScope.sockets[socketName] = io($scope.configuration.api.url + socketUrl, {multiplex:false}).connect();
 
           $rootScope.sockets[socketName].on('connect', function(obj) {
             $scope.$apply(function(){
@@ -67,7 +67,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
 
         if(!$rootScope.mqtts[mqttName]){
           $scope.activityLog.showConnectionIndicator();
-          $rootScope.mqtts[mqttName] = mqtt.connect($scope.configuration.api);
+          $rootScope.mqtts[mqttName] = mqtt.connect($scope.configuration.api.url);
 
           $rootScope.mqtts[mqttName].on('connect', function(obj) {
             $scope.$apply(function(){
@@ -110,7 +110,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
             }
           }
           else {
-            $http.get($scope.configuration.api + '/api').success(function(data, status, headers, config){
+            $http.get($scope.configuration.api.url + '/api').success(function(data, status, headers, config){
               if (data.MCP && data.MCP.robots[0]){
                 $scope.robotName = data.MCP.robots[0].name;
                 command.robot = $scope.robotName;
@@ -184,13 +184,13 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
 
   $scope.commandUrl = function(command) {
     if(command.device){
-      return $scope.configuration.api + $rootScope.urls[command.robot + '/' + command.device + '/' + command.name];
+      return $scope.configuration.api.url + $rootScope.urls[command.robot + '/' + command.device + '/' + command.name];
     }
     else if(command.robot){
-      return $scope.configuration.api + $rootScope.urls[command.robot + '/' + command.name];
+      return $scope.configuration.api.url + $rootScope.urls[command.robot + '/' + command.name];
     }
     else {
-      return $scope.configuration.api + $rootScope.urls[command.name];
+      return $scope.configuration.api.url + $rootScope.urls[command.name];
     }
   };
   
@@ -218,7 +218,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
       $scope.activityLog.saveLog('socketio', 'Command ' + command.name + ' sent.');
     }
     else {
-      if ($scope.configuration.api.match(/localhost/)) {
+      if ($scope.configuration.api.url.match(/localhost/)) {
         if ($scope.popupVisible == false) {
           $scope.popupVisible = true;
           $ionicPopup.alert({
@@ -233,7 +233,13 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
       }
 
       $scope.activityLog.showConnectionIndicator();
-      $http.post($scope.commandUrl(command), command.params)
+      var config = {};
+      if ($scope.configuration.api.auth && $scope.configuration.api.auth !== 'none'){
+        config.headers = {
+          'Authorization': $scope.configuration.api.tokenHeader
+        };
+      }
+      $http.post($scope.commandUrl(command), command.params, config)
         .success(function(data, status, headers, config){
           $scope.logActivity(true, command, data);
         })
@@ -259,7 +265,7 @@ commander.controller('CommandSetController', ['$scope', '$rootScope', '$http', '
       $scope.message = 'Result of ' + command.name + ': ' + data.result;
     }
     else {
-      $scope.message = 'Error executing command: ' + command.name;
+      $scope.message = 'Error executing command: ' + command.name + ':' + data;
     }
     $scope.activityLog.saveLog(success, $scope.message);
   };

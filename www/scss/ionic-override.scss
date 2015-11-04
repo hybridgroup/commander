@@ -17,6 +17,21 @@
   }
 }
 
+.item-edit-divider  {
+  background-color: #f7f7f7;
+  color: #444;
+  font-weight: bold;
+  padding: 10px 16px;
+
+  button {
+    font-size: 16px !important;
+    line-height: 15px !important;
+    min-height: 30px !important;
+    height: 28px !important;
+    top: 5px !important;
+  }
+}
+
 
 /*Lists*/
 .commander-list {

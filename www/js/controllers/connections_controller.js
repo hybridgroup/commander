@@ -1,5 +1,6 @@
-commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http', 'LocalStorageService', '$location', 'activityLogger', '$ionicPopup', '$ionicListDelegate', function($scope, $rootScope, $http, LocalStorageService, $location, activityLogger, $ionicPopup, $ionicListDelegate) {
-
+commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http', 'LocalStorageService', '$location', 'activityLogger', '$ionicPopup', '$ionicListDelegate', 'base64Service', function($scope, $rootScope, $http, LocalStorageService, $location, activityLogger, $ionicPopup, $ionicListDelegate, base64Service) {
+  $rootScope.editConnectionMode = false;
+  $scope.connectionForm = {url:'',auth:'none',user: null,password: null,token: null,tokenHeader: null};
   // Local connections
   $scope.$on(LocalStorageService.Event.updated, function(event, data){
     updateLocalConnectionsView();
@@ -10,6 +11,7 @@ commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http',
   }
 
   updateLocalConnectionsView()
+  
 
   $scope.closeOpenSockets = function(){
     var localSets = LocalStorageService.commandSets();
@@ -44,6 +46,20 @@ commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http',
     }
   }
 
+  // Presentation-related
+  $scope.getClass = function(connectionIndex) {
+    return  isCurrent(connectionIndex) ? "button-stable" : "button-balanced";
+  }
+
+  $scope.getTitle = function(connectionIndex) {
+    return isCurrent(connectionIndex) ? "Current" : "Use";
+  }
+
+  var isCurrent = function(connectionIndex) {
+    currentConnection = LocalStorageService.get('current_connection')
+    return currentConnection == connectionIndex;
+  }
+
   $scope.useConnection = function(connectionIndex) {
     $scope.closeOpenSockets();
 
@@ -66,43 +82,30 @@ commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http',
     if (isCurrent(connectionIndex) ) {
       LocalStorageService.set('current_connection', 0)
       $scope.currentConnection = 0;
+      LocalStorageService.set('api', $scope.connections[0]);
     }
     else if (currentConnection == localSets.length) {
       LocalStorageService.set('current_connection', currentConnection - 1)
       $scope.currentConnection = currentConnection - 1;
+      LocalStorageService.set('api', $scope.connections[currentConnection - 1]);
     }
     $ionicListDelegate.closeOptionButtons();
   }
 
-  // Presentation-related
-  $scope.getClass = function(connectionIndex) {
-    return  isCurrent(connectionIndex) ? "button-stable" : "button-balanced";
+  $scope.editConnection = function(connectionIndex){
+    $scope.connectionForm = $scope.connections[connectionIndex];
+    $rootScope.editConnectionMode = true;
+    $scope.editIndex = connectionIndex;
   }
 
-  $scope.getTitle = function(connectionIndex) {
-    return isCurrent(connectionIndex) ? "Current" : "Use";
+  $scope.cancelEditConnection = function(){
+    $scope.connectionForm = {url:'',auth:'none',user: null,password: null,token: null,tokenHeader: null};
+    $rootScope.editConnectionMode = false;
+    $scope.editIndex = null;
   }
 
-  var isCurrent = function(connectionIndex) {
-    currentConnection = LocalStorageService.get('current_connection')
-    return currentConnection == connectionIndex;
-  }
-
-  $scope.saveConnection = function(connectionIndex, newUrl){
-    if (!newUrl) {
-      $ionicPopup.alert({
-        title: 'Error',
-        template: 'Please specify a valid URL'
-      });
-      return false;
-    }
-    $scope.connections[connectionIndex] = newUrl;
-    LocalStorageService.set('connections', $scope.connections);
-    return true;
-  }
-
-  $scope.addConnection = function(apiUrl) {
-    if (!apiUrl) {
+  $scope.saveConnection = function(connectionForm, connectionIndex) {
+    if (!connectionForm.url) {
       $ionicPopup.alert({
         title: 'Error',
         template: 'Please specify a valid URL'
@@ -110,31 +113,64 @@ commander.controller('ConnectionsController', [ '$scope', '$rootScope', '$http',
       return;
     }
 
-    var localSets = LocalStorageService.connections();
+    var newConnection = {
+      url: connectionForm.url,
+      auth: connectionForm.auth,
+      user: null,
+      password: null,
+      token: null,
+      tokenHeader: null
+    }
 
+    if (connectionForm.auth == 'basic'){
+      if(!connectionForm.user || !connectionForm.password){
+        $ionicPopup.alert({
+          title: 'Error',
+          template: 'Please specify a valid user and password'
+        });
+        return;
+      }
+      var token = connectionForm.user + ':' + connectionForm.password;
+      newConnection.token = base64Service.encode(token);
+      newConnection.tokenHeader = 'Basic ' + newConnection.token;
+      newConnection.user = connectionForm.user;
+      newConnection.password = connectionForm.password;
+    }
+
+    if (connectionForm.auth == 'oauth2'){
+      if(!connectionForm.token){
+        $ionicPopup.alert({
+          title: 'Error',
+          template: 'Please specify a valid access token'
+        });
+        return;
+      }
+      newConnection.token = connectionForm.token;
+      newConnection.tokenHeader = 'Bearer ' + newConnection.token;
+    }
+
+    var localSets = LocalStorageService.connections();
     // Add new connection or update an existing one
     var indexToUpdate = null;
     var templateMessage = null;
 
-    for(i = 0; i < localSets.length; i++){
-      if(localSets[i].name == apiUrl) {
-        indexToUpdate = i;
-      }
-    }
-
-    if(indexToUpdate == null) {
-      localSets.push(apiUrl);
+    if(connectionIndex == null) {
+      localSets.push(newConnection);
       templateMessage = "added";
     } else {
-      localSets[indexToUpdate] = apiUrl;
+      localSets[connectionIndex] = newConnection;
       templateMessage = "updated";
     }
 
     LocalStorageService.set('connections', localSets);
 
+    $scope.connectionForm = {url:'',auth:'none',user:'',password:'',token:''}
+    $rootScope.editConnectionMode = false;
+    $scope.editIndex = null;
+
     $ionicPopup.alert({
       title: "Success",
-      template: '<b>' + apiUrl + '</b> connection was successfuly ' + templateMessage + '.'
+      template: '<b>' + newConnection.url + '</b> connection was successfuly ' + templateMessage + '.'
     });
   }
 
